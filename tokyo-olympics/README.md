@@ -17,12 +17,19 @@ This dataset contains the details of the Athletes, Coaches, Teams participating 
 
 ### Pipeline
 
-### Data Ingestion
+#### Setup
 
+#### Data Ingestion
+
+#### Data Transformation
+
+#### Data Analytics
+
+#### Dashboards and Reporting
 
 ### Transformation Code
 
-The Databricks transformation code is [here]()
+The Databricks dataset transformation code is [here](https://github.com/vedanthv/data-engineering-projects/blob/main/tokyo-olympics/data-transformation.ipynb)
 
 ### Screenshots
 
