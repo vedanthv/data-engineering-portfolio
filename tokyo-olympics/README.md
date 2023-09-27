@@ -21,7 +21,11 @@ This dataset contains the details of the Athletes, Coaches, Teams participating 
 
 #### Data Ingestion
 
+![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/e432b1af-4513-402e-865e-430404046de1)
+
 #### Data Transformation
+
+![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/05cbdf20-926c-4c67-a046-ec6f8ea2ed60)
 
 #### Data Analytics
 
@@ -30,6 +34,4 @@ This dataset contains the details of the Athletes, Coaches, Teams participating 
 ### Transformation Code
 
 The Databricks dataset transformation code is [here](https://github.com/vedanthv/data-engineering-projects/blob/main/tokyo-olympics/data-transformation.ipynb)
-
-### Screenshots
 
