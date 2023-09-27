@@ -1,6 +1,6 @@
 # Data Engineering Projects
 
-1. Tokyo Olympics In Depth Analysis
+## Tokyo Olympics In Depth Analysis
 
 **Stack**
 - Azure Data Factory
