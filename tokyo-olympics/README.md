@@ -17,7 +17,19 @@ This dataset contains the details of the Athletes, Coaches, Teams participating 
 
 ### Pipeline
 
+![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/d0eeb64e-b6c9-40c8-bfde-413981d5fe0e)
+
 #### Setup
+
+- Setup an Azure Account with Github Student Pack.
+  
+- Keep the GitHub Repository with the Olympics raw data ready.
+
+- Azure Databricks is SSO authenticated with Azure so no need separate setup.
+
+- A storage account has to be created on Azure to load resources.
+
+- While using Databricks "Azure Blob Storage Container" has to be given write,read access on the IAM console for the container.
 
 #### Data Ingestion
 
