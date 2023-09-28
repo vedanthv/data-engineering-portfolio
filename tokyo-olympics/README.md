@@ -39,6 +39,8 @@ This dataset contains the details of the Athletes, Coaches, Teams participating 
 
 ![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/05cbdf20-926c-4c67-a046-ec6f8ea2ed60)
 
+**Transformed Data in Azure Datalake Gen2 Storage**
+
 #### Data Analytics
 
 #### Dashboards and Reporting
