@@ -29,3 +29,7 @@ A Formula 1 championship season refers to a specific year in which a series of F
 **Drivers' Championship**: The primary focus of a Formula 1 season is the Drivers' Championship. Drivers accumulate points from each race throughout the season. The driver with the most points at the end of the season is crowned the Drivers' Champion and often receives the prestigious "World Champion" title.
 
 **Constructors' Championship**: In addition to the Drivers' Championship, there is also a Constructors' Championship. This championship considers the combined points earned by both drivers of each team. The team with the most points at the end of the season wins the Constructors' Championship.
+
+## Solution Architecture
+
+<img src = "https://github.com/vedanthv/data-engineering-projects/blob/main/formula-1-analytics-engg/formula1-solution-architecture.png">
