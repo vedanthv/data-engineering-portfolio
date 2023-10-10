@@ -2,6 +2,8 @@
 
 Formula 1, often abbreviated as F1, is one of the most prestigious and popular forms of motorsport in the world. It's a high-octane racing series that blends cutting-edge technology, exceptional driving skill, and global glamour into an exhilarating sporting spectacle.
 
+![charles-leclerc-ferrari-sf-23-](https://github.com/vedanthv/data-engineering-projects/assets/44313631/4e8c3e14-0652-4ebc-b418-3e906526c6e4)
+
 ## A Brief Introduction to Formula 1
 
 **Cars**: Formula 1 cars are cutting-edge, single-seat racing machines with advanced aerodynamics and powerful engines. They are designed for maximum speed and agility.
