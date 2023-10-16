@@ -30,6 +30,47 @@ A Formula 1 championship season refers to a specific year in which a series of F
 
 **Constructors' Championship**: In addition to the Drivers' Championship, there is also a Constructors' Championship. This championship considers the combined points earned by both drivers of each team. The team with the most points at the end of the season wins the Constructors' Championship.
 
+## Project Requirements
+
+### Data Ingestion 
+
+- Extract Data from the Ergast API.
+
+- Ingested Data must have the correct schema applied.
+
+- Ingested Data must have the audit columns.
+
+- Ingested data must be in the Parquet Format.
+
+- Analyse the ingested data via SQL
+
+- Ingested Data must be able to handle incremental load.
+
+### Data Transformation
+
+- Join key information required to report anything.
+
+- Transformed Data must be stored in column format.
+
+### Analysis Requirements
+
+- Dominant Drivers
+
+- Dominant Teams
+
+- Create Databricks Dashboards
+
+### Scheduling Requirements
+
+- Schedule to run at 10pm every Friday
+
+- Ability to monitor pipelines.
+
+- Rerun failed pipelines.
+
+- Set up Alerts on Failures.
+
 ## Solution Architecture
 
 <img src = "https://github.com/vedanthv/data-engineering-projects/blob/main/formula-1-analytics-engg/formula1-solution-architecture.png">
+
