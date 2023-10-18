@@ -1,8 +1,12 @@
-# Data Engineering Project Portfolio
+# Data Engineering Portfolio
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/7e6403e6-8900-444f-b1cc-471a0f2e54d4)
+
+Hello World! I'm Vedanth. 
 
 This is a complete portfolio of the projects I have designed with a major focus on implementing various cloud services from Azure and AWS.
 
-## 🤾‍♀️ [Tokyo Olympics Analytics Engineering](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de)
+## 🤾‍♀🎖️ [MedalMetrics: Tokyo Olympics Data Alchemy](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de)
 
 **Brief Overview**
 
@@ -20,7 +24,7 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 - Synapse Analytics
 - PowerBI
 
-## 🏎️ [Formula 1 Race Analytics Data Engineering](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg)
+## 🏎️ [Grand Prix Data Odyssey: Deep Formula 1 Insights](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg)
 
 **Brief Overview**
 
@@ -42,3 +46,11 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 - Azure Synapse Studio
 - Delta Lake Storage
 - PowerBI
+
+*Thanks for your interest in my work!*
+
+Feel Free to Connect with me 🤠
+
+-Vedanth V Baliga
+
+**[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
