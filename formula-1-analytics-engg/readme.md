@@ -72,5 +72,5 @@ A Formula 1 championship season refers to a specific year in which a series of F
 
 ## Solution Architecture
 
-<img src = "https://github.com/vedanthv/data-engineering-projects/blob/main/formula-1-analytics-engg/formula1-solution-architecture.png">
+<img src = "https://github.com/vedanthv/data-engineering-projects/blob/main/formula-1-analytics-engg/static/formula1-solution-architecture.png">
 
