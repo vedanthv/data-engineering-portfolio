@@ -6,7 +6,7 @@ Hello World! I'm Vedanth.
 
 This is a complete portfolio of the projects I have designed with a major focus on implementing various cloud services from Azure and AWS.
 
-## 🤾‍♀🎖️ [MedalMetrics: Tokyo Olympics Data Alchemy](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de)
+## [Medal Metrics: Tokyo Olympics Data Alchemy](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de) 🤾‍♀🎖️
 
 **Brief Overview**
 
@@ -24,7 +24,7 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 - Synapse Analytics
 - PowerBI
 
-## 🏎️ [Grand Prix Data Odyssey: Deep Formula 1 Insights](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg)
+##  [Grand Prix Data Odyssey: Deep Formula 1 Insights](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg) 🏎️
 
 **Brief Overview**
 
