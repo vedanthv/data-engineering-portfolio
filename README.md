@@ -16,7 +16,7 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 
 ![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/876cc839-97ec-430d-88d2-f1a04f06698c)
 
-**Stack**
+**Tech Stack**
 - Azure Data Factory
 - Azure Data Lake Gen 2
 - Azure Blob Storage
@@ -34,7 +34,7 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 
 ![image](https://github.com/vedanthv/data-engineering-projects/assets/44313631/0eee5f17-7102-4526-b3e3-8fb185a06553)
 
-**Stack**
+**Tech Stack**
 - Spark SQL
 - Azure Databricks
 - Postman
@@ -47,6 +47,24 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 - Delta Lake Storage
 - PowerBI
 
+## [UserMingle : Kafka-Driven User Profile Streaming]()
+
+**Brief Overview**
+In this project, I have used the [Random User Generator](https://randomuser.me/) API to fetch data intermittedly using Airflow DAG pipelines and store the data in Postgres DB.
+The entire streaming process is managed by a Kafka setup that has a Zookeeper pipeline to manage multiple broadcasts and process them from the message queue. There is a master-worker architecture setup on Apache Spark. Finally there is a Cassandra DB setup that has a listener that takes the stream data from Spark and stores in a columnar format. The entire project is containerized with Docker.
+
+**Solution Architecture**
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/bf025b1f-e051-4f1e-9353-1d2b837060b4)
+
+**Tech Stack**
+
+- **Apache Airflow**: Responsible for orchestrating the pipeline and storing fetched data in a PostgreSQL database.
+- **Apache Kafka and Zookeeper**: Used for streaming data from PostgreSQL to the processing engine.
+- **Control Center and Schema Registry**: Helps in monitoring and schema management of our Kafka streams.
+- **Apache Spark**: For data processing with its master and worker nodes.
+- **Cassandra**: Where the processed data will be stored.
+  
 *Thanks for your interest in my work!*
 
 Feel Free to Connect with me 🤠
