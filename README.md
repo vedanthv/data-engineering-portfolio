@@ -50,6 +50,7 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 ## [UserMingle : Kafka-Driven User Profile Streaming]() 🧔
 
 **Brief Overview**
+
 In this project, I have used the [Random User Generator](https://randomuser.me/) API to fetch data intermittedly using Airflow DAG pipelines and store the data in Postgres DB.
 The entire streaming process is managed by a Kafka setup that has a Zookeeper pipeline to manage multiple broadcasts and process them from the message queue. There is a master-worker architecture setup on Apache Spark. Finally there is a Cassandra DB setup that has a listener that takes the stream data from Spark and stores in a columnar format. The entire project is containerized with Docker.
 
