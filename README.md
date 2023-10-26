@@ -47,7 +47,7 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 - Delta Lake Storage
 - PowerBI
 
-## [UserMingle : Kafka-Driven User Profile Streaming]()
+## [UserMingle : Kafka-Driven User Profile Streaming]() 🧔
 
 **Brief Overview**
 In this project, I have used the [Random User Generator](https://randomuser.me/) API to fetch data intermittedly using Airflow DAG pipelines and store the data in Postgres DB.
