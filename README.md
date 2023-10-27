@@ -1,10 +1,12 @@
-# Data Engineering Portfolio
-
-![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/7e6403e6-8900-444f-b1cc-471a0f2e54d4)
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/664c2886-b8d7-41cd-b231-f9f1ca4bbd3e)
 
 Hello World! I'm Vedanth. 
 
-This is a complete portfolio of the projects I have designed with a major focus on implementing various cloud services from Azure and AWS.
+This is a complete portfolio of the projects I have designed with a major focus on implementing various data engineering tech and cloud services across Azure, AWS and GCP.
+
+Feel Free to Connect with me 🤠
+
+**[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
 ## [Medal Metrics: Tokyo Olympics Data Alchemy](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de) 🤾‍♀🎖️
 
@@ -65,11 +67,3 @@ The entire streaming process is managed by a Kafka setup that has a Zookeeper pi
 - **Control Center and Schema Registry**: Helps in monitoring and schema management of our Kafka streams.
 - **Apache Spark**: For data processing with its master and worker nodes.
 - **Cassandra**: Where the processed data will be stored.
-  
-*Thanks for your interest in my work!*
-
-Feel Free to Connect with me 🤠
-
--Vedanth V Baliga
-
-**[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
