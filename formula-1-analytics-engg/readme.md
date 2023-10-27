@@ -84,5 +84,3 @@ A Formula 1 championship season refers to a specific year in which a series of F
 ### Dominant Teams
 
 ![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/3995a206-950d-470b-a525-8f1845ed7cca)
-
->>>>>>> 0a66d022b17ac7afe562c8434afbc4387194f15e
