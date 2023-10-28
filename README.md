@@ -49,7 +49,7 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 - Delta Lake Storage
 - PowerBI
 
-## [UserMingle : Kafka-Driven User Profile Streaming]() 🧔
+## [UserMingle : Kafka-Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle) 🧔
 
 **Brief Overview**
 
