@@ -37,13 +37,24 @@ def stream_data():
     import json
     from kafka import KafkaProducer
     import time
-
-    res = get_data()
-    res = format_data(res)
+    import logging
 
     producer = KafkaProducer(bootstrap_servers = ['broker:29092'],max_block_ms = 10000,api_version=(0,11,5))
-    producer.send('testing',json.dumps(res).encode('utf-8'))    
-    
+
+    curr_time = time.time()
+
+    while True:
+        if time.time() > curr_time + 60:
+            break
+        try:
+            res = get_data()
+            res = format_data(res)
+
+            producer.send('testing',json.dumps(res).encode('utf-8'))  
+
+        except Exception as e:
+            logging.error(f"An error occured: {e}")
+            continue    
 
 with DAG('user_automation',
          default_args=default_args,
