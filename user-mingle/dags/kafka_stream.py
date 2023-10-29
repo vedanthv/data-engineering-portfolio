@@ -35,9 +35,14 @@ def format_data(res):
 
 def stream_data():
     import json
+    from kafka import KafkaProducer
+    import time
+
     res = get_data()
     res = format_data(res)
-    print(json.dumps(res,indent = 3))
+
+    producer = KafkaProducer(bootstrap_servers = ['broker:29092'],max_block_ms = 10000,api_version=(0,11,5))
+    producer.send('testing',json.dumps(res).encode('utf-8'))    
     
 
 with DAG('user_automation',
@@ -49,5 +54,3 @@ with DAG('user_automation',
         task_id = 'stream_data_from_api',
         python_callable = stream_data
     )
-
-stream_data()
