@@ -35,6 +35,14 @@ def create_cassandra_connection():
         logging.error(f"Could not create cassandra connection due to {e}")
         return None
 
+if __name__ == "__main__":
+    # create spark connection
+    spark_conn = create_spark_connection()
 
+    if spark_conn is not None:
+        # connect to kafka with spark connection
+        session = create_cassandra_connection()
 
-
+        if session is not None:
+            create_keyspace(session)
+            create_table(session)
