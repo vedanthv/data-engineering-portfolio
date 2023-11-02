@@ -23,6 +23,17 @@ def create_spark_connection():
 
     return s_conn
 
+def create_keyspace():
+    def create_keyspace(session):
+    session.execute("""
+        CREATE KEYSPACE IF NOT EXISTS spark_streams
+        WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+    """)
+
+    print("Keyspace created successfully!")
+
+
+
 def create_cassandra_connection():
     try:
         # connecting to the cassandra cluster
