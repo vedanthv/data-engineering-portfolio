@@ -50,13 +50,15 @@ This is a complete end to end Formula 1 race analytics project that encompasses 
 - Delta Lake Storage
 - PowerBI
 
-## [Taste-Threads: Realtime Yelp Sentiment Analytics with Sockets and LLMs]()
+## [Taste-Threads: Realtime Yelp Sentiment Analytics with Sockets and LLMs]() 😋
 
 **Brief Overview**
 
 This project uses the extensive Yelp Dataset with more than 7 million records. The Yelp dataset is a subset of businesses, reviews, and user data for use in connection with academic research. This project involves fetching data in realtime using Sockets and then using Apache Spark and LLMs for processing. The entire pipeline is powered by Kafka and Airflow on Confluent Cloud. Finally, indexing is performed using Elastic Search for better search capabilities.
 
 **Solution Architecture**
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6451c979-d846-44e9-bc6a-1736d8b92de1)
 
 **Tech Stack**
 
