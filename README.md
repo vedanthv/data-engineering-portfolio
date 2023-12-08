@@ -86,3 +86,10 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 - Azure Databricks
 - Synapse Analytics
 - PowerBI
+
+## [HarmonicPulse: Analyzing the Heartbeat of Music Sales]()
+
+<img src = "https://images7.alphacoders.com/133/1333817.jpeg" width = 1500, height = 400>
+
+This is an innovative SQL data analytics project designed to decode the intricacies of music sales within a dynamic marketplace. Through meticulous database analysis, the project delves into sales patterns, customer preferences, and genre popularity, unraveling the symphony of consumer behavior. Utilizing SQL queries, the project extracts valuable insights on top-selling artists, album trends, and regional preferences. From dissecting rhythmic patterns to harmonizing with customer demographics, HarmonyHub paints a comprehensive picture of the music retail landscape.
+
