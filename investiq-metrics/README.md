@@ -1,10 +1,11 @@
-# InvestIQ Metrics : Indian Stock Exchange Analytics
-
-In this project titled **InvestIQ Metrics** I have showcased an end to end data engineering application in AWS using a wide range of cloud services to provide useful metrics and visualizations into the Indian NSE share exchange on of end of day basis with complete orchestration pipelines built using Apache Airflow.
+## InvestIQ Metrics : Indian Stock Exchange Analytics
 
 ![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/df9a8200-0252-4957-ab1d-e673bca36a33)
 
-## Tech Stack
+
+In this project titled **InvestIQ Metrics** I have showcased an end to end data engineering application in AWS using a wide range of cloud services to provide useful metrics and visualizations into the Indian NSE share exchange on of end of day basis with complete orchestration pipelines built using Apache Airflow.
+
+### Tech Stack
 
 - AWS EC2 Instances
 - Apache Airflow
@@ -15,7 +16,7 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
 - AWS Redshift
 - PowerBI
 
-## Project Architecture
+### Project Architecture
 
 ![InvestIQ](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/be8cc57d-f51f-498d-a9aa-dc2386a96f62)
 
@@ -43,9 +44,9 @@ I will be using the following [Latest Stock Price](https://rapidapi.com/suneetk9
 
 ![Snapshot of the API](https://snipboard.io/JYTk6N.jpg)
 
-### Architecture Components
+## Architecture In Detail
 
-#### EC2 Setup
+### EC2 Setup
 
 The entire project is orchestrated using Airflow and hosted on an EC2 instance.
 
@@ -59,7 +60,7 @@ After the instance is created, you can either use your root email to configure a
 
 After this create Access Keys in ```pem``` format and download it.
 
-#### Airflow Setup
+### Airflow Setup
 
 Once you have connected to your EC2 instance cloud shell, run the following commands to get Airflow up and running
 
@@ -85,8 +86,110 @@ In order to run airflow in AWS EC2 you will need to head to ```[Your Public IPv4
 
 The username is Admin and the password is mentioned on your AWS EC2 console logs.
 
-##### Setting up an SSH shell from EC2 to VSCode
+### Setting up an SSH shell from EC2 to VSCode
 
 For setting up EC2 instance code in your VSCode editor, please watch this [video](https://www.youtube.com/watch?v=KQr0eI97cLQ&pp=ygUKdnNjb2RlIGVjMg%3D%3D) and follow the steps.
 
+### Complete Code Workflow
 
+Here is an overview of the entire DAG Architecture of this project
+
+![](https://snipboard.io/Y27Fgh.jpg)
+
+#### Phase 1 : DAG Workflow
+
+```tsk_extract_nse_data_var``` - This task basically connects to the API and fetches the data from it. There is a python function that is defined that sends a request to the endpoint with the auth keys and gets the response back in JSON. This is then stored in a file with a unique name that has the date and the time that the file was loaded at.
+
+You will have to define your API key in the ```config_api.json``` file.
+
+Here is the code that achieves this functionality.
+
+```python
+def extract_nse_data(**kwargs):
+    url = kwargs['url']
+    headers = kwargs['headers']
+    dt_string = kwargs['date_string']
+    # return headers
+    response = requests.get(url, headers=headers)
+    response_data = response.json()
+    
+
+    # Specify the output file path
+    output_file_path = f"/home/ubuntu/eod-data/nse_data_{dt_string}.json"
+    file_str = f'nse_data_{dt_string}.csv'
+
+    # Write the JSON response to a file
+    with open(output_file_path, "w") as output_file:
+        json.dump(response_data, output_file, indent=4)  # indent for pretty formatting
+    output_list = [output_file_path, file_str]
+    return output_list   
+```
+
+The DAG Code
+
+```python
+extract_nse_data_var = PythonOperator(
+        task_id= 'tsk_extract_nse_data_var',
+        python_callable=extract_nse_data,
+        op_kwargs={'url': 'https://latest-stock-price.p.rapidapi.com/any','headers': api_host_key, 'date_string':dt_now_string}
+        )
+```
+
+Before running the DAG make sure that your EC2 instance has the S3 Access
+
+```load_to_s3``` - This is quite a simple task that loads the file that has been dumped in our local file system to Amazon S3 storage using a bash operator. It pulls the file path of the file added from the XComs and loads it in a bucket called ```nse_eod_data```
+
+```python
+load_to_s3 = BashOperator(
+            task_id = 'tsk_load_to_s3',
+            bash_command = 'aws s3 mv {{ ti.xcom_pull("tsk_extract_nse_data_var")[0]}} s3://nse-eod-data/',
+        )
+```
+
+If you run this DAG and it succeeds here is the final result that you may see in your S3 bucket.
+
+![](https://snipboard.io/PWauvV.jpg)
+
+Each JSON file will have a structure like this:
+
+![](https://snipboard.io/fELrtH.jpg)
+
+#### Move Data from Landing to Raw Zone
+
+To move the json data from the Landing Zone ```nse_eod_data``` bucket to the raw zone bucket that has the same data but it will be transformed later, we will be using a Lambda function.
+
+- A Lambda function in AWS is a serverless compute service that lets you run code without provisioning or managing servers. 
+
+- Lambda follows the serverless computing model, where you write code (functions) and AWS automatically manages the underlying infrastructure. You don't need to worry about provisioning, scaling, or managing servers. 
+
+- Lambda automatically scales your function based on the incoming request volume. It can handle thousands of requests per second, and you only pay for the compute time consumed by your function.
+
+A Lambda function always has a trigger and in this case whenever any data object lands in out ```nse-eod-data``` S3 bucket, we write it or copy the JSON to our landing zone bucket.
+
+![](https://snipboard.io/7UDSVY.jpg)
+
+Here is the code that acheives this particular logic
+
+```python
+import boto3
+import json
+
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    # TODO implement
+    source_bucket = event['Records'][0]['s3']['bucket']['name']
+    object_key = event['Records'][0]['s3']['object']['key']
+   
+    
+    target_bucket = 'copy-of-raw-bucket-nse-eod-data'
+    copy_source = {'Bucket': source_bucket, 'Key': object_key}
+   
+    waiter = s3_client.get_waiter('object_exists')
+    waiter.wait(Bucket=source_bucket, Key=object_key)
+    s3_client.copy_object(Bucket=target_bucket, Key=object_key, CopySource=copy_source)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Copy completed successfully')
+    }
+```
