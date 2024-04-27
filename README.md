@@ -58,7 +58,7 @@ This project uses the extensive Yelp Dataset with more than 7 million records. T
 
 **Solution Architecture**
 
-![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6451c979-d846-44e9-bc6a-1736d8b92de1)
+![image]([https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6451c979-d846-44e9-bc6a-1736d8b92de1](https://github.com/vedanthv/data-engineering-portfolio/tree/main/taste-threads/src))
 
 **Tech Stack**
 
@@ -87,9 +87,16 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 - Synapse Analytics
 - PowerBI
 
-## [HarmonicPulse: Analyzing the Heartbeat of Music Sales]()
+## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
 
-<img src = "https://images7.alphacoders.com/133/1333817.jpeg" width = 1500, height = 400>
+**Tech Stack**
+- AWS EC2
+- Apache Airflow
+- RapidAPI
+- AWS Lambda Functions
+- AWS S3 Storage
+- AWS Cloudwatch
+- AWS Redshift
+- PowerBI
 
-This is an innovative SQL data analytics project designed to decode the intricacies of music sales within a dynamic marketplace. Through meticulous database analysis, the project delves into sales patterns, customer preferences, and genre popularity, unraveling the symphony of consumer behavior. Utilizing SQL queries, the project extracts valuable insights on top-selling artists, album trends, and regional preferences. From dissecting rhythmic patterns to harmonizing with customer demographics, HarmonyHub paints a comprehensive picture of the music retail landscape.
-
+"Introducing InvestIQ Metrics: Where every market heartbeat finds meaning. InvestIQ Metrics is your dynamic portal into the rhythm of the stock market, offering a symphony of data-driven insights and analysis. Powered by cutting-edge real time data, this project transcends the mundane, illuminating the trends, patterns, and opportunities hidden within the market's fluctuations.
