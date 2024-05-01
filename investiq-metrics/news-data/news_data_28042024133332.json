@@ -1,0 +1,2028 @@
+{
+    "items": "50",
+    "sentiment_score_definition": "x <= -0.35: Bearish; -0.35 < x <= -0.15: Somewhat-Bearish; -0.15 < x < 0.15: Neutral; 0.15 <= x < 0.35: Somewhat_Bullish; x >= 0.35: Bullish",
+    "relevance_score_definition": "0 < x <= 1, with a higher score indicating higher relevance.",
+    "feed": [
+        {
+            "title": "Upstart Holdings: Buy, Sell, or Hold?",
+            "url": "https://www.fool.com/investing/2024/04/28/upstart-holdings-buy-sell-or-hold/",
+            "time_published": "20240428T131800",
+            "authors": [
+                "Courtney Carlsen"
+            ],
+            "summary": "The AI-powered consumer lender looks to upend the industry, but its business continues to face headwinds.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F774040%2Fupst-loan-volume-quarterly-4-23-24.png&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.998356"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.360215"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.007388,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "UPST",
+                    "relevance_score": "0.384397",
+                    "ticker_sentiment_score": "-0.098402",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "10 metros where sellers are slashing listing prices the most",
+            "url": "https://www.businessinsider.com/10-metros-where-sellers-are-slashing-listing-prices-the-most-2024-4",
+            "time_published": "20240428T131700",
+            "authors": [
+                "Alcynna Lloyd"
+            ],
+            "summary": "\u2022 Sellers are reducing prices in cities with surplus housing inventory, according to Redfin data. \u2022 Price cuts are occurring at a faster rate in Florida and Texas, which lead the nation in new home construction. \u2022 As sellers lower prices and builders offer concessions, homebuyers are gaining ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "Real Estate & Construction",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.310843"
+                }
+            ],
+            "overall_sentiment_score": 0.185547,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "RDFN",
+                    "relevance_score": "0.519739",
+                    "ticker_sentiment_score": "0.234493",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Elon Musk Makes Surprise China Visit After Nixing India Trip",
+            "url": "https://www.investors.com/market-trend/stock-market-today/elon-musk-surprise-china-visit-tesla-fsd-india-trip/",
+            "time_published": "20240428T131500",
+            "authors": [
+                "ED CARSON",
+                "Investor's Business Daily"
+            ],
+            "summary": "Tesla ( TSLA ) CEO Elon Musk made an unannounced visit to China on Sunday, meeting with government officials in an apparent effort to introduce Full Self-Driving software in the country. The move comes after Musk abruptly postponing an India trip for high-level talks for an investment there.",
+            "banner_image": "https://www.investors.com/wp-content/uploads/2022/04/Stock-elonmusk-smile-01-shutt.jpg",
+            "source": "Investors Business Daily",
+            "category_within_source": "n/a",
+            "source_domain": "www.investors.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.684621"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.333333"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.451494"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.333333"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.333333"
+                }
+            ],
+            "overall_sentiment_score": 0.102278,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "FRBA",
+                    "relevance_score": "0.102888",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FULT",
+                    "relevance_score": "0.102888",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.845094",
+                    "ticker_sentiment_score": "-0.041311",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "3 Unusual Income ETFs That May Be Just What You're Looking For",
+            "url": "https://www.fool.com/investing/2024/04/28/3-unusual-income-etfs-that-may-be-just-what-youre/",
+            "time_published": "20240428T131500",
+            "authors": [
+                "James Brumley"
+            ],
+            "summary": "They may be off the beaten path, but these exchange-traded funds just might meet your unique income need.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/774402/one-thousand-dollars-1000-fanned-out.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Energy & Transportation",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.25"
+                }
+            ],
+            "overall_sentiment_score": 0.218539,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "BLK",
+                    "relevance_score": "0.034039",
+                    "ticker_sentiment_score": "0.133002",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "VZ",
+                    "relevance_score": "0.034039",
+                    "ticker_sentiment_score": "0.154281",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "JNJ",
+                    "relevance_score": "0.034039",
+                    "ticker_sentiment_score": "0.154281",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "XOM",
+                    "relevance_score": "0.034039",
+                    "ticker_sentiment_score": "0.154281",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Can This High-Flying Stock 10x in 10 Years?",
+            "url": "https://www.fool.com/investing/2024/04/28/can-this-high-flying-stock-10x-in-10-years/",
+            "time_published": "20240428T130700",
+            "authors": [
+                "Prosper Junior Bakiny"
+            ],
+            "summary": "This midcap biotech could see huge success ahead -- or disappointment.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/773793/doctor-smiling-and-holding-patients-hand.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.161647"
+                }
+            ],
+            "overall_sentiment_score": 0.235592,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "VKTX",
+                    "relevance_score": "0.541766",
+                    "ticker_sentiment_score": "0.227503",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Social Security isn't keeping up with inflation. That could weaken Biden's support among some seniors | Politics",
+            "url": "https://www.cnn.com/2024/04/28/politics/social-security-inflation-election/index.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Tami Luhby"
+            ],
+            "summary": "Social Security isn't keeping up with inflation. That could weaken Biden's support among some seniors ...",
+            "banner_image": "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2008640078.jpg?c=16x9&q=h_144,w_256,c_fill",
+            "source": "CNN",
+            "category_within_source": "Economy",
+            "source_domain": "www.cnn.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.310843"
+                },
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.983605"
+                }
+            ],
+            "overall_sentiment_score": -0.021983,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Ventyx Biosciences, Inc. of Class Action Lawsuit and Upcoming Deadlines - VTYX",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-ventyx-biosciences-inc-of-class-action-lawsuit-and-upcoming-deadlines--vtyx-302127960.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Ventyx ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.99246"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.083923,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "VTYX",
+                    "relevance_score": "0.094204",
+                    "ticker_sentiment_score": "0.082994",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against Shoals Technologies Group, Inc. - SHLS",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-announces-the-filing-of-a-class-action-against-shoals-technologies-group-inc---shls-302128113.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against Shoals Technologies ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.310843"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.538269"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.012265,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SHLS",
+                    "relevance_score": "0.210274",
+                    "ticker_sentiment_score": "0.239728",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims on Behalf of Investors of Zoetis Inc. - ZTS",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-investigates-claims-on-behalf-of-investors-of-zoetis-inc---zts-302127971.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "NEW YORK, April 28, 2024 /PRNewswire/ -- Pomerantz LLP is investigating claims on behalf of investors of Zoetis Inc. ( \"Zoetis\" or the \"Company\" ) ( NYSE: ZTS ) . Such investors are advised to contact Danielle Peyton at [email protected] or 646-581-9980, ext. 7980.",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.066068,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "ZTS",
+                    "relevance_score": "0.642555",
+                    "ticker_sentiment_score": "0.093129",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against Anavex Life Sciences Corp. - AVXL",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-announces-the-filing-of-a-class-action-against-anavex-life-sciences-corp---avxl-302128047.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against Anavex Life Sciences ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [],
+            "overall_sentiment_score": 0.105025,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AVXL",
+                    "relevance_score": "0.217834",
+                    "ticker_sentiment_score": "0.246182",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Plug Power Inc. of Class Action Lawsuit and Upcoming Deadlines - PLUG",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-plug-power-inc-of-class-action-lawsuit-and-upcoming-deadlines--plug-302128014.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Plug Power ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.99977"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.839681"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.5"
+                }
+            ],
+            "overall_sentiment_score": 0.062847,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MS",
+                    "relevance_score": "0.061949",
+                    "ticker_sentiment_score": "-0.010034",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "C",
+                    "relevance_score": "0.030998",
+                    "ticker_sentiment_score": "0.053851",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "PLUG",
+                    "relevance_score": "0.154059",
+                    "ticker_sentiment_score": "0.049318",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Innoviz Technologies Ltd. of Class Action Lawsuit and Upcoming Deadlines - INVZ",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-innoviz-technologies-ltd-of-class-action-lawsuit-and-upcoming-deadlines--invz-302128007.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Innoviz ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.650727"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.77141"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                }
+            ],
+            "overall_sentiment_score": 0.04857,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INVZ",
+                    "relevance_score": "0.09239",
+                    "ticker_sentiment_score": "0.066916",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against bluebird bio, Inc. - BLUE",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-announces-the-filing-of-a-class-action-against-bluebird-bio-inc---blue-302128100.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "NEW YORK, April 28, 2024 /PRNewswire/ -- Pomerantz LLP announces that a class action lawsuit has been filed against bluebird bio, Inc. ( \"bluebird\" or the \"Company\" ) ( NASDAQ: BLUE ) . Such investors are advised to contact Danielle Peyton at [email protected] or 646-581-9980, ( or 888.4-POMLAW ) ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.1019,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "BLUE",
+                    "relevance_score": "0.220809",
+                    "ticker_sentiment_score": "0.248721",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims on Behalf of Investors of Primerica, Inc. - PRI",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-investigates-claims-on-behalf-of-investors-of-primerica-inc---pri-302127961.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "NEW YORK, April 28, 2024 /PRNewswire/ -- Pomerantz LLP is investigating claims on behalf of investors of Primerica, Inc. ( \"Primerica\" or the \"Company\" ) ( NYSE: PRI ) . Such investors are advised to contact Danielle Peyton at [email protected] or 646-581-9980, ext. 7980.",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Finance",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.108179"
+                }
+            ],
+            "overall_sentiment_score": -0.133093,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PRI",
+                    "relevance_score": "0.601928",
+                    "ticker_sentiment_score": "-0.364275",
+                    "ticker_sentiment_label": "Bearish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Announces the Filing of a Class Action Against Ocugen, Inc. - OCGN",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-announces-the-filing-of-a-class-action-against-ocugen-inc---ocgn-302128158.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "NEW YORK, April 28, 2024 /PRNewswire/ -- Pomerantz LLP announces that a class action lawsuit has been filed against Ocugen, Inc. ( \"Ocugen\" or the \"Company\" ) ( NASDAQ: OCGN ) . Such investors are advised to contact Danielle Peyton at [email protected] or 646-581-9980, ( or 888.4-POMLAW ) , ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.360215"
+                },
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                }
+            ],
+            "overall_sentiment_score": 0.084549,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "OCGN",
+                    "relevance_score": "0.605266",
+                    "ticker_sentiment_score": "0.135329",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in HireRight Holdings Corporation of Class Action Lawsuit and Upcoming Deadlines - HRT",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-hireright-holdings-corporation-of-class-action-lawsuit-and-upcoming-deadlines--hrt-302128022.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in HireRight ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999606"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.650727"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.079901,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "HRT",
+                    "relevance_score": "0.592557",
+                    "ticker_sentiment_score": "0.185049",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Rivian Automotive, Inc. of Class Action Lawsuit and Upcoming Deadlines - RIVN",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-rivian-automotive-inc-of-class-action-lawsuit-and-upcoming-deadlines--rivn-302127993.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Rivian ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                }
+            ],
+            "overall_sentiment_score": 0.024348,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "RIVN",
+                    "relevance_score": "0.497126",
+                    "ticker_sentiment_score": "0.016145",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims On Behalf of Investors Sage Therapeutics, Inc. - SAGE",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-investigates-claims-on-behalf-of-investors-sage-therapeutics-inc---sage-302127999.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims On Behalf of Investors Sage Therapeutics, Inc ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.060542,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SAGE",
+                    "relevance_score": "0.40348",
+                    "ticker_sentiment_score": "0.117995",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in VinFast Auto Ltd. of Class Action Lawsuit and Upcoming Deadlines - VFS",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-vinfast-auto-ltd-of-class-action-lawsuit-and-upcoming-deadlines--vfs-302128038.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in VinFast Auto ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.94762"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.5"
+                }
+            ],
+            "overall_sentiment_score": 0.082021,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "VFS",
+                    "relevance_score": "0.094762",
+                    "ticker_sentiment_score": "0.043607",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.031654",
+                    "ticker_sentiment_score": "0.001909",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims On Behalf of Investors of Reviva Pharmaceuticals Holdings, Inc. - RVPH",
+            "url": "https://www.prnewswire.com/news-releases/shareholder-alert-pomerantz-law-firm-investigates-claims-on-behalf-of-investors-of-reviva-pharmaceuticals-holdings-inc---rvph-302127982.html",
+            "time_published": "20240428T130000",
+            "authors": [
+                "Pomerantz LLP"
+            ],
+            "summary": "SHAREHOLDER ALERT: Pomerantz Law Firm Investigates Claims On Behalf of Investors of Reviva Pharmaceuticals ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/2287619/Pomerantz_V3_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Real Estate & Construction",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                }
+            ],
+            "overall_sentiment_score": 0.004847,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "RVPH",
+                    "relevance_score": "0.194242",
+                    "ticker_sentiment_score": "0.110327",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "InGovern raises concern over Triveni Engineering's stake buy in Sir Shadi",
+            "url": "https://www.business-standard.com/companies/news/ingovern-raises-concern-over-triveni-engineering-s-stake-buy-in-sir-shadi-124042800432_1.html",
+            "time_published": "20240428T125843",
+            "authors": [
+                "BS Reporter"
+            ],
+            "summary": "Terming it a \"hostile takeover bid\", the corporate governance and voting advisory firm has said the acquisition may face opposition and lead to two sets of warring promoters at SSLE and hamper decision making.",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-04/23/full/1713896373-2309.jpg?im=FeatureCrop,size=(826,465)",
+            "source": "Business Standard",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.310843"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                }
+            ],
+            "overall_sentiment_score": 0.036145,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "In race to build artificial intelligence, tech plans a big plumbing upgrade",
+            "url": "https://www.business-standard.com/technology/tech-news/in-race-to-build-artificial-intelligence-tech-plans-a-big-plumbing-upgrade-124042800430_1.html",
+            "time_published": "20240428T125751",
+            "authors": [
+                "NYT"
+            ],
+            "summary": "The spending that the industry's giants expect artificial intelligence to require is starting to come into focus - and it is jarringly large. If 2023 was the tech industry's year of the A.I. chatbot, 2024 is turning out to be the year of A.I. plumbing.",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-02/27/full/1709055889-3458.jpg?im=FitAndFill=(826,465)",
+            "source": "Business Standard",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.5"
+                }
+            ],
+            "overall_sentiment_score": 0.084934,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.167322",
+                    "ticker_sentiment_score": "0.065326",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.042122",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.042122",
+                    "ticker_sentiment_score": "-0.07891",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "NVDA",
+                    "relevance_score": "0.042122",
+                    "ticker_sentiment_score": "0.105592",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CSCO",
+                    "relevance_score": "0.042122",
+                    "ticker_sentiment_score": "0.150055",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "7 Financial and Retirement Mistakes Even the Wealthy Make",
+            "url": "https://www.fool.com/retirement/2024/04/28/7-financial-mistakes-even-the-wealthy-make/",
+            "time_published": "20240428T125400",
+            "authors": [
+                "Selena Maranjian"
+            ],
+            "summary": "Plenty of rich people are putting their future financial security in jeopardy.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F774458%2Fgetty-rich-wealthy-cigar-scotch.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.13234,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "HHH",
+                    "relevance_score": "0.047844",
+                    "ticker_sentiment_score": "-0.092888",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Real Madrid Squad For Bayern Munich UCL Clash Has Three Huge Surprises",
+            "url": "https://www.forbes.com/sites/tomsanderson/2024/04/28/real-madrid-squad-for-bayern-munich-ucl-clash-has-three-huge-surprises/",
+            "time_published": "20240428T125143",
+            "authors": [
+                "Tom Sanderson"
+            ],
+            "summary": "Real Madrid's squad list for its Champions League semifinal first leg clash with Bayern Munich on Tuesday has three big surprises. The 14-time winners of the competition are ready to travel to Bavaria at the turn of the week and are on a high after securing a 14-point lead at the La Liga summit.",
+            "banner_image": "https://imageio.forbes.com/specials-images/imageserve/662e42dd1ddbbe51a66a370a/0x0.jpg?format=jpg&crop=3414,1921,x0,y155,safe&height=900&width=1600&fit=bounds",
+            "source": "Forbes",
+            "category_within_source": "n/a",
+            "source_domain": "www.forbes.com",
+            "topics": [],
+            "overall_sentiment_score": -0.031218,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "ALIZF",
+                    "relevance_score": "0.09989",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Crypto Analyst Predicts This Altcoin Will Explode 260% In 2024, And Its Not Dogecoin Or Shiba Inu",
+            "url": "https://www.benzinga.com/markets/cryptocurrency/24/04/38478483/crypto-analyst-predicts-this-altcoin-will-explode-260-in-2024-and-its-not-dogecoin-or-shib",
+            "time_published": "20240428T124743",
+            "authors": [
+                "Bibhu Pattnaik"
+            ],
+            "summary": "A recent forecast by cryptocurrency strategist Altcoin Sherpa suggests an impressive surge in the value of Solana SOL/USD. According to him, the digital asset is expected to climb by a whopping 267% by year's end, potentially breaking the $500 mark.",
+            "banner_image": "https://cdn.benzinga.com/files/images/story/2024/04/28/shutterstock_2002007354.jpg?width=1200&height=800&fit=crop",
+            "source": "Benzinga",
+            "category_within_source": "Markets",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "Blockchain",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.161647"
+                }
+            ],
+            "overall_sentiment_score": 0.311646,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "CRYPTO:BTC",
+                    "relevance_score": "0.146916",
+                    "ticker_sentiment_score": "0.127923",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CRYPTO:SOL",
+                    "relevance_score": "0.421485",
+                    "ticker_sentiment_score": "0.500432",
+                    "ticker_sentiment_label": "Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Musk makes his second trip to China in less than a year to hurry along self-driving tech rollout, reports say",
+            "url": "https://africa.businessinsider.com/news/musk-makes-his-second-trip-to-china-in-less-than-a-year-to-hurry-along-self-driving/hyq8yqe",
+            "time_published": "20240428T124651",
+            "authors": [
+                "Cameron Manley"
+            ],
+            "summary": "The purpose of the trip is to hurry along the rollout of Tesla's full self-driving technology, the most advanced version of its Autopilot software, Reuters reported, citing an unnamed person familiar with the matter.",
+            "banner_image": "https://ocdn.eu/pulscms-transforms/1/0fDktkuTURBXy8zZmExNDI3Zi1kYWIyLTQxMmQtYTI3YS03ZDQ0ZTQ1OTFmNzMuanBlZ5GTBc0DFs0Brg",
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "africa.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.614606"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.124526,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "XPEV",
+                    "relevance_score": "0.114682",
+                    "ticker_sentiment_score": "0.21557",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.436009",
+                    "ticker_sentiment_score": "0.095805",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Musk makes his second trip to China in less than a year to hurry along self-driving tech rollout, reports say",
+            "url": "https://www.businessinsider.com/musk-in-china-boost-teslas-full-self-driving-technology-reports-2024-4",
+            "time_published": "20240428T124600",
+            "authors": [
+                "Cameron Manley"
+            ],
+            "summary": "Musk returns to China to boost Tesla's self-driving technology: reports - Business Insider ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.614606"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.11717,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "XPEV",
+                    "relevance_score": "0.096283",
+                    "ticker_sentiment_score": "0.203966",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.532043",
+                    "ticker_sentiment_score": "0.117676",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "2 Top Growth Stocks to Buy Right Now and Hold Forever",
+            "url": "https://www.fool.com/investing/2024/04/28/2-top-growth-stocks-to-buy-now-and-hold-forever/",
+            "time_published": "20240428T124500",
+            "authors": [
+                "Rachel Warren"
+            ],
+            "summary": "These healthcare stocks can provide enviable long-term portfolio growth.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/773907/getty-couple-happy-in-kitchen.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.989041"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.360215"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.318166,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "KVUE",
+                    "relevance_score": "0.043738",
+                    "ticker_sentiment_score": "0.142649",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "VRTX",
+                    "relevance_score": "0.087344",
+                    "ticker_sentiment_score": "0.23405",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "MRNA",
+                    "relevance_score": "0.043738",
+                    "ticker_sentiment_score": "0.195492",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "SWAV",
+                    "relevance_score": "0.043738",
+                    "ticker_sentiment_score": "0.184503",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "ALPN",
+                    "relevance_score": "0.043738",
+                    "ticker_sentiment_score": "0.077297",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "JNJ",
+                    "relevance_score": "0.216087",
+                    "ticker_sentiment_score": "0.249471",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "CEO Shake-Up Looms At Paramount Global Amid Skydance Merger Discussions - Paramount Global  ( NASDAQ:PARA ) ",
+            "url": "https://www.benzinga.com/news/24/04/38478430/ceo-shake-up-looms-at-paramount-global-amid-skydance-merger-discussions",
+            "time_published": "20240428T124204",
+            "authors": [
+                "Bibhu Pattnaik"
+            ],
+            "summary": "Bob Bakish, the current CEO of Paramount Global, may be facing termination as the company continues its merger talks with Skydance Media. What Happened: A recent CNBC report suggests that the board of Paramount Global PARA is contemplating the dismissal of Bakish, which will possibly come as ...",
+            "banner_image": "https://cdn.benzinga.com/files/images/story/2024/04/28/shutterstock_2192961835.jpg?width=1200&height=800&fit=crop",
+            "source": "Benzinga",
+            "category_within_source": "General",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.108179"
+                }
+            ],
+            "overall_sentiment_score": 0.204861,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "CHTR",
+                    "relevance_score": "0.107016",
+                    "ticker_sentiment_score": "0.125807",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "WBD",
+                    "relevance_score": "0.107016",
+                    "ticker_sentiment_score": "0.131425",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "PARA",
+                    "relevance_score": "0.580434",
+                    "ticker_sentiment_score": "0.287073",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "If You'd Invested $250 in Occidental Petroleum 4 Years Ago, Here's How Much You'd Have Today",
+            "url": "https://www.fool.com/investing/2024/04/28/if-youd-invested-250-in-occidental-petroleum-4-yea/",
+            "time_published": "20240428T123600",
+            "authors": [
+                "Ryan Vanzo"
+            ],
+            "summary": "Occidental Petroleum stock has made investors small fortunes in recent years.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/773812/gettyimages-1420032790-1200x800-5b2df79.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Energy & Transportation",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.503496"
+                }
+            ],
+            "overall_sentiment_score": 0.056078,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "OXY",
+                    "relevance_score": "0.24289",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Once Called The 'Apple Store Of Weed' And Valued At $1.7B, This Cannabis Company Has Declared Bankruptcy",
+            "url": "https://www.benzinga.com/markets/cannabis/24/04/38478505/once-called-the-apple-store-of-weed-and-valued-at-1-7b-this-cannabis-company-has-declared-bankru",
+            "time_published": "20240428T123428",
+            "authors": [
+                "Maureen Meehan"
+            ],
+            "summary": "MedMen Enterprises Inc. has thrown in the towel, citing financial conditions and an inability to pay its debts, said Amit Pandey, the cannabis company's former chief financial officer late Friday.",
+            "banner_image": "https://cdn.benzinga.com/files/images/story/2024/04/28/MedMen-Banruptcy.jpeg?width=1200&height=800&fit=crop",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.108179"
+                }
+            ],
+            "overall_sentiment_score": -0.100285,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "Can Starbucks Soar 10x to Become a Trillion-Dollar Company by 2050?",
+            "url": "https://www.fool.com/investing/2024/04/28/starbucks-soar-10x-trillion-dollar-2050/",
+            "time_published": "20240428T123400",
+            "authors": [
+                "Neil Patel"
+            ],
+            "summary": "Based on its track record of compounding shareholder capital, investors have reasons to remain optimistic.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/774149/starbucks-online-order-mobile-coffee-drive-thru.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Retail & Wholesale",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.214378"
+                }
+            ],
+            "overall_sentiment_score": 0.380904,
+            "overall_sentiment_label": "Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SBUX",
+                    "relevance_score": "0.699089",
+                    "ticker_sentiment_score": "0.584941",
+                    "ticker_sentiment_label": "Bullish"
+                },
+                {
+                    "ticker": "AWON",
+                    "relevance_score": "0.063425",
+                    "ticker_sentiment_score": "0.089045",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "I've lived in Australia for years. Don't make these 8 mistakes when you visit - especially if you're an American like me.",
+            "url": "https://www.businessinsider.com/things-never-do-in-australia-from-woman-lives-there",
+            "time_published": "20240428T123100",
+            "authors": [
+                "Jaimee Marshall"
+            ],
+            "summary": "Things you should never do in Australia, from woman who lives there - Business Insider ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "Retail & Wholesale",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.042707,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MDNDF",
+                    "relevance_score": "0.098054",
+                    "ticker_sentiment_score": "-0.007523",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "COST",
+                    "relevance_score": "0.04912",
+                    "ticker_sentiment_score": "0.035812",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Advice about 401 ( k )  rollovers is poised for a big change. Here's why",
+            "url": "https://www.cnbc.com/2024/04/28/advice-about-401k-rollovers-is-poised-for-a-big-change-heres-why.html",
+            "time_published": "20240428T123001",
+            "authors": [
+                "Greg Iacurci"
+            ],
+            "summary": "Rollovers from 401(k) plans to individual retirement accounts are a key focus of a new Labor Department rule that aims to raise the bar for retirement advice.",
+            "banner_image": "https://image.cnbcfm.com/api/v1/image/107356574-17048894781704889475-32827988945-1080pnbcnews.jpg?v=1704889478&w=750&h=422&vtcrop=y",
+            "source": "CNBC",
+            "category_within_source": "Top News",
+            "source_domain": "www.cnbc.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.87644"
+                }
+            ],
+            "overall_sentiment_score": 0.141398,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "Up 40%: Is This Red-Hot Growth Stock Still a Buy?",
+            "url": "https://www.fool.com/investing/2024/04/28/up-40-is-this-red-hot-growth-stock-still-a-buy/",
+            "time_published": "20240428T123000",
+            "authors": [
+                "George Budwell"
+            ],
+            "summary": "This small-cap biotech stock is surging. Time to buy?",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F774711%2Ftime-to-buy.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.538269"
+                },
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.316726"
+                }
+            ],
+            "overall_sentiment_score": 0.127605,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AGEN",
+                    "relevance_score": "0.695257",
+                    "ticker_sentiment_score": "0.226472",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "BMY",
+                    "relevance_score": "0.062926",
+                    "ticker_sentiment_score": "0.062014",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GILD",
+                    "relevance_score": "0.062926",
+                    "ticker_sentiment_score": "0.062014",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "ROSEN, A TOP RANKED LAW FIRM, Encourages Lincoln National Corporation Investors to Secure Counsel Before Important Deadline in Securities Class Action - LNC",
+            "url": "https://www.prnewswire.com/news-releases/rosen-a-top-ranked-law-firm-encourages-lincoln-national-corporation-investors-to-secure-counsel-before-important-deadline-in-securities-class-action--lnc-302129114.html",
+            "time_published": "20240428T123000",
+            "authors": [
+                "THE ROSEN LAW FIRM",
+                "P. A."
+            ],
+            "summary": "ROSEN, A TOP RANKED LAW FIRM, Encourages Lincoln National Corporation Investors to Secure Counsel Before ... PR ...",
+            "banner_image": "https://mma.prnewswire.com/media/405060/Rosen_Law_Logo.jpg?p=facebook",
+            "source": "PR Newswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.prnewswire.com",
+            "topics": [
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.310843"
+                }
+            ],
+            "overall_sentiment_score": 0.125934,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "LNC",
+                    "relevance_score": "0.379051",
+                    "ticker_sentiment_score": "-0.005491",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.065685",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Everything From Biden's Capital Gains Tax Proposal, Fed's Inflation Indicator To US Economy Growth And Goldman Sachs' Inflation Decline Prediction: Top Economic Updates This Week",
+            "url": "https://www.benzinga.com/news/24/04/38478485/everything-from-bidens-capital-gains-tax-proposal-feds-inflation-indicator-to-us-economy-growth-and",
+            "time_published": "20240428T122722",
+            "authors": [
+                "Benzinga Neuro"
+            ],
+            "summary": "As the weekend comes to a close, let's take a look at the top stories that shaped the week. From a former senator's skepticism about President Joe Biden's tax proposal to the Fed's inflation indicator, here's a quick recap of the key events that unfolded.",
+            "banner_image": "https://cdn.benzinga.com/files/images/story/2024/04/28/Federal-reserve-St-louis.jpeg?width=1200&height=800&fit=crop",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.744043"
+                }
+            ],
+            "overall_sentiment_score": 0.101602,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GS",
+                    "relevance_score": "0.095899",
+                    "ticker_sentiment_score": "-0.041295",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "EHang and Greater Bay Technology Form Strategic Partnership to Jointly Develop World's First Ultra-Fast/eXtreme Fast Charging Batteries for eVTOL - EHang Holdings  ( NASDAQ:EH ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/04/g38478481/ehang-and-greater-bay-technology-form-strategic-partnership-to-jointly-develop-worlds-first-ultra-",
+            "time_published": "20240428T122120",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "GUANGZHOU, China, April 28, 2024 ( GLOBE NEWSWIRE ) -- EHang Holdings Limited ( \"EHang\" or the \"Company\" ) EH, the world's leading Urban Air Mobility ( \"UAM\" ) technology platform company, announced that it has established a strategic partnership with ultra-fast charging-focused Guangzhou ...",
+            "banner_image": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "Energy & Transportation",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.360215"
+                }
+            ],
+            "overall_sentiment_score": 0.267679,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GNZUY",
+                    "relevance_score": "0.033421",
+                    "ticker_sentiment_score": "0.109145",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "EH",
+                    "relevance_score": "0.32478",
+                    "ticker_sentiment_score": "0.313859",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "EHang and Greater Bay Technology Form Strategic Partnership to Jointly Develop World's First Ultra-Fast/eXtreme Fast Charging Batteries for eVTOL",
+            "url": "https://www.globenewswire.com/news-release/2024/04/28/2870861/0/en/EHang-and-Greater-Bay-Technology-Form-Strategic-Partnership-to-Jointly-Develop-World-s-First-Ultra-Fast-eXtreme-Fast-Charging-Batteries-for-eVTOL.html",
+            "time_published": "20240428T122100",
+            "authors": [
+                "EHang Holdings Limited"
+            ],
+            "summary": "GUANGZHOU, China, April 28, 2024 ( GLOBE NEWSWIRE ) -- EHang Holdings Limited ( \"EHang\" or the \"Company\" ) ( Nasdaq: EH ) , the world's leading Urban Air Mobility ( \"UAM\" ) technology platform company, announced that it has established a strategic partnership with ultra-fast charging-focused ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/62632dde-6b6b-44e9-802c-de503cfdbc72/ehang.jpg",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "Energy & Transportation",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.272166,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GNZUY",
+                    "relevance_score": "0.03443",
+                    "ticker_sentiment_score": "0.115416",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "EH",
+                    "relevance_score": "0.334008",
+                    "ticker_sentiment_score": "0.335407",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Charlie Munger: What You Can Learn From the Life of Warren Buffett's Business Partner",
+            "url": "https://www.fool.com/investing/2024/04/28/charlie-munger-what-you-can-learn-from-the-life-of/",
+            "time_published": "20240428T121900",
+            "authors": [
+                "Selena Maranjian"
+            ],
+            "summary": "Following the example of Charlie Munger can lead to many positive outcomes in your life.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F773902%2Fgetty-strong-muscles-biceps-learning-invest-in-yourself-smarter.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.495866"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.5"
+                }
+            ],
+            "overall_sentiment_score": 0.319851,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "EADSF",
+                    "relevance_score": "0.055881",
+                    "ticker_sentiment_score": "0.199999",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "PEP",
+                    "relevance_score": "0.055881",
+                    "ticker_sentiment_score": "0.199999",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "KO",
+                    "relevance_score": "0.055881",
+                    "ticker_sentiment_score": "0.199999",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "MA",
+                    "relevance_score": "0.055881",
+                    "ticker_sentiment_score": "0.199999",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "BA",
+                    "relevance_score": "0.111488",
+                    "ticker_sentiment_score": "0.222354",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "BRK-A",
+                    "relevance_score": "0.166551",
+                    "ticker_sentiment_score": "0.17544",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "The Fed will only cut rates when it's panicking over a recession and a market crash, Black Swan investor says",
+            "url": "https://markets.businessinsider.com/news/stocks/fed-rate-cuts-stock-market-crash-recession-outlook-economy-investing-2024-4",
+            "time_published": "20240428T121600",
+            "authors": [
+                "Jennifer Sor"
+            ],
+            "summary": "Fed Will Only Cut Rates in Recession, Stock Market Crash: Black Swan Investor - Markets Insider ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "markets.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.929393"
+                }
+            ],
+            "overall_sentiment_score": -0.231396,
+            "overall_sentiment_label": "Somewhat-Bearish",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "X 'End Goal' Revealed After Elon Musk Teased A Crypto Payments Bombshell That Could Blow up The Price Of Bitcoin, Ethereum, XRP And Dogecoin",
+            "url": "https://www.forbes.com/sites/digital-assets/2024/04/28/x-end-goal-revealed-after-elon-musk-teased-a-crypto-payments-bombshell-that-could-blow-up-the-price-of-bitcoin-ethereum-xrp-and-dogecoin/",
+            "time_published": "20240428T121518",
+            "authors": [
+                "Billy Bambrough"
+            ],
+            "summary": "X 'End Goal' Revealed After Elon Musk Teased A Crypto Payments Bombshell That Could Blow up The Price Of Bitcoin ... Forbes ...",
+            "banner_image": "https://imageio.forbes.com/specials-images/imageserve/65a681d8f8e278139e96031d/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds",
+            "source": "Forbes",
+            "category_within_source": "n/a",
+            "source_domain": "www.forbes.com",
+            "topics": [
+                {
+                    "topic": "Blockchain",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.120286,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PYPL",
+                    "relevance_score": "0.214304",
+                    "ticker_sentiment_score": "0.16127",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.143843",
+                    "ticker_sentiment_score": "-0.0118",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:USD",
+                    "relevance_score": "0.072217",
+                    "ticker_sentiment_score": "0.040479",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CRYPTO:BTC",
+                    "relevance_score": "0.826017",
+                    "ticker_sentiment_score": "0.105746",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CRYPTO:ETH",
+                    "relevance_score": "0.28305",
+                    "ticker_sentiment_score": "0.112534",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CRYPTO:DOGE",
+                    "relevance_score": "0.413425",
+                    "ticker_sentiment_score": "-0.04219",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CRYPTO:LTC",
+                    "relevance_score": "0.072217",
+                    "ticker_sentiment_score": "0.182505",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "CRYPTO:BCH",
+                    "relevance_score": "0.072217",
+                    "ticker_sentiment_score": "0.182505",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "CRYPTO:XRP",
+                    "relevance_score": "0.214304",
+                    "ticker_sentiment_score": "-0.04971",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Artificial Intelligence Could Propel This \"Magnificent Seven\" Stock 33% Higher, a Wall Street Analyst Says",
+            "url": "https://www.fool.com/investing/2024/04/28/artificial-intelligence-could-propel-this-magnific/",
+            "time_published": "20240428T121500",
+            "authors": [
+                "Adam Levy"
+            ],
+            "summary": "This summer could provide two huge growth catalysts for this stock.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F774321%2Fgettyimages-artificial-intelligence-ai-motherboard-circuit.jpeg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Retail & Wholesale",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.459462"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "0.25"
+                },
+                {
+                    "topic": "Finance",
+                    "relevance_score": "0.25"
+                }
+            ],
+            "overall_sentiment_score": 0.275891,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.096674",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.086459",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.096674",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "NVDA",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.096674",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "AAPL",
+                    "relevance_score": "0.630514",
+                    "ticker_sentiment_score": "0.353067",
+                    "ticker_sentiment_label": "Bullish"
+                },
+                {
+                    "ticker": "TSLA",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.096674",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "BAC",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.306717",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "AMZN",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.096674",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "BNXYF",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.07948",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "CCaaS emerges as the new frontier for digital transformation in India",
+            "url": "https://www.financialexpress.com/business/brandwagon-ccaas-emerges-as-the-new-frontier-for-digital-transformation-in-india-3469462/",
+            "time_published": "20240428T121500",
+            "authors": [
+                "Guest"
+            ],
+            "summary": "In the landscape of modern business, digital transformation has transcended mere competitiveness to become the cornerstone of survival and evolution. The integration of cutting-edge digital technologies not only streamlines current processes but also fosters new avenues for growth and innovation.",
+            "banner_image": "https://www.financialexpress.com/wp-content/uploads/2024/04/Untitled-design-2024-04-26T160310.523.jpg",
+            "source": "The Financial Express",
+            "category_within_source": "n/a",
+            "source_domain": "www.financialexpress.com",
+            "topics": [
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.390195,
+            "overall_sentiment_label": "Bullish",
+            "ticker_sentiment": []
+        },
+        {
+            "title": "Opinion: Winds of fate confront Trump",
+            "url": "https://www.cnn.com/2024/04/28/opinions/trump-faces-the-wind-opinion-galant/index.html",
+            "time_published": "20240428T121300",
+            "authors": [
+                "Richard Galant"
+            ],
+            "summary": "Editor's Note: Sign up to get this weekly column as a newsletter. We're looking back at the strongest, smartest opinion takes of the week from CNN and other outlets. \"How does it feel to shape the wind to your will?\" Doomed vassal Kashigi Yabushige asks warlord Yoshii Toranaga that question in ...",
+            "banner_image": "https://media.cnn.com/api/v1/images/stellar/prod/04-clay-jones-source-clay-jones-1-jpg.JPG?q=w_1110,c_fill",
+            "source": "CNN",
+            "category_within_source": "Markets",
+            "source_domain": "www.cnn.com",
+            "topics": [
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.031856,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "WBD",
+                    "relevance_score": "0.088093",
+                    "ticker_sentiment_score": "0.052424",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "DSSMY",
+                    "relevance_score": "0.014711",
+                    "ticker_sentiment_score": "0.04831",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.014711",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "How to design a volunteering program in your workplace",
+            "url": "https://apnews.com/article/corporate-volunteers-common-impact-liberty-mutual-foundation-a0973f1fda583d6d413839903879f8b2",
+            "time_published": "20240428T121200",
+            "authors": [
+                "JAMES POLLARD"
+            ],
+            "summary": "More workplaces are bolstering their volunteer programs, especially as employee demands grow for socially responsible employers and engagement. Nearly three in five companies surveyed by the Association of Corporate Citizenship Professionals reported last year.",
+            "banner_image": "https://dims.apnews.com/dims4/default/57dfaee/2147483647/strip/true/crop/4122x2746+0+1/resize/599x399!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F8d%2F80%2F3e2662ca335f94ecfdefcd408f5e%2Fede6447054974962875c2cb53363a592",
+            "source": "Associated Press",
+            "category_within_source": "Business",
+            "source_domain": "apnews.com",
+            "topics": [],
+            "overall_sentiment_score": 0.370835,
+            "overall_sentiment_label": "Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SSDOF",
+                    "relevance_score": "0.080055",
+                    "ticker_sentiment_score": "0.187622",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Seeking engagement and purpose, corporate employees turn to workplace volunteering",
+            "url": "https://apnews.com/article/corporate-volunteers-blue-cross-blue-shield-benevity-694fcd302768111d3242c0dafb53d62e",
+            "time_published": "20240428T121100",
+            "authors": [
+                "JAMES POLLARD"
+            ],
+            "summary": "NEW YORK ( AP ) - Michelle Barbin's job does not always fill her bucket. Yes, she likes her nine-to-five helping improve consumer experiences at Blue Cross Blue Shield of Massachusetts. She emphasizes she wouldn't have spent nearly 19 years working for the health insurance provider otherwise.",
+            "banner_image": "https://dims.apnews.com/dims4/default/e75e192/2147483647/strip/true/crop/5153x3432+0+1/resize/599x399!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F48%2F79%2Fef2807d0d798fc4aaa3abd9af13b%2Face5cadce34e47749509d3697eba5728",
+            "source": "Associated Press",
+            "category_within_source": "Business",
+            "source_domain": "apnews.com",
+            "topics": [
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.414377,
+            "overall_sentiment_label": "Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.034332",
+                    "ticker_sentiment_score": "-0.029093",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "BLKB",
+                    "relevance_score": "0.034332",
+                    "ticker_sentiment_score": "0.284612",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "A woman outed by social media as the alleged stalker who inspired 'Baby Reindeer' says she's considering legal action against the Netflix show's creator",
+            "url": "https://africa.businessinsider.com/entertainment/a-woman-outed-by-social-media-as-the-alleged-stalker-who-inspired-baby-reindeer-says/nkpk0zw",
+            "time_published": "20240428T120749",
+            "authors": [
+                "Eve Crosbie"
+            ],
+            "summary": "A woman outed by social media as the alleged stalker who inspired 'Baby Reindeer' says she's considering legal ... - Business Insider Africa ...",
+            "banner_image": "https://ocdn.eu/pulscms-transforms/1/05UktkuTURBXy84NGZjZmQ2OS0xNDc0LTQzNmItOTEyMC01MGVmMGJiMTNlYmUuanBlZ5GTBc0DFs0Brg",
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "africa.businessinsider.com",
+            "topics": [],
+            "overall_sentiment_score": 0.041354,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "NFLX",
+                    "relevance_score": "0.193465",
+                    "ticker_sentiment_score": "-0.052061",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "A woman outed by social media as the alleged stalker who inspired 'Baby Reindeer' says she's considering legal action against the Netflix show's creator",
+            "url": "https://www.businessinsider.com/baby-reindeer-real-stalker-considering-legal-action-against-richard-gadd-2024-4",
+            "time_published": "20240428T120700",
+            "authors": [
+                "Eve Crosbie"
+            ],
+            "summary": "'Baby Reindeer': Woman outed as alleged stalker may sue Netflix creator - Business Insider ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.businessinsider.com",
+            "topics": [],
+            "overall_sentiment_score": 0.029072,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "NFLX",
+                    "relevance_score": "0.224903",
+                    "ticker_sentiment_score": "-0.020721",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Canopy Growth Obtains Shareholder Approval to Move Ahead With Canopy USA: Here's What It Means for Investors",
+            "url": "https://www.fool.com/investing/2024/04/28/canopy-growth-obtains-shareholder-approval-to-move/",
+            "time_published": "20240428T120500",
+            "authors": [
+                "David Jagielski"
+            ],
+            "summary": "Is Canopy Growth closer to entering the U.S. cannabis market?",
+            "banner_image": "https://g.foolcdn.com/editorial/images/773646/a-person-inspect-a-cannabis-plant-with-a-magnifying-glass.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Life Sciences",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.538269"
+                },
+                {
+                    "topic": "Manufacturing",
+                    "relevance_score": "0.5"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.650727"
+                }
+            ],
+            "overall_sentiment_score": 0.112218,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "STZ",
+                    "relevance_score": "0.18967",
+                    "ticker_sentiment_score": "-0.023093",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "CGC",
+                    "relevance_score": "0.799455",
+                    "ticker_sentiment_score": "0.211503",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        }
+    ]
+}
