@@ -193,3 +193,109 @@ def lambda_handler(event, context):
         'body': json.dumps('Copy completed successfully')
     }
 ```
+
+#### Transformation of the Data
+
+Now that we have a clean copy of the raw data, the next thing to do is to do some transformations on it. I have used another task ```tsk_transform_nse_data``` to do some basic transformations like converting the JSON based columns into separate columns of their own.
+
+```
+def transform_data(task_instance):
+    data = task_instance.xcom_pull(task_ids="tsk_extract_nse_data_var")[0]
+    object_key = task_instance.xcom_pull(task_ids="tsk_extract_nse_data_var")[1]
+
+    df = pd.read_json(data)
+
+    # Normalize the JSON column into separate columns
+    normalized_df = pd.json_normalize(df['meta'])
+
+    # Concatenate the normalized DataFrame with the original DataFrame
+    df = pd.concat([df, normalized_df], axis=1)
+
+    # Drop the original JSON column
+    df.drop(columns=['meta'], inplace=True)
+
+    # Convert DataFrame to CSV format
+    csv_data = df.to_csv(index=False)
+
+    # Upload CSV to S3
+    object_key = f"{object_key}"
+    s3_client.put_object(Bucket=target_bucket_name, Key=object_key, Body=csv_data)
+```
+Once the data has been transformed, there is another lambda function that runs to store this data into another bucket.
+
+Here is a snapshot of the data in the bucket.
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/e27dc945-3518-4f3d-9106-5e3aebb36c1f)
+
+This is the lambda function **transformation-convert-to-csv**
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/db04ad2b-d802-4850-92ba-426ea38062e2)
+
+```
+import boto3
+import json
+import pandas as pd
+# import json
+
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    # TODO implement
+    source_bucket = event['Records'][0]['s3']['bucket']['name']
+    object_key = event['Records'][0]['s3']['object']['key']
+   
+    
+    target_bucket = 'cleaned-data-zone-csv-bucket-nse'
+    copy_source = {'Bucket': source_bucket, 'Key': object_key}
+    
+    target_file_name = object_key[:-5]
+    print(target_file_name)
+    
+    waiter = s3_client.get_waiter('object_exists')
+    waiter.wait(Bucket=source_bucket, Key=object_key)
+    
+    response = s3_client.get_object(Bucket=source_bucket, Key=object_key)
+    print(response)
+    data = response['Body']
+    print(data)
+    data = response['Body'].read().decode('utf-8')
+    print(data)
+    # data = json.loads(data)
+    data = pd.json_normalize(data)
+    print(data)
+    
+    f = []
+    for i in data:
+        f.append(i)
+    df = pd.DataFrame(f)
+    # Select specific columns
+    print(df)
+    
+    # Convert DataFrame to CSV format
+    csv_data = df.to_csv(index=True)
+    
+    # Upload CSV to S3
+    bucket_name = target_bucket
+    object_key = f"{target_file_name}.csv"
+    s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=csv_data)
+    
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps('CSV conversion and S3 upload completed successfully')
+    }
+```
+Here is a full view of the DAG runs in Airflow EC2 instance
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/623fd8b2-74f3-4a11-b3a4-92e59b728b56)
+
+#### News Data from Alpha Vantage
+
+I have used a very similar process to fetch market news data from [Alpha Vantage API](https://www.alphavantage.co/documentation/) that is scheduled to run everyday.
+
+Here is the overview of tasks in the DAG
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/2cf0d903-e148-4e92-95bb-043882ad195b)
+
+**Work In Progress Stay tuned!!**
+
+
