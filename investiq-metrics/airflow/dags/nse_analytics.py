@@ -35,6 +35,24 @@ def extract_nse_data(**kwargs):
     output_list = [output_file_path, file_str]
     return output_list   
 
+def transform_data(task_instance):
+    data = task_instance.xcom_pull(task_ids="tsk_extract_nse_data_var")[0]
+    object_key = task_instance.xcom_pull(task_ids="tsk_extract_nse_data_var")[1]
+
+    df = pd.read_json(data)
+
+    # Normalize the JSON column into separate columns
+    normalized_df = pd.json_normalize(df['meta'])
+
+    # Concatenate the normalized DataFrame with the original DataFrame
+    df = pd.concat([df, normalized_df], axis=1)
+
+    # Drop the original JSON column
+    df.drop(columns=['meta'], inplace=True)
+
+    # Convert DataFrame to CSV format
+    csv_data = df.to_csv(index=False)
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -55,6 +73,11 @@ with DAG('nse_analytics_dag',
         task_id= 'tsk_extract_nse_data_var',
         python_callable=extract_nse_data,
         op_kwargs={'url': 'https://latest-stock-price.p.rapidapi.com/any','headers': api_host_key, 'date_string':dt_now_string}
+        )
+
+        transform_nse_data_var = PythonOperator(
+        task_id= 'tsk_transform_nse_data_var',
+        python_callable=transform_data
         )
 
         load_to_s3 = BashOperator(
