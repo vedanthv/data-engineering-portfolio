@@ -11,8 +11,7 @@ import boto3
 
 s3_client = boto3.client('s3')
 
-api_key = "6JJJARCHH0G9BYPF"
-
+api_key = "ADD KEY HERE"
 target_bucket_name = "news-data-finance"
 
 now = datetime.now()
