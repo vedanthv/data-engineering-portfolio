@@ -16,6 +16,15 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
 - AWS Redshift
 - PowerBI
 
+### Main Highlights
+
+- Used almost all the main AWS Services in the project
+- Extracted Data in a variety of ways:
+      - NSE Daily OHLC : RapidAPI
+      - Global Market News : Alpha Vantage API
+      - Indian Market News : Used Selenium hosted on EC2 to web scrape data from various sources like Yahoo and Google News.
+- Complete end to end automation of the entire ETL pipeline using Airflow hosted on EC2 server
+
 ### Project Architecture
 
 ![InvestIQ](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/be8cc57d-f51f-498d-a9aa-dc2386a96f62)
