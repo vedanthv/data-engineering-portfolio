@@ -18,12 +18,15 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
 
 ### Main Highlights
 
-- Used almost all the main AWS Services in the project
-- Extracted Data in a variety of ways:
-      - NSE Daily OHLC : RapidAPI
-      - Global Market News : Alpha Vantage API
-      - Indian Market News : Used Selenium hosted on EC2 to web scrape data from various sources like Yahoo and Google News.
-- Complete end to end automation of the entire ETL pipeline using Airflow hosted on EC2 server
+* Used almost all the main [AWS Services](https://github.com/vedanthv/data-engineering-portfolio/blob/main/investiq-metrics/README.md#tech-stack) in the project
+  
+* Extracted Data in a variety of ways:
+  
+    * **NSE Daily OHLC** : RapidAPI
+    * **Global Market News Data** : Alpha Vantage API
+    * **Indian Market News Data** : Used Selenium hosted on EC2 to web scrape data from various sources like Yahoo and Google News.
+  
+* Complete end to end automation of the entire ETL pipeline using Airflow hosted on EC2 server
 
 ### Project Architecture
 
