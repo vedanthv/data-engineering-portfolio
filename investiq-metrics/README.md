@@ -9,11 +9,15 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
 
 - AWS EC2 Instances
 - Apache Airflow
+- Airbyte
+- Docker
 - RapidAPI
 - AWS Lambda Functions
 - AWS S3 Storage
 - AWS Cloudwatch
 - AWS Redshift
+- Prometheus
+- Grafana
 - PowerBI
 
 ### Main Highlights
@@ -23,14 +27,16 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
 * Extracted Data in a variety of ways:
   
     * **NSE Daily OHLC** : RapidAPI
+    * **Historical NSE Data** : Airbyte
     * **Global Market News Data** : Alpha Vantage API
     * **Indian Market News Data** : Used Selenium hosted on EC2 to web scrape data from various sources like Yahoo and Google News.
   
 * Complete end to end automation of the entire ETL pipeline using Airflow hosted on EC2 server
+* Monitoring Dashboard and Metrics Ingestion using StatsD, Prometheus and Grafana.
 
 ### Project Architecture
 
-![InvestIQ](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/be8cc57d-f51f-498d-a9aa-dc2386a96f62)
+![nse eod data architecture (1)](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/ace380e2-d7ef-4a09-ae64-6747bb739a64)
 
 ### Setup
 
