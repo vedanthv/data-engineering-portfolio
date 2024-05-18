@@ -8,6 +8,21 @@ Feel Free to Connect with me 🤠
 
 **[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
+## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
+![nse eod data architecture](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/c952fc03-fd72-42a2-8a0b-7f756f04dae9)
+
+**Tech Stack**
+- AWS EC2
+- Apache Airflow
+- RapidAPI
+- AWS Lambda Functions
+- AWS S3 Storage
+- AWS Cloudwatch
+- AWS Redshift
+- PowerBI
+
+"Introducing InvestIQ Metrics: Where every market heartbeat finds meaning. InvestIQ Metrics is your dynamic portal into the rhythm of the stock market, offering a symphony of data-driven insights and analysis. Powered by cutting-edge real time data, this project transcends the mundane, illuminating the trends, patterns, and opportunities hidden within the market's fluctuations.
+
 ## [UserMingle : Kafka-Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle) 🧔
 
 **Brief Overview**
@@ -67,19 +82,3 @@ The project utilizes the Tokyo Olympics Dataset from Kaggle  with data from over
 - Azure Databricks
 - Synapse Analytics
 - PowerBI
-
-## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
-
-![InvestIQ](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/be8cc57d-f51f-498d-a9aa-dc2386a96f62)
-
-**Tech Stack**
-- AWS EC2
-- Apache Airflow
-- RapidAPI
-- AWS Lambda Functions
-- AWS S3 Storage
-- AWS Cloudwatch
-- AWS Redshift
-- PowerBI
-
-"Introducing InvestIQ Metrics: Where every market heartbeat finds meaning. InvestIQ Metrics is your dynamic portal into the rhythm of the stock market, offering a symphony of data-driven insights and analysis. Powered by cutting-edge real time data, this project transcends the mundane, illuminating the trends, patterns, and opportunities hidden within the market's fluctuations.
