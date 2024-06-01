@@ -143,9 +143,7 @@ Command Line Flags like timeout, concurrency, grace period, outrage tolerance an
 
 **Complete Dashboard Demo**
 
-
-
-![](https://snipboard.io/bqL0Oa.jpg)
+https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/0b848e71-0ab7-4fad-8058-7c7b77a8555f
 
 Running 31 DAGs at once with low latency
 
