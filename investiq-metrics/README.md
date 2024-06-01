@@ -141,6 +141,10 @@ Running 31 DAGs at once with low latency
 
 ![](https://snipboard.io/s4yIGQ.jpg)
 
+In depth DAG Statistics running at 5 second latency
+
+![](https://snipboard.io/1u0JYp.jpg)
+
 ### EC2 Setup
 
 The entire project is orchestrated using Airflow and hosted on an EC2 instance.
