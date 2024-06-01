@@ -64,6 +64,24 @@ I will be using the following [Latest Stock Price](https://rapidapi.com/suneetk9
 
 ## Architecture In Detail
 
+### Data Monitoring Setup
+
+#### StatsD Explorer
+
+The Data Monitoring Architecture is used in the project to monitor the Airflow logs using various different metrics.
+
+The metrics cannot be captured directly into Grafana for visualization but has to be streamed in throught **StatsD** explorer.
+
+StatsD is a standard and, by extension, a set of tools that can be used to send, collect, and aggregate custom metrics from any application. Originally, StatsD referred to a daemon written by Etsy in Node.js. Today, the term StatsD refers to both the protocol used in the original daemon, as well as a collection of software and services that implement this protocol.
+
+![](https://snipboard.io/jrYhqd.jpg)
+
+The above image shows the StatsD explorer running on my local machine in the 9102 port.
+
+Here is a view of all the metrics coming into statsD via Airflow.
+
+![](https://snipboard.io/Bsczjb.jpg)
+
 ### EC2 Setup
 
 The entire project is orchestrated using Airflow and hosted on an EC2 instance.
@@ -314,6 +332,5 @@ Here is the overview of tasks in the DAG
 
 ![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/2cf0d903-e148-4e92-95bb-043882ad195b)
 
-**Work In Progress Stay tuned!!**
 
 
