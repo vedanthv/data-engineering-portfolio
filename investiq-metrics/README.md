@@ -137,7 +137,9 @@ Command Line Flags like timeout, concurrency, grace period, outrage tolerance an
 
 ![](https://snipboard.io/bqL0Oa.jpg)
 
+Running 31 DAGs at once with low latency
 
+![](https://snipboard.io/s4yIGQ.jpg)
 
 ### EC2 Setup
 
