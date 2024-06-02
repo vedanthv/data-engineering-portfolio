@@ -33,7 +33,10 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
   
 * Complete end to end automation of the entire ETL pipeline using Airflow hosted on EC2 server
 * Monitoring Dashboard and Metrics Ingestion using StatsD, Prometheus and Grafana.
-
+* [**TODO**] Streaming Data Pipelines with Upstash
+* [**TODO**] Utilize Redshift Serverless
+* [**TODO**] PowerBI Reporting and Visualization
+  
 ### Project Architecture
 
 ![nse eod data architecture (1)](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/ace380e2-d7ef-4a09-ae64-6747bb739a64)
