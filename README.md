@@ -54,6 +54,8 @@ The entire streaming process is managed by a Kafka setup that has a Zookeeper pi
 - **Apache Spark**: For data processing with its master and worker nodes.
 - **Cassandra**: Where the processed data will be stored.
 
+Reference Video tutorial by [CodeWithYu](https://www.youtube.com/watch?v=GqAcTrqKcrY&pp=ygUgY29kZXdpdGh5dSByYW5kb20gdXNlciBnZW5lcmF0b3I%3D)
+
 ##  [Grand Prix Data Odyssey: Deep Formula 1 Insights](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg) 🏎️
 
 **Brief Overview**
