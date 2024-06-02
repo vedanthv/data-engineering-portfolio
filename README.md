@@ -29,6 +29,12 @@ Feel Free to Connect with me 🤠
 
 ## [TubeTrendX: AI-Powered Personalized Analytics for YouTube Creators]()
 
+In the bustling world of digital media, YouTube shines as a dynamic stage for content creators to showcase their videos and connect with audiences around the globe.
+
+Yet, the avalanche of daily uploads turns the task of extracting valuable insights from viewer comments and gauging audience sentiment into a formidable challenge.
+
+Enter our project, which harnesses the YouTube Data API and OpenAI's powerful Language Models (LLMs) to revolutionize the way creators analyze their channels, videos, and comments.
+
 ## [UserMingle : Kafka-Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle) 🧔
 
 **Brief Overview**
