@@ -39,7 +39,7 @@ In this project titled **InvestIQ Metrics** I have showcased an end to end data 
   
 ### Project Architecture
 
-![nse eod data architecture (1)](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/ace380e2-d7ef-4a09-ae64-6747bb739a64)
+![final architecture](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6c6afb46-ac1a-4c73-b47b-3915fb7140c6)
 
 ### Setup
 
