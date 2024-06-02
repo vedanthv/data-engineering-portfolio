@@ -10,7 +10,7 @@ Feel Free to Connect with me 🤠
 
 ## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
 
-![nse eod data architecture (1)](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/1813cd86-631e-45bd-bdc7-3182c30546f0)
+![final architecture](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6c6afb46-ac1a-4c73-b47b-3915fb7140c6)
 
 **Tech Stack**
 - AWS EC2
