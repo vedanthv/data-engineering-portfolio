@@ -24,3 +24,12 @@ This innovative automation empowers content creators to delve deeper into their 
 
 By streamlining the analysis process, our solution equips creators to make informed, data-driven decisions swiftly and efficiently, conserving time and resources while amplifying the impact of their content.
 
+## Key Goals of The Project
+
+- [ ] **Dashboard for creators** to view analytics of their channel in one place
+
+- [ ] **Sentiments of comments** on the top 5-10 videos on the channel.
+
+- [ ] Auto generation of captions for the videos and **complete analysis of the words using NLP**, possibly a prompt to ChatGPT and giving suggestions to improve the language for better viewership.
+
+- [ ] **Smart Description and Thumbnail Generation** by filtering out top videos with the same tags as the genre of the channel and using it to generate new thumbnails.
