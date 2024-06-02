@@ -1,5 +1,7 @@
 # TubeTrendX: AI-Powered Personalized Analytics for YouTube Creators
 
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6dbd5ab3-45f7-4c0c-a8e4-48d99f1fb050)
+
 ## Introduction and Problem Statement
 
 In the bustling world of digital media, YouTube shines as a dynamic stage for content creators to showcase their videos and connect with audiences around the globe.
