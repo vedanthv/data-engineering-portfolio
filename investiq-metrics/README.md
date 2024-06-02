@@ -65,6 +65,12 @@ I will be using the following [Latest Stock Price](https://rapidapi.com/suneetk9
 
 ![Snapshot of the API](https://snipboard.io/JYTk6N.jpg)
 
+Historic data available for NSE from the website is ingested using a Google Sheets + Airbyte pipeline that enables ingestion of millions of records from Google Sheets to S3 Bucket using Airbyte's easy to use UI. 
+
+The better method to ingest csv data from the website would be scrapping the csv files using Selenium or BeautifulSoup but I wanted to try out Airbyte and found this to be a perfect use case for it.
+
+![airbyte pipeline](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/06552564-a5ef-40fe-aef1-4700603dfce0)
+
 ## Architecture In Detail
 
 ### Data Monitoring Setup
