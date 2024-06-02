@@ -1,4 +1,6 @@
-## [UserMingle : Kafka-Driven User Profile Streaming]() 🧔
+## UserMingle : Kafka-Driven User Profile Streaming🧔
+
+Reference Video tutorial by [CodewithYu](https://www.youtube.com/watch?v=GqAcTrqKcrY&pp=ygUgY29kZXdpdGh5dSByYW5kb20gdXNlciBnZW5lcmF0b3I%3D)
 
 **Brief Overview**
 
