@@ -27,7 +27,10 @@ Feel Free to Connect with me 🤠
 
 "Introducing InvestIQ Metrics: Where every market heartbeat finds meaning. InvestIQ Metrics is your dynamic portal into the rhythm of the stock market, offering a symphony of data-driven insights and analysis. Powered by cutting-edge real time data, this project transcends the mundane, illuminating the trends, patterns, and opportunities hidden within the market's fluctuations.
 
-## [TubeTrendX: AI-Powered Personalized Analytics for YouTube Creators]()
+## [TubeTrendX: AI-Powered Personalized Analytics for YouTube Creators](https://github.com/vedanthv/data-engineering-portfolio/tree/main/tube-trends)
+
+![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6dbd5ab3-45f7-4c0c-a8e4-48d99f1fb050)
+
 
 In the bustling world of digital media, YouTube shines as a dynamic stage for content creators to showcase their videos and connect with audiences around the globe.
 
