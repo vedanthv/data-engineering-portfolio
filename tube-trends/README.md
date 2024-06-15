@@ -33,3 +33,11 @@ By streamlining the analysis process, our solution equips creators to make infor
 - [ ] Auto generation of captions for the videos and **complete analysis of the words using NLP**, possibly a prompt to ChatGPT and giving suggestions to improve the language for better viewership.
 
 - [ ] **Smart Description and Thumbnail Generation** by filtering out top videos with the same tags as the genre of the channel and using it to generate new thumbnails.
+
+## Architecture
+
+### ETL Pipelines
+
+| Name    | Description | Source | Sink | Schedule
+| -------- | ------- | ---------- | ------- | ---------- | 
+| ```channel-metadata-etl```  | Channel metadata like name, subscriber count and tags| Youtube API | AWS S3 | Runs every week on Sat 18:30 UTC |
