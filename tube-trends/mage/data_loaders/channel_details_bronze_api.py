@@ -11,49 +11,54 @@ if 'data_loader' not in globals():
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
-
 @data_loader
 def load_data_from_api(*args, **kwargs):
-
     """
-    Function for loading data from an API using http.client and converting it to a pandas DataFrame.
+    Function for loading channel metadata from API using http.client and converting it to a pandas DataFrame.
     """
     headers = {
-        'x-rapidapi-key': "{{env.variable.rapidapikey}}",
-        'x-rapidapi-host': "{{env.variable.rapidapi-host}}"
+        'x-rapidapi-key': "2781ae1228mshc6f17aab7ec0136p15b6cfjsn2c26196d15cc",
+        'x-rapidapi-host': "yt-api.p.rapidapi.com"
     }
-
+    
+    base_path = "/channel/home?id="
     conn = http.client.HTTPSConnection("yt-api.p.rapidapi.com")
 
-    conn.request("GET", "/channel/home?id=UC8butISFwT-Wl7EV0hUK0BQ", headers=headers)
+    # Initialize an empty list to store DataFrames for each channel
+    dfs = []
 
-    res = conn.getresponse()
-    data = res.read()
-    
-    # Parse the response data if it's in JSON format
-    try:
-        parsed_data = json.loads(data)
-    except json.JSONDecodeError:
-        parsed_data = None
+    for channel_id in channel_ids:
+        conn.request("GET", base_path + channel_id, headers=headers)
+        res = conn.getresponse()
+        data = res.read()
+
+        # Parse the response data if it's in JSON format
+        try:
+            parsed_data = json.loads(data)
+        except json.JSONDecodeError:
+            parsed_data = None
+
+        # Convert the parsed JSON data to a pandas DataFrame
+        if isinstance(parsed_data, list):
+            df = pd.DataFrame(parsed_data)
+        elif isinstance(parsed_data, dict):
+            df = pd.json_normalize(parsed_data)
+        else:
+            df = pd.DataFrame()
+
+        dfs.append(df)
 
     conn.close()
 
-    # Convert the parsed JSON data to a pandas DataFrame
-    if isinstance(parsed_data, list):
-        # Convert list of dictionaries to DataFrame
-        df = pd.DataFrame(parsed_data)
-    elif isinstance(parsed_data, dict):
-        # Normalize nested dictionaries
-        df = pd.json_normalize(parsed_data)
-    else:
-        df = pd.DataFrame()
+    # Concatenate all DataFrames into a single DataFrame
+    combined_df = pd.concat(dfs, ignore_index=True)
 
-    return df
+    return combined_df
 
 # Example usage
-df = load_data_from_api()
+channel_ids = ["UCCezIgC97PvUuR4_gbFUs5g","UCh9nVJoWXmFb7sLApWGcLPQ","UCAq9f7jFEA7Mtl3qOZy2h1A","UCAEOtPgh29aXEt31O17Wfjg"]
 
-print(df.columns)
+df = load_data_from_api(channel_ids)
 
 @test
 def test_output(output, *args) -> None:
