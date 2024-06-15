@@ -17,7 +17,7 @@ def load_data_from_api(*args, **kwargs):
     Function for loading channel metadata from API using http.client and converting it to a pandas DataFrame.
     """
     headers = {
-        'x-rapidapi-key': "2781ae1228mshc6f17aab7ec0136p15b6cfjsn2c26196d15cc",
+        'x-rapidapi-key': "your_key",
         'x-rapidapi-host': "yt-api.p.rapidapi.com"
     }
     
