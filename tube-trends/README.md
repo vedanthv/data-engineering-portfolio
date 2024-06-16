@@ -41,3 +41,4 @@ By streamlining the analysis process, our solution equips creators to make infor
 | Name    | Description | Source | Sink | Schedule
 | -------- | ------- | ---------- | ------- | ---------- | 
 | ```channel-metadata-etl```  | Channel metadata like name, subscriber count and tags| Youtube API | AWS S3 | Runs every week on Sat 18:30 UTC |
+| ```video-data-etl``` | Details of videos like title, description, banner image, no of views and likes | Youtube API | DynamoDB | Runs every week on Fri at 00:00 UTC |
