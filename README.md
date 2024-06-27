@@ -8,6 +8,8 @@ Feel Free to Connect with me 🤠
 
 **[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
+For code snippets integrating various pieces of the DE stack check out my other [repo](https://github.com/vedanthv/data-engineering-code-snippets)
+
 ## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
 
 ![final architecture](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6c6afb46-ac1a-4c73-b47b-3915fb7140c6)
