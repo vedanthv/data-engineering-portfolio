@@ -10,6 +10,9 @@ Feel Free to Connect with me 🤠
 
 For code snippets integrating various pieces of the DE stack check out my other [repo](https://github.com/vedanthv/data-engineering-code-snippets)
 
+## [💵 🦹 FlashMetrics Financial Intelligence](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid)
+
+
 ## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
 
 ![final architecture](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6c6afb46-ac1a-4c73-b47b-3915fb7140c6)
@@ -28,17 +31,6 @@ For code snippets integrating various pieces of the DE stack check out my other 
 - PowerBI
 
 "Introducing InvestIQ Metrics: Where every market heartbeat finds meaning. InvestIQ Metrics is your dynamic portal into the rhythm of the stock market, offering a symphony of data-driven insights and analysis. Powered by cutting-edge real time data, this project transcends the mundane, illuminating the trends, patterns, and opportunities hidden within the market's fluctuations.
-
-## [TubeTrendX: AI-Powered Personalized Analytics for YouTube Creators](https://github.com/vedanthv/data-engineering-portfolio/tree/main/tube-trends)
-
-![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/6dbd5ab3-45f7-4c0c-a8e4-48d99f1fb050)
-
-
-In the bustling world of digital media, YouTube shines as a dynamic stage for content creators to showcase their videos and connect with audiences around the globe.
-
-Yet, the avalanche of daily uploads turns the task of extracting valuable insights from viewer comments and gauging audience sentiment into a formidable challenge.
-
-Enter our project, which harnesses the YouTube Data API and OpenAI's powerful Language Models (LLMs) to revolutionize the way creators analyze their channels, videos, and comments.
 
 ## [UserMingle : Kafka-Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle) 🧔
 
