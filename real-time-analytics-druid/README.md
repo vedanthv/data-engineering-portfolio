@@ -4,7 +4,7 @@
 
 ## Video Demo
 
-Add video here
+https://github.com/user-attachments/assets/dcb3ac53-7145-4338-b8d9-aee9944aa410
 
 ## Overview
 
