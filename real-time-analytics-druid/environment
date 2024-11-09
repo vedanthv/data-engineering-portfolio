@@ -1,0 +1,23 @@
+DRUID_SINGLE_NODE_CONF = micro_quickstart
+
+druid_emitter_logging_logLevel = debug
+
+druid_extensions_loadList=["druid-histogram","druid-datasketches","druid-lookups-cached-global","postgres-metadata-storage","druid-multistage-query", "druid-kafka-indexing-service"]
+
+druid_zk_serivce_host="zookeeper"
+
+druid_metadata_storage_host=postgres
+druid_metadata_storage_type=psotgresql
+druid_metadata_storage_connect_URI="jdbc:psotgresql://postgres:5432/druid?user=druid&password=FoolishPassword"
+druid_metadata_storage_connector_user=druid
+druid_metadata_Storage_connector_password=FoolishPassword
+
+druid_indexer_runner_javaOptsArray = ["-server", "-Xmx1g","-Xms1g","-XX:MaxDirectMemorySize=3g","-D user.timezone=UTC","-D file.encoding=UTF-8"]
+
+druid_storage_type = local
+druid_storage_storageDirectory=/opt/shared/segments 
+druid_indexer_logs_type = file
+druid_indexer_logs_directory = /opt/shared/indexing-logs
+
+druid_processing_numThreads = 2
+druid_processing_numMergeBuffers=2
