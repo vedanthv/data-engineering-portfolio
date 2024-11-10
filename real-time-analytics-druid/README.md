@@ -2,18 +2,61 @@
 
 # What is Apache Druid?
 
+Apache Druid is one of the most famous and extensively used realtime OLAP analytics databases that was introduced by MetaMarket in 2014.
+
+MapReduce and Hadoop was conceptualised by Google in 2004 for large scaled data processing but one of the major drawbacks was that it could not handle large scale event streaming data efficiently.
+
+Metamarket is a company that focuses on providing market insights to sales executives and organizations whose products guarantee efficient query performance. After realizing that Hadoop and other open source products could not give these guarantees, they build Druid : a real time data store.
+
+The other major aspect of buildiing Druid was to provide high availability since any downtime of critical dashboards and data, may result in significant loss to a business in the vertical of FMCG, AdTech etc... that heavily rely on marketing insights for split second decisions.
+
 # Components of Apache Druid
+
+**All Images in this section are picked from** : https://blog.det.life/the-architecture-of-apache-druid-e92d64ba4360 
+(credits to Vu Trinh!)
+
+![alt text](image.png)
+
+## Real Time Nodes
+
+A real-time node (also called a Real-Time Server or Middle Manager node) is responsible for ingesting real-time data, processing it, and making it available for querying almost immediately. Druid is designed to handle large volumes of real-time streaming data with low-latency query responses.
+
+- Real-time nodes are responsible for ingesting data from streaming sources like Apache Kafka, HTTP, or any other data stream.
+
+- They use ingestion spec (JSON) to define how the data should be ingested, parsed, and transformed.
+
+- The node consumes events in real time, processes them (e.g., filtering, transformation), and stores them in an intermediate data structure.
+
+- Real-time nodes take the incoming data and perform indexing. This process involves transforming the raw data into a columnar format (specifically, Druid's segment format).
+The node writes this data to real-time segments in memory first and eventually persists them to disk when they reach a certain size or age.
+
+- As soon as the data is ingested and indexed, it becomes available for queries. In Druid, queries can be made with near real-time latency, which is critical for applications requiring up-to-the-minute data access.
+
+- The data on the real-time node is eventually persisted into deep storage and can be used by historical nodes for more efficient querying over long time periods.
+
+- We can have multiple real time nodes that can ingest the same data guaranteeing data resiliency and multiple real time nodes can also ingest different partitions of the same stream, so load balancing can be acheived.
+
+![alt text](image-1.png)
+Credits : Vu Trinh
+
+## Why use Kafka?
+
+One question that you may ask is, why do we use Kafka here if we can directly stream to real time nodes. 
+
+We use Kafka streams because it provides checkpoint/offset capability that informs the real time node about the data offset from where it needs to start ingesting data.
+
+Incase the real time node goes down, the Kafka broker can tell the node the offset position once its back up to avoid unnecessary data redundancy.
 
 # Case Studies and Use in Popular Applications
 
-# Trying it out with One Financial Accounts Table
+# Experiments with a single table
 
-Here are some visuals where I try out Apache Druid with just one table.
+Here are some visuals where I try out Apache Druid with just one table that has some financial transactional data.
 
 - There is only one broker that consumes data from a python file that has code to produce 100,000 messages per second.
 - All components listed above are spun up as shown in the video demo.
 - There is a common zookeeper that manages both the broker and druid services.
-- The entire setup is on a ```t2.medium``` EC2 instance type and ```ubuntu 24.04``` image.
+- The entire setup is on a ```t2.medium``` EC2 instance type and ```ubuntu 24.04``` img/image.
 - The demo and the benchmarking was done on a non docker setup but you can use the ```docker-compose.yml``` script in the repo to follow along with Docker pre setup.
 - **Cost of AWS Services on Avg** : Around 8$ over a period of 3 weeks and 100 hours of uptime.
 
@@ -23,38 +66,38 @@ https://github.com/user-attachments/assets/dcb3ac53-7145-4338-b8d9-aee9944aa410
 
 ## Overview
 
-![alt text](image-3.png)
+![alt text](img/image-3.png)
 
 ## Extensions
 
-![alt text](image-4.png)
+![alt text](img/image-4.png)
 
 ## Services Running
 
-![alt text](image-5.png)
+![alt text](img/image-5.png)
 
 ## Leader and Worker Node
 
-![alt text](image-6.png)
+![alt text](img/image-6.png)
 
 ## Parsed Data from JSON
 
-![alt text](image-7.png)
+![alt text](img/image-7.png)
 
 ## Partitioning by Timestamp
 
-![alt text](image-8.png)
+![alt text](img/image-8.png)
 
 Druid partitions data based on the primary time column of your data. This column is stored internally in Druid as __time.
 
 ## Realtime Filtering Capability
 
-![alt text](image-9.png)
+![alt text](img/image-9.png)
 Here I have filtered rows where the transaction type is "payment". 
 
 ## Query Granularity
 
-![alt text](image-10.png)
+![alt text](img/image-10.png)
 
 Granularity determines how to bucket data across the time dimension, or how to aggregate data by hour, day, minute, etc and defines how it is stored. The granularity formats here apply also to segmentGranularity and queryGranularity in the granularitySpec section of the the ingestion spec.
 
@@ -76,21 +119,21 @@ Refer : https://druid.apache.org/docs/31.0.0/ingestion/ingestion-spec/#tuningcon
 
 - The ingestion spec json gives details of all the transformations and filtering that we did.
 
-![alt text](image-11.png)
+![alt text](img/image-11.png)
 
 ## Submitting the Spec to the Supervisor
 
-![alt text](image-12.png)
+![alt text](img/image-12.png)
 
-![alt text](image-14.png)
+![alt text](img/image-14.png)
 
 ## Supervisor Indexes the data in the **kttm** topic
 
-![alt text](image-15.png)
+![alt text](img/image-15.png)
 
 The status of each task running on the supervisor port 8100 is displayed here
 
-![alt text](image-16.png)
+![alt text](img/image-16.png)
 
 ## Segmentation of the Data by Time
 
@@ -100,7 +143,7 @@ The status of each task running on the supervisor port 8100 is displayed here
 
 - We can also see various otther metrics like replicas, replica factor, IsAvailable? , IsActive? , IsRealTime? etc..
 
-![alt text](image-17.png)
+![alt text](img/image-17.png)
 
 - This feature is called "auto batching" in Druid.
 
@@ -123,18 +166,18 @@ Increasing the producer speed to send 1000 records per sec...
 
 100000 records per second...
 
-![alt text](image-19.png)
+![alt text](img/image-19.png)
 
 Grouping Operations for 400,000+ records happens within 0.30 seconds!
 
-![alt text](image-20.png)
+![alt text](img/image-20.png)
 
 ## Time Aggregation
 
 Let us do some aggregation based on the time where the total_amount (basically the cash from bank)
 that flows in and out per minute.
 
-![alt text](image-21.png)
+![alt text](img/image-21.png)
 
 # Troubleshooting Guide
 
@@ -149,7 +192,7 @@ create multiple terminals and SSH into each one of them.
 
 We need to do this because the SSH session terminates within 15-20 min, and then we need to stop the EC2, get the new public address and again connect. Its a pain. [Solution??](https://codewithsusan.com/notes/vscode-remote-ssh-connection-issues#:~:text=Why%20this%20happens,is%20to%20restart%20the%20server.) 
 
-![alt text](image-13.png)
+![alt text](img/image-13.png)
 
 So...
 
@@ -223,9 +266,9 @@ Create topic
 
 https://stackoverflow.com/questions/59481878/unable-to-start-kafka-with-zookeeper-kafka-common-inconsistentclusteridexceptio
 
-![alt text](image.png)
+![alt text](img/image.png)
 
-![alt text](image-1.png)
+![alt text](img/image-1.png)
 
 **IMP!!! Since Druid itself starts a Zookeeper we dont need to start one more while creating broker.**
 
@@ -233,7 +276,7 @@ https://stackoverflow.com/questions/59481878/unable-to-start-kafka-with-zookeepe
 
 https://stackoverflow.com/questions/11583562/how-to-kill-a-process-running-on-particular-port-in-linux
 
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 
 Prefix all commands by sudo
 
@@ -241,9 +284,9 @@ Prefix all commands by sudo
 
 https://stackoverflow.com/questions/59481878/unable-to-start-kafka-with-zookeeper-kafka-common-inconsistentclusteridexceptio
 
-![alt text](image.png)
+![alt text](img/image.png)
 
-![alt text](image-1.png)
+![alt text](img/image-1.png)
 
 This legit works for all kinds of errors!!
 
