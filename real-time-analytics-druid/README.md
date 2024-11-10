@@ -91,8 +91,6 @@ The status of each task running on the supervisor port 8100 is displayed here
 
 - If a segment is corrupted we can rebuild that segment without affecting the other partitions of the  data.
 
-[Add video here!!!]
-
 ## Realtime Superfast Querying
 
 Once the supervisor builds the table for us with the partitions, we can start querying the data.
@@ -100,13 +98,13 @@ Look at how fast the queries get executed!!
 
 Barely takes 0.1s to read in 800 records!
 
-[Add video here!!!]
+![fast_query_execution_1](https://github.com/user-attachments/assets/b19d130c-2687-42bc-a80c-8b429e70e367)
 
 ## Benchmarking
 
 Increasing the producer speed to send 1000 records per sec...
 
-[Add video here!!!]
+![benchmarking_1000](https://github.com/user-attachments/assets/f17ba663-bd11-4bb3-813a-de7835b9a17a)
 
 100000 records per second...
 
