@@ -1,6 +1,21 @@
-# 💵 🦹 FlashMetrics Financial Intelligence
+# 💵 🦹 FlashMetrics Financial Intelligence with Apache Druid
 
-# Some Visuals
+# What is Apache Druid?
+
+# Components of Apache Druid
+
+# Case Studies and Use in Popular Applications
+
+# Trying it out with One Financial Accounts Table
+
+Here are some visuals where I try out Apache Druid with just one table.
+
+- There is only one broker that consumes data from a python file that has code to produce 100,000 messages per second.
+- All components listed above are spun up as shown in the video demo.
+- There is a common zookeeper that manages both the broker and druid services.
+- The entire setup is on a ```t2.medium``` EC2 instance type and ```ubuntu 24.04``` image.
+- The demo and the benchmarking was done on a non docker setup but you can use the ```docker-compose.yml``` script in the repo to follow along with Docker pre setup.
+- **Cost of AWS Services on Avg** : Around 8$ over a period of 3 weeks and 100 hours of uptime.
 
 ## Video Demo
 
