@@ -11,7 +11,7 @@ Feel Free to Connect with me 🤠
 For code snippets integrating various pieces of the DE stack check out my other [repo](https://github.com/vedanthv/data-engineering-code-snippets)
 
 ## [💵 🦹 FlashMetrics Financial Intelligence](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid)
-
+![openart-image_gTGqPGtf_1731224265387_raw](https://github.com/user-attachments/assets/6b9bdeb1-ab1f-4ea2-9b01-5c8066c29c0f)
 
 ## [InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)
 
