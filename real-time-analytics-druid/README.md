@@ -63,6 +63,66 @@ Refer : https://druid.apache.org/docs/31.0.0/ingestion/ingestion-spec/#tuningcon
 
 ![alt text](image-11.png)
 
+## Submitting the Spec to the Supervisor
+
+![alt text](image-12.png)
+
+![alt text](image-14.png)
+
+## Supervisor Indexes the data in the **kttm** topic
+
+![alt text](image-15.png)
+
+The status of each task running on the supervisor port 8100 is displayed here
+
+![alt text](image-16.png)
+
+## Segmentation of the Data by Time
+
+- In the below example there is one segment for each day.
+
+- Spapshot versioning of the data in each segment takes place at regular intervals.
+
+- We can also see various otther metrics like replicas, replica factor, IsAvailable? , IsActive? , IsRealTime? etc..
+
+![alt text](image-17.png)
+
+- This feature is called "auto batching" in Druid.
+
+- If a segment is corrupted we can rebuild that segment without affecting the other partitions of the  data.
+
+[Add video here!!!]
+
+## Realtime Superfast Querying
+
+Once the supervisor builds the table for us with the partitions, we can start querying the data.
+Look at how fast the queries get executed!!
+
+Barely takes 0.1s to read in 800 records!
+
+[Add video here!!!]
+
+## Benchmarking
+
+Increasing the producer speed to send 1000 records per sec...
+
+[Add video here!!!]
+
+100000 records per second...
+
+![alt text](image-19.png)
+
+Grouping Operations for 400,000+ records happens within 0.30 seconds!
+
+![alt text](image-20.png)
+
+## Time Aggregation
+
+Let us do some aggregation based on the time where the total_amount (basically the cash from bank)
+that flows in and out per minute.
+
+![alt text](image-21.png)
+
 # Troubleshooting Guide
 
 ## Non Docker Vanilla Setup
@@ -74,7 +134,9 @@ I sepnt lot of time SSH'ing into the EC2 instance from VSCode.
 Its kind of pointless and doesnt work like before, so best way if you are not using Docker is to 
 create multiple terminals and SSH into each one of them.
 
-We need to do this because the SSH session terminates within 15-20 min, and then we need to stop the EC2, get the new public address and again connect. Its a pain.
+We need to do this because the SSH session terminates within 15-20 min, and then we need to stop the EC2, get the new public address and again connect. Its a pain. [Solution??](https://codewithsusan.com/notes/vscode-remote-ssh-connection-issues#:~:text=Why%20this%20happens,is%20to%20restart%20the%20server.) 
+
+![alt text](image-13.png)
 
 So...
 
