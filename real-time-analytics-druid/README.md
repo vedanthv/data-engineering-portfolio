@@ -37,6 +37,7 @@ The node writes this data to real-time segments in memory first and eventually p
 - We can have multiple real time nodes that can ingest the same data guaranteeing data resiliency and multiple real time nodes can also ingest different partitions of the same stream, so load balancing can be acheived.
 
 ![alt text](image-1.png)
+
 Credits : Vu Trinh
 
 ## Why use Kafka?
