@@ -1,4 +1,12 @@
-# 💵 🦹 FlashMetrics Financial Intelligence with Apache Druid
+# 💵 🦹 Dabbling with Apache Druid : Realtime Analytics Engine
+
+Multiple Case Studies in various domains that I experimented using Apache Druid as a real time analytics database for efficient and low latency querying on streaming data source sending excess of 100k messages a second.
+
+I have demonstrated and benchmarked most of the features available in Druid.
+
+🚀 Its not a complete project like some of the others here, but just a depiction of how I learn new tech practically in a(or a couple) weekend(s) :)
+
+![openart-image_gTGqPGtf_1731224265387_raw](https://github.com/user-attachments/assets/6b9bdeb1-ab1f-4ea2-9b01-5c8066c29c0f)
 
 Already Know about Druid, want to skip to the boring parts? Click [here](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid#experiments-with-a-single-table)
 
