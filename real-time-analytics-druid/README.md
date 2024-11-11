@@ -1,5 +1,7 @@
 # 💵 🦹 FlashMetrics Financial Intelligence with Apache Druid
 
+Already Know about Druid, want to skip to the boring parts? Click [here](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid#experiments-with-a-single-table)
+
 # Project Setup and Troubleshooting Guide
 
 If you would like to emulate the project on your system follow these steps.
