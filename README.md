@@ -21,7 +21,7 @@ I do small projects / prototypes regularly while learning new stuff, not CV wort
 | Project | Domain | 
 | :---------: | :---------: |
 | [Realtime Ingestion and Transformation with Apache Druid as OLAP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid) | Data Ingestion and Big Data Processing | 
-|[Airflow with Postgres as OLTP Base](https://github.com/vedanthv/data-engineering-portfolio/tree/main/airflow-postgres-db)|Data Ingestion and Web Scraping|
+|[Airflow with Postgres as OLTP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/airflow-postgres-db)|Data Ingestion and Web Scraping|
 
 ### End 2 End Projects
 
