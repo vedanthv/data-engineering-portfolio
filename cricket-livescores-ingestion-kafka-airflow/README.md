@@ -1,6 +1,139 @@
 ## Streaming Data using Kafka Topic and Storing in Postgres with Airflow 
 
+Check out the other [project](https://github.com/vedanthv/data-engineering-portfolio/tree/main/airflow-postgres-db) on Batch Processing with Postgres and Airflow if you haven't already.
+
 In this small project, I have setup a pipeline that produces some IPL match and scores data, creates a topic **livescores_topic** and the consumer is Postgres database.
+
+## Setup and Troubleshooting
+
+IMP : Only the databases are part of docker compose.
+
+THe rest (airflow,zookeeper and broker) have to be manual started. 
+
+I plan on converting these and including them in the docker compose in the near future!
+
+### Airflow - Data Orchestrator
+
+I have used **airflowctl** to setup Airflow this time because its simple to use and setup.
+
+Its light weight and does not take much space compared to the docker image.
+
+Major Steps are here: https://github.com/kaxil/airflowctl/tree/main
+
+I have also listed down the steps below that you can copy/paste.
+
+1. Create venv
+
+```
+sudo apt install python3-pip
+sudo apt install sqlite3
+sudo apt install sqlite3
+sudo apt install python3.12-venv
+```
+
+```
+python3 -m venv cricket
+```
+
+2. Init the project
+
+```
+airflowctl init cricket-de-dags --airflow-version 2.6.3 --python-version 3.8
+```
+
+```
+cd cricket-de-dags/
+```
+
+3. Build the environment
+
+```
+airflowctl build
+```
+
+4. Start airflow in ```ec2_ip:8080```
+
+```
+airflowctl start cricket-de-dags --background
+```
+
+That's all simple!!!
+
+#### How to install postgres connector / provider
+
+First stop your airflow instance using
+
+```
+airflowctl cricket-de-dags stop
+```
+
+Now in the ```requirements.txt``` file add the following
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+Now restart again using the steps mentioned above.
+
+### Setup Postgres and Redis DB
+
+Here we use a simple docker-compose.yml file.
+
+```
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  redis:
+    # Redis is limited to 7.2-bookworm due to licencing change
+    # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
+    image: redis:7.2-bookworm
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 50
+      start_period: 30s
+    restart: always
+  pgadmin:
+
+    container_name: pgadmin4_container2
+    
+    image: dpage/pgadmin4
+    
+    restart: always
+    
+    environment:
+    
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      
+    ports:
+      - "5050:80"
+
+volumes:
+  postgres-db-volume:
+```
+
+### Setup Kafka Broker and Zookeeper
+
+Follow the steps here it works well : https://kafka.apache.org/quickstart
+
+## Architecture
 
 The entire pipeline is orchestrated on Airflow.
 
@@ -251,3 +384,6 @@ The rest of it below just uses the above functions ...
     create_table_task >> generate_ipl_data_task >> consume_from_kafka_task
 ```
 
+**Postgres DB Table Streaming Ingest with Each Airflow DAG Run**
+
+[Add video here!!!]
