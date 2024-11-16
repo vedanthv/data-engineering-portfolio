@@ -4,6 +4,12 @@ Check out the other [project](https://github.com/vedanthv/data-engineering-portf
 
 In this small project, I have setup a pipeline that produces some IPL match and scores data, creates a topic **livescores_topic** and the consumer is Postgres database.
 
+## Demo
+
+**Postgres DB Table Streaming Ingest with Each Airflow DAG Run**
+
+https://github.com/user-attachments/assets/d8fda48f-86da-4c59-893a-9f41ffb00b55
+
 ## Setup and Troubleshooting
 
 IMP : Only the databases are part of docker compose.
@@ -383,7 +389,3 @@ The rest of it below just uses the above functions ...
     # Set task dependencies
     create_table_task >> generate_ipl_data_task >> consume_from_kafka_task
 ```
-
-**Postgres DB Table Streaming Ingest with Each Airflow DAG Run**
-
-[Add video here!!!]
