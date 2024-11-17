@@ -65,7 +65,8 @@ These are :
 - ```team-results``` : Results of a particular team like "RCB". Eg : **0.0.0.0:8000/team-results?Royal%Challengers%Bangalore**
 
 ### Swagger UI
-![alt text](image.png)
+
+![Uploading image.png…]()
 
 In an upcoming part I will be covering some POST request examples as well [mostly to capture API metrics].
 
