@@ -66,7 +66,7 @@ These are :
 
 ### Swagger UI
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/994099fb-33ad-4da6-964b-4447d29a3493)
 
 In an upcoming part I will be covering some POST request examples as well [mostly to capture API metrics].
 
