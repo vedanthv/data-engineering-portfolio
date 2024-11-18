@@ -3,9 +3,9 @@ import pandas as pd
 import requests
 
 # FastAPI URLs (Update with your FastAPI backend URLs)
-BASE_URL = "http://<YOUR_EC2_IP>.ap-south-1.compute.amazonaws.com:8000/team-results"
-LOG_URL = "http://<YOUR_EC2_IP>.ap-south-1.compute.amazonaws.com:8000/log-click"
-PLAYERS_URL = "http://<YOUR_EC2_IP>.ap-south-1.compute.amazonaws.com:8000/players"  # Endpoint for player details
+BASE_URL = "http://ec2-3-109-101-141.ap-south-1.compute.amazonaws.com:8000/team-results"
+LOG_URL = "http://ec2-3-109-101-141.ap-south-1.compute.amazonaws.com:8000/log-click"
+PLAYERS_URL = "http://ec2-3-109-101-141.ap-south-1.compute.amazonaws.com:8000/players"  # Endpoint for player details
 
 # Predefined list of teams (both abbreviations and full names for easy lookup)
 team_abbr_dict = {
