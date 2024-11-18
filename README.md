@@ -8,7 +8,11 @@ Feel Free to Connect with me 🤠
 
 **[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
-For code snippets integrating various pieces of the DE stack check out my other [repo](https://github.com/vedanthv/data-engineering-code-snippets)
+## Tech Stack
+
+Tools and mostly Open Source technology used by me for Data Ingestion, Orchestration, Databases, Backend and Frontend Development.
+
+![DE Portfolio Tool Used](https://github.com/user-attachments/assets/62fc0dd1-b612-439d-947e-96787e711dd1)
 
 ## Quick Links
 
