@@ -20,10 +20,11 @@ I do small projects / prototypes regularly while learning new stuff, not CV wort
 
 | Project | Domain | 
 | :---------: | :---------: |
-| [Realtime Ingestion and Transformation with Apache Druid as OLAP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid) | Data Ingestion and Big Data Processing | 
+|[Realtime Ingestion and Transformation with Apache Druid as OLAP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid) | Data Ingestion and Big Data Processing | 
 |[Airflow with Postgres as OLTP Database [Batch Processing]](https://github.com/vedanthv/data-engineering-portfolio/tree/main/airflow-postgres-db)|Data Ingestion and Web Scraping|
-|[Streaming ETL with Airflow Orchestrator and Postgres DB](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-ingestion-kafka-airflow)|Near Realtime Streaming,SQL Database, Kafka, Cricket!|
-|[Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
+|[Cricket Analytics : Streaming ETL with Airflow Orchestrator and Postgres DB](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-ingestion-kafka-airflow)|Near Realtime Streaming,SQL Database, Kafka, Cricket!|
+|[Cricket Analytics : Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
+|[Cricket Analytics : Frontend Webapp with Streamlit]()|Frontend Application Development,MVC Architecture|
 
 ### End 2 End Projects
 
