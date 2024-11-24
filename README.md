@@ -18,22 +18,15 @@ Tools and mostly Open Source technology used by me for Data Ingestion, Orchestra
 
 Here is an index of projects with the tech, domain and link.
 
-### Learning Prototype Projects
-
-I do small projects / prototypes regularly while learning new stuff, not CV worthy but definitely helps to solidify key concepts.
+### Projects
 
 | Project | Domain | 
 | :---------: | :---------: |
 |[Realtime Ingestion and Transformation with Apache Druid as OLAP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid) | Data Ingestion and Big Data Processing | 
 |[Airflow with Postgres as OLTP Database [Batch Processing]](https://github.com/vedanthv/data-engineering-portfolio/tree/main/airflow-postgres-db)|Data Ingestion and Web Scraping|
-|[Cricket Analytics : Streaming ETL with Airflow Orchestrator and Postgres DB](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-ingestion-kafka-airflow)|Near Realtime Streaming,SQL Database, Kafka, Cricket!|
-|[Cricket Analytics : Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
-|[Cricket Analytics : Frontend Webapp with Streamlit]()|Frontend Application Development,MVC Architecture|
-
-### End 2 End Projects
-
-| Project | Tech |
-| :---------: | :---------: |
+|[Streaming ETL with Airflow Orchestrator and Postgres DB](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-ingestion-kafka-airflow)|Near Realtime Streaming,SQL Database, Kafka, Cricket!|
+|[Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
+|[Frontend Webapp with Streamlit](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-analytics-frontend-app-streamlit)|Frontend Application Development,MVC Architecture|
 |[InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)|AWS EC2,Docker,Airflow,ReapidAPI,AWS Lambda,AWS S3,AWS CloudWatch,AWS Redshift,Prometheus,Grafana,PowerBI|
 |[User Mingle : Kafka Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle)|Airflow, Zookeeper, Cassandra, Schema Registry, Spark|  
 |[Grand Prix Data Odyssey](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg)|Azure Databricks,Spark SQL,Postman,Blob Storage,Unity Catalog,ADF,Azure Devops,Synapse Studio, Delta Lake,PowerBI | 
