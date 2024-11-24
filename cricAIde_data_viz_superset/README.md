@@ -11,10 +11,15 @@
 
 Stage 1 : [Data Profiling](https://sharing.clickup.com/9016629797/gr/h/8cpxph5-276/7cd81674667af1f)
 
+Stage 2 : [Data Ingestion and Orchestration](https://app.clickup.com/9016629797/v/gr/8cpxph5-276)
+
 ## Infrastructure and Tech Stack
 
-### Top Level Database Diagram
+- Data Orchestration : Apache Airflow
+- Database : Postgres
 
-![CricAIde V1](https://github.com/user-attachments/assets/15c3a304-a5b8-4c4b-ac41-621c99107aa2)
+### Database Diagram
 
-### Main Ingestion Data Endpoints 
+![CricAIde V1](https://github.com/user-attachments/assets/ce64a973-f6d3-4301-a7e6-1f6e7e31593c)
+
+### Main Data Endpoints
