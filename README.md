@@ -8,9 +8,7 @@ Feel Free to Connect with me 🤠
 
 **[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
-## Tech Stack
-
-Tools and mostly Open Source technology used by me for Data Ingestion, Orchestration, Databases, Backend and Frontend Development.
+## Infrastructure and Tech Stack
 
 ![DE Portfolio Tool Used](https://github.com/user-attachments/assets/62fc0dd1-b612-439d-947e-96787e711dd1)
 
