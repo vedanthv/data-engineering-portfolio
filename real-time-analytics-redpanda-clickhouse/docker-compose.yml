@@ -37,6 +37,44 @@ services:
     volumes:
       - ./clickhouse-ddl/init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: debezium
+      POSTGRES_PASSWORD: dbz
+      POSTGRES_DB: cricket
+    ports:
+      - "5432:5432"
+
+  debezium:
+    image: debezium/connect:2.7.3.Final
+    container_name: debezium
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: redpanda:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: debezium_config
+      OFFSET_STORAGE_TOPIC: debezium_offsets
+      STATUS_STORAGE_TOPIC: debezium_status
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+    depends_on:
+      - redpanda
+      - postgres
+
+  syncer:
+    build: ./pub_sync
+    container_name: ch_pg_syncer
+    environment:
+      CLICKHOUSE_HOST: ${CLICKHOUSE_HOST}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    depends_on:
+      - clickhouse
+      - postgres
+
   producer:
     build: ./producer
     container_name: api_producer
@@ -59,12 +97,23 @@ services:
     depends_on:
       - redpanda
 
+  producer_players:
+    build: ./producer_players
+    container_name: api_producer_players
+    env_file: 
+      - .env
+    environment:
+      API_TOKEN: ${API_TOKEN}
+      KAFKA_BROKER: ${KAFKA_BROKER}
+    depends_on:
+      - redpanda
+
   ch-ui:
     image: ghcr.io/caioricciuti/ch-ui:latest
     restart: always
     ports:
       - "5521:5521"
     environment:
-      VITE_CLICKHOUSE_URL: "http://localhost:8123"
+      VITE_CLICKHOUSE_URL: "http://100.24.9.1:8123"
       VITE_CLICKHOUSE_USER: "default"
-      VITE_CLICKHOUSE_PASS: 
+      VITE_CLICKHOUSE_PASS: ""
