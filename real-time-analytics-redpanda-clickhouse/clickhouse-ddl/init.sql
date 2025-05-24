@@ -89,6 +89,22 @@ CREATE MATERIALIZED VIEW mv_fixtures_v2 TO cricket_fixtures AS
 SELECT * FROM kafka_cricket_fixtures;
 
 DROP TABLE IF EXISTS mv_teams_v2;
-
 CREATE MATERIALIZED VIEW mv_teams_v2 TO cricket_teams AS
 SELECT * FROM kafka_teams;
+
+CREATE MATERIALIZED VIEW fixtures_with_team_names_mv
+ENGINE = ReplacingMergeTree(fixture_id)
+ORDER BY (fixture_id)
+AS
+SELECT
+    f.*,
+    t1.name AS localteam_name,
+    t2.name AS visiting_team_name,
+    t3.name AS toss_won_team,
+    t4.name AS winner_team
+FROM cricket_fixtures f
+LEFT JOIN cricket_teams t1 ON f.localteam_id = t1.team_id
+LEFT JOIN cricket_teams t2 ON f.visitorteam_id = t2.team_id
+LEFT JOIN cricket_teams t3 ON f.toss_won_team_id = t3.team_id
+LEFT JOIN cricket_teams t4 ON f.winner_team_id = t4.team_id;
+
