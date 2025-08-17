@@ -16,9 +16,15 @@ Feel Free to Connect with me 🤠
 
 Here is an index of projects with the tech, domain and link.
 
-### Projects
+### LLM and GenAI Projecta
 
-| Project | Domain | 
+| Project | Description | Tech | 
+| :---------: | :---------: | :---------: |
+|[(Technical Analysis) Finance Portfolio Management Agentic AI Chatbot](https://github.com/vedanthv/data-engineering-portfolio/tree/main/finance-portfolio-management-llm-bot) |Multi Agent AI chatbot that connects to Zerodha and gives you update on your holdings based on prompts. It can roughly predict the Forecasted Price, Risk ATR, Auto Detect Candlestick Pattern, Ideal Buy and Sell date and Rebalancing of holdings (**rebalancing is very naive, use with caution**) PS. Does not have vector search yet! | Python,Streamlit, Azure Functions, Azure Event Hub, Azure Data Lake Gen 2|
+
+### Data Engineering Projects
+
+| Project | Tech | 
 | :---------: | :---------: |
 |[Pt 1 : Streaming ETL with Airflow Orchestrator and Postgres DB](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-ingestion-kafka-airflow)|Near Realtime Streaming,SQL Database, Kafka, Cricket!|
 |[Pt 2 : Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
