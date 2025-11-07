@@ -28,11 +28,11 @@ Every Flink or generator process sees it as normal Kafka.
 
 Redpanda can run as:
 
-### Single node (your current setup)
+### Single node 
 
 * one broker
 * good for dev/local
-* you use `--overprovisioned`, `--smp=1`, `--memory=1G`
+* `--overprovisioned`, `--smp=1`, `--memory=1G`
 
 ### Multi node (production)
 
@@ -44,7 +44,7 @@ Redpanda can run as:
 
 ---
 
-# 3. Major Components You Use in the Compose
+# 3. Major Components
 
 ## 3.1 Redpanda Broker
 
@@ -90,8 +90,6 @@ Redpanda exposes an optional REST proxy on port **8082**, useful for:
 * debugging
 * interacting without Kafka clients
 
-You’re not using it heavily, but it’s enabled.
-
 ---
 
 # 4. Core Kafka Concepts that Redpanda Implements
@@ -99,8 +97,6 @@ You’re not using it heavily, but it’s enabled.
 ## 4.1 Topics
 
 A stream of messages.
-
-Examples in your setup:
 
 * `cc.temp_readings`
 * `cc.door_events`
@@ -173,7 +169,7 @@ Segment retention is controlled by:
 
 ---
 
-# 6. Networking Concepts in Your Compose
+# 6. Networking Concepts
 
 ## 6.1 kafka-addr
 
@@ -198,7 +194,7 @@ Otherwise, clients won't connect.
 
 ---
 
-# 7. Resource Tuning Flags You Used
+# 7. Resource Tuning Flags
 
 ## 7.1 --overprovisioned
 
@@ -208,7 +204,6 @@ Tells Redpanda to relax hardware expectations for containers.
 
 How many CPU threads to use.
 
-You set:
 
 ```
 --smp=1
@@ -229,7 +224,7 @@ You set it to zero for containers.
 
 # 8. Health Checks
 
-Your healthcheck:
+healthcheck:
 
 ```yaml
 test: ["CMD", "bash", "-c", "rpk cluster info --brokers=localhost:9092 || exit 1"]
@@ -264,8 +259,6 @@ Low ulimit = data loss risk or errors.
 
 # 10. Persistence
 
-You mapped:
-
 ```
 rpdata:/var/lib/redpanda
 ```
@@ -283,7 +276,7 @@ If you delete the volume, all Kafka data disappears.
 
 ---
 
-# 11. How Redpanda Behaves in Your Pipeline
+# 11. How Redpanda Behaves 
 
 ### Producers:
 
@@ -642,10 +635,6 @@ Kafka’s older architecture is:
 * Requires careful settings to achieve safety
 * Depends on ZooKeeper
 * More operational overhead
-
-Below is a **deep, step-by-step**, engineering-grade explanation of the failure scenario you asked about and exactly **why Kafka (default settings) can lose committed messages**, and **why Raft (and Redpanda) cannot**.
-
-This is the most important difference between Kafka-style replication and Raft-style consensus.
 
 ---
 

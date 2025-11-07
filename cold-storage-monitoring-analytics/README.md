@@ -1,9 +1,5 @@
 ## Cold-Chain Monitoring for Grocery & Dark Stores
 
----
-
-# **Cold-Chain Monitoring for Grocery & Dark Stores – Project Description (~1000 words)**
-
 Cold-chain monitoring is a critical requirement in grocery retail, convenience stores, and dark-store fulfillment centers. Refrigerated and frozen storage units—such as chillers, freezers, walk-in cold rooms, and refrigerated racks—must consistently maintain strict temperature ranges to keep perishable food safe. Even small deviations can lead to product spoilage, inventory loss, regulatory non-compliance, increased costs, and potential health risks. This project implements a real-time cold-chain monitoring platform designed to simulate sensor data and process it through a full modern streaming-analytics pipeline using Redpanda, Flink, ClickHouse, and Metabase, all deployed via Docker Compose on an EC2 instance.
 
 The primary goal of the system is to continuously ingest, process, and analyze temperature and door-state data coming from cold-storage assets in grocery and dark-store environments. The project includes a realistic data generator that simulates multiple refrigeration assets producing telemetry at fixed intervals. This simulated data mimics real-world behaviors such as cooling/heating patterns, door-open temperature spikes, occasional excursions outside safe ranges, noise in readings, and different behavior for chillers versus freezers. The generator acts as the IoT edge layer, producing JSON events to Redpanda topics using Kafka API compatibility.
