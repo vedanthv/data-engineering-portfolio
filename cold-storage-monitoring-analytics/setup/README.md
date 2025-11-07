@@ -113,6 +113,14 @@ curl -fsSL https://download.docker.com/linux/$ID/gpg | \
 * `-L` follows redirects.
 * Pipe sends output to `gpg --dearmor` which converts the ASCII-armored key to binary format and stores it under `/etc/apt/keyrings/docker.gpg`.
 
+f: Don’t give me a nonsense HTML page if the server fails
+
+s: Don’t print unnecessary progress bars
+
+S: But DO show actual error messages
+
+L: Follow redirects so the download works reliably
+
 ---
 
 ### Set Permissions on Key
