@@ -10,8 +10,6 @@ Feel Free to Connect with me 🤠
 
 ## Infrastructure and Tech Stack
 
-![DE Portfolio Tool Used](https://github.com/user-attachments/assets/62fc0dd1-b612-439d-947e-96787e711dd1)
-
 ## Quick Links
 
 Here is an index of projects with the tech, domain and link.
