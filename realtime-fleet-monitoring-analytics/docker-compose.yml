@@ -25,11 +25,12 @@ services:
       - --advertise-rpc-addr
       - redpanda-1:33145
     ports:
-      # - 8081:8081
       - 8082:8082
       - 9092:9092
       - 28082:28082
       - 29092:29092
+    volumes:
+      - redpanda1-data:/var/lib/redpanda
     networks:
       - realtimeanalytics
 
@@ -65,6 +66,8 @@ services:
        - 9093:9093
        - 28083:28083
        - 29093:29093
+     volumes:
+       - redpanda2-data:/var/lib/redpanda
      networks:
        - realtimeanalytics
 
@@ -104,12 +107,18 @@ services:
       - 8081:8081
     command: jobmanager
     environment:
+      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
+      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
+      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         jobmanager.bind-host: 0.0.0.0
         rest.address: jobmanager
         rest.bind-address: 0.0.0.0
+    volumes:
+      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
+      - ./flink-lib:/opt/flink/usrlib
     networks:
       - realtimeanalytics
 
@@ -122,11 +131,17 @@ services:
       - jobmanager
     command: taskmanager
     environment:
+      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
+      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
+      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         taskmanager.numberOfTaskSlots: 20
         taskmanager.bind-host: 0.0.0.0
+    volumes:
+      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
+      - ./flink-lib:/opt/flink/usrlib
     networks:
       - realtimeanalytics
 
@@ -140,12 +155,33 @@ services:
       - jobmanager
     volumes:
       - ./sql-client/lib:/opt/flink/usrlib
+      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
     environment:
+      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
+      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
+      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         rest.address: jobmanager
     networks:
       - realtimeanalytics
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse
+    ports:
+      - 8123:8123   
+      - 9000:9000   
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+      - clickhouse-logs:/var/log/clickhouse-server
+    networks:
+      - realtimeanalytics
+volumes:
+  redpanda1-data:
+  redpanda2-data:
+  clickhouse-data:
+  clickhouse-logs:
 networks:
   realtimeanalytics:

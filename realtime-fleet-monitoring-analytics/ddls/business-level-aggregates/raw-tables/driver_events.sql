@@ -3,7 +3,8 @@ CREATE TABLE driver_events (
   driver_id   STRING,
   vehicle_id  STRING,
   event_type  STRING,
-  `timestamp` TIMESTAMP_LTZ(3),
+  raw_timestamp TIMESTAMP_LTZ(3),
+  `timestamp` AS COALESCE(raw_timestamp, CURRENT_TIMESTAMP),
   WATERMARK FOR `timestamp` AS `timestamp` - INTERVAL '5' SECOND
 ) WITH (
   'connector' = 'kafka',
