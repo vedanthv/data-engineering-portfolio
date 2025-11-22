@@ -1,9 +1,6 @@
-version: '3.7'
 services:
-
-  # Redpanda cluster
   redpanda-1:
-    image: docker.redpanda.com/redpandadata/redpanda:v24.2.5
+    image: docker.redpanda.com/redpandadata/redpanda:v23.1.8
     container_name: redpanda-1
     command:
       - redpanda
@@ -28,30 +25,81 @@ services:
       - --advertise-rpc-addr
       - redpanda-1:33145
     ports:
+      # - 8081:8081
       - 8082:8082
       - 9092:9092
       - 28082:28082
       - 29092:29092
-    volumes:
-      - redpanda-data:/var/lib/redpanda/data
+    networks:
+      - realtimeanalytics
 
-  # Redpanda Console
+  redpanda-2:
+     image: docker.redpanda.com/redpandadata/redpanda:v23.1.8
+     container_name: redpanda-2
+     command:
+       - redpanda
+       - start
+       - --smp
+       - '1'
+       - --reserve-memory
+       - 0M
+       - --overprovisioned
+       - --node-id
+       - '2'
+       - --seeds
+       - redpanda-1:33145
+       - --kafka-addr
+       - PLAINTEXT://0.0.0.0:29093,OUTSIDE://0.0.0.0:9093
+       - --advertise-kafka-addr
+       - PLAINTEXT://redpanda-2:29093,OUTSIDE://localhost:9093
+       - --pandaproxy-addr
+       - PLAINTEXT://0.0.0.0:28083,OUTSIDE://0.0.0.0:8083
+       - --advertise-pandaproxy-addr
+       - PLAINTEXT://redpanda-2:28083,OUTSIDE://localhost:8083
+       - --rpc-addr
+       - 0.0.0.0:33146
+       - --advertise-rpc-addr
+       - redpanda-2:33146
+     ports:
+       - 8083:8083
+       - 9093:9093
+       - 28083:28083
+       - 29093:29093
+     networks:
+       - realtimeanalytics
+
   redpanda-console:
-    image: redpandadata/console:latest
+    image: docker.redpanda.com/redpandadata/console:v2.2.4
     container_name: redpanda-console
+    entrypoint: /bin/sh
+    command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
     environment:
-      - KAFKA_BROKERS=redpanda-1:29092
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda-1:29092", "redpanda-2:29092"]
+          schemaRegistry:
+            enabled: false
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda-1:9644", "http://redpanda-2:9644"]
+        connect:
+          enabled: false
     ports:
       - 8080:8080
     depends_on:
       - redpanda-1
+      - redpanda-2
+    networks:
+      - realtimeanalytics
 
   # Flink cluster
   jobmanager:
     container_name: jobmanager
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-sql
     ports:
       - 8081:8081
     command: jobmanager
@@ -59,61 +107,45 @@ services:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
+        jobmanager.bind-host: 0.0.0.0
+        rest.address: jobmanager
+        rest.bind-address: 0.0.0.0
+    networks:
+      - realtimeanalytics
 
   taskmanager:
     container_name: taskmanager
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-sql
     depends_on:
       - jobmanager
     command: taskmanager
-    scale: 1
     environment:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 20    
+        taskmanager.numberOfTaskSlots: 20
+        taskmanager.bind-host: 0.0.0.0
+    networks:
+      - realtimeanalytics
 
   sql-client:
+    image: flink:1.19-scala_2.12-java11
     container_name: sql-client
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command:
-      - /opt/flink/bin/sql-client.sh
-      - embedded
-      - -l
-      - /opt/sql-client/lib
+    command: ["bash", "-c", "sleep infinity"]
+    stdin_open: true
+    tty: true
     depends_on:
       - jobmanager
+    volumes:
+      - ./sql-client/lib:/opt/flink/usrlib
     environment:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         rest.address: jobmanager
-    volumes:
-      - ./data/sql:/etc/sql
-
-  # Job submitter: watches ./jobs and submits all *.py to the JobManager
-  job-submitter:
-    # image: flink:1.17-scala_2.12   # lightweight placeholder; you can build from your Dockerfile instead
-    # If your Dockerfile produces the Flink distribution image, use 'build: ...' instead of image
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: job-submitter
-    depends_on:
-      - jobmanager
-    environment:
-      - SUBMIT_ONCE=true
-      - JOB_DIR=/opt/flink/jobs
-      - JOBMANAGER_REST=http://jobmanager:8081
-      - FLINK_PARALLELISM=4
-    entrypoint: ["/bin/sh", "-c", "/opt/submit-jobs.sh"]
-    volumes:
-      - ./jobs:/opt/flink/jobs:ro
-      - ./submit-jobs.sh:/opt/submit-jobs.sh:ro
-
-volumes:
-  redpanda-data:
+    networks:
+      - realtimeanalytics
+networks:
+  realtimeanalytics:

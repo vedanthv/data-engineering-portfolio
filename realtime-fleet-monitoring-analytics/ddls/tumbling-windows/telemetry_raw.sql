@@ -9,12 +9,12 @@ CREATE TABLE telemetry_raw (
       SUBSTR(REPLACE(`timestamp`, 'T', ' '), 1, 23)
       AS TIMESTAMP_LTZ(3)
   ),
-  WATERMARK FOR event_time AS event_time - INTERVAL '30' SECOND
+  WATERMARK FOR event_time AS event_time - INTERVAL '2' SECOND
 ) WITH (
   'connector' = 'kafka',
   'topic' = 'fleet.prod.telemetry.raw',
   'properties.bootstrap.servers' = 'redpanda-1:29092',
-  'properties.group.id' = 'sql-telemetry-consumer',
+  'properties.group.id' = 'sql-telemetry-consumer-v3',
   'scan.startup.mode' = 'latest-offset',
   'format' = 'json',
   'json.ignore-parse-errors' = 'true'

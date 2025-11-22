@@ -1,7 +1,7 @@
 -- 5) overspeed alerts to Kafka
 CREATE TABLE overspeed_alerts (
   vehicle_id STRING,
-  PRIMARY KEY(vehicle_id) PRIMARY KEY,
+  PRIMARY KEY(vehicle_id) NOT ENFORCED,
   ts TIMESTAMP_LTZ(3),
   speed_kmph DOUBLE
 ) WITH (
