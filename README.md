@@ -18,7 +18,7 @@ Here is an index of projects with the tech, domain and link.
 
 | Project | Tech | 
 | :---------: | :---------: |
-|[Cold-Chain Monitoring for Grocery & Dark Stores](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cold-storage-monitoring-analytics) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
+|[Realtime Truck Fleet Monitoring Analysis]([https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics]) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
 
 
 ### Small Data Engineering And Analytics Projects
