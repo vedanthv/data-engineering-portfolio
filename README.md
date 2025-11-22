@@ -8,8 +8,6 @@ Feel Free to Connect with me 🤠
 
 **[LinkedIn](https://www.linkedin.com/in/vedanthbaliga/) | [GitHub](https://github.com/vedanthv/)**
 
-## Infrastructure and Tech Stack
-
 ## Quick Links
 
 Here is an index of projects with the tech, domain and link.
@@ -18,7 +16,7 @@ Here is an index of projects with the tech, domain and link.
 
 | Project | Tech | 
 | :---------: | :---------: |
-|[Realtime Truck Fleet Monitoring Analysis]([https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics]) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
+|[Realtime Truck Fleet Monitoring Analysis](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
 
 
 ### Small Data Engineering And Analytics Projects
