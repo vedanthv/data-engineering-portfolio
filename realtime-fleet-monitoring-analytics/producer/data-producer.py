@@ -268,6 +268,7 @@ def run_vehicle_loop(vehicle, producer, telemetry_rate, run_seconds):
 # ---------------------------
 def main():
     parser = argparse.ArgumentParser()
+    # modify to redpanda-1:29092 when deploying with k8s
     parser.add_argument("--brokers", default="localhost:9092")
     parser.add_argument("--num-vehicles", type=int, default=10)
     parser.add_argument("--telemetry-rate", type=float, default=1.0)
