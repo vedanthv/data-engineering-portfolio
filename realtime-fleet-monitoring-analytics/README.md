@@ -236,3 +236,139 @@ flowchart TB
   J4_SINK_CH --> CH_ALERT
   J4_SINK_TOPIC --> RP_ALERTS
 ```
+
+### Docker Deployment
+
+```mermaid
+%%{ init: { 'theme': 'default', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'lineColor': '#333333', 'fontSize': '14px' } } }%%
+flowchart LR
+  %% Styles
+  classDef broker fill:#e3f2fd,stroke:#1565c0,stroke-width:1px;
+  classDef console fill:#ede7f6,stroke:#5e35b1,stroke-width:1px;
+  classDef flink fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px;
+  classDef db fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+  classDef ext fill:#f5f5f5,stroke:#424242,stroke-width:1px;
+
+  subgraph NET["Docker network: realtimeanalytics"]
+
+    %% Redpanda brokers
+    RP1["redpanda-1\nRedpanda broker\nPLAINTEXT 29092\nOUTSIDE 9092\nPandaproxy 28082 and 8082"]:::broker
+    RP2["redpanda-2\nRedpanda broker\nPLAINTEXT 29093\nOUTSIDE 9093\nPandaproxy 28083 and 8083"]:::broker
+
+    RP2 -->|"seeds redpanda-1:33145"| RP1
+
+    %% Redpanda Console
+    RPC["redpanda-console\nRedpanda Console\nport 8080"]:::console
+    RPC -->|"kafka brokers redpanda-1:29092"| RP1
+    RPC -->|"kafka brokers redpanda-2:29093"| RP2
+
+    %% Flink cluster
+    JM["jobmanager\nFlink JobManager\nUI 8081"]:::flink
+    TM["taskmanager\nFlink TaskManager"]:::flink
+    SC["sql-client\nFlink SQL Client\nsleep infinity"]:::flink
+
+    TM -->|"RPC and dataflow"| JM
+    SC -->|"RPC / REST"| JM
+
+    %% ClickHouse
+    CH["clickhouse\nClickHouse Server\nHTTP 8123\nNative 9000"]:::db
+
+    %% Data flows (logical)
+    JM -->|"Kafka source or sink"| RP1
+    JM -->|"Kafka source or sink"| RP2
+    JM -->|"analytics to ClickHouse"| CH
+
+  end
+
+  %% External host access
+  subgraph EXT["Host machine (localhost)"]
+    HOST["Apps and tools and browser"]:::ext
+  end
+
+  HOST -->|"Kafka client to port 9092"| RP1
+  HOST -->|"Kafka client to port 9093"| RP2
+  HOST -->|"Web UI on port 8080"| RPC
+  HOST -->|"Flink UI on port 8081"| JM
+  HOST -->|"Pandaproxy on 8082 and 8083"| RP1
+  HOST -->|"HTTP or Native on 8123 or 9000"| CH
+```
+
+### Kubernetes Deployment
+
+```mermaid
+%%{ init: { 'theme': 'default', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'lineColor': '#333333', 'fontSize': '14px' } } }%%
+
+flowchart LR
+  %% Styles
+  classDef service fill:#e3f2fd,stroke:#1565c0,stroke-width:1px;
+  classDef deploy fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px;
+  classDef config fill:#fff8e1,stroke:#ff8f00,stroke-width:1px;
+  classDef app fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px;
+  classDef db fill:#fbe9e7,stroke:#d84315,stroke-width:1px;
+
+  subgraph NS["Kubernetes Namespace: telemetry"]
+
+    %% Redpanda Cluster
+    subgraph RP["Redpanda Brokers"]
+      RP1S["Service: redpanda-1<br/>port 29092"]:::service
+      RP1D["Deployment: redpanda-1<br/>Pod: redpanda (node-id=1)"]:::deploy
+
+      RP2S["Service: redpanda-2<br/>port 29093"]:::service
+      RP2D["Deployment: redpanda-2<br/>Pod: redpanda (node-id=2, seed=redpanda-1)"]:::deploy
+
+      RP1S --> RP1D
+      RP2S --> RP2D
+      RP2D -->|seed| RP1D
+    end
+
+    %% Redpanda Console
+    subgraph RPC["Redpanda Console"]
+      RPCS["Service: redpanda-console<br/>port 8080"]:::service
+      RPCD["Deployment: redpanda-console<br/>Pod: console"]:::deploy
+
+      RPCS --> RPCD
+      RPCD -->|brokers: 29092/29093| RP1S
+      RPCD --> RP2S
+    end
+
+    %% Flink Cluster
+    subgraph FL["Flink Cluster"]
+      CM["ConfigMap: flink-config<br/>flink-conf.yaml"]:::config
+
+      JMS["Service: jobmanager<br/>rpc 6123, ui 8081"]:::service
+      JMD["Deployment: jobmanager<br/>Pod: jobmanager"]:::deploy
+      TMD["Deployment: taskmanager<br/>Pod: taskmanager"]:::deploy
+      SCD["Deployment: sql-client<br/>Pod: sql-client (sleep infinity)"]:::deploy
+
+      CM --> JMD
+      CM --> TMD
+      CM --> SCD
+
+      JMS --> JMD
+      JMD <-->|control & coordination| TMD
+      SCD -->|RPC / REST| JMS
+    end
+
+    %% ClickHouse
+    subgraph CH["ClickHouse"]
+      CHS["Service: clickhouse<br/>http 8123, native 9000"]:::service
+      CHD["Deployment: clickhouse<br/>Pod: clickhouse-server"]:::db
+
+      CHS --> CHD
+    end
+
+    %% Telemetry Producer
+    subgraph TP["Telemetry Producer (Python)"]
+      TPD["Deployment: telemetry-producer<br/>env KAFKA_BOOTSTRAP_SERVERS=redpanda-1:29092<br/>topic=fleet.prod.telemetry.raw"]:::app
+    end
+
+  end
+
+  %% Data Flows
+  TPD -->|produce telemetry<br/>fleet.prod.telemetry.raw| RP1S
+
+  JMD -->|consume/produce Kafka| RP1S
+  JMD --> RP2S
+
+  JMD -->|write analytics| CHS
+```
