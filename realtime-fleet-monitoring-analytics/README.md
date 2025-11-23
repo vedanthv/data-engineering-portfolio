@@ -50,78 +50,189 @@ It captures raw telemetry from vehicles, processes it in real time, detects risk
 | **Storage / OLAP Layer**            | **ClickHouse (OLAP Columnar DB)**                      | Fast analytics + dashboards on telemetry data                                  | • Stores telemetry facts<br>• Stores trip/session facts<br>• Driver score marts<br>• Alert history<br>• Materialized views for aggregation<br>• Sub-second queries for dashboards                                             | • Extremely fast for time-series & geo data<br>• MergeTree handles millions of rows/sec<br>• Affordable and scalable for fleet analytics |
 | **Analytics / Visualization Layer** | **Metabase**                                           | BI dashboards + self-service exploration                                       | • Driver score dashboards<br>• Trip KPIs<br>• Alert trends<br>• Heatmaps (with custom queries)<br>• Ad hoc analysis for operations team                                                                                       | • Simple, free, and integrates directly with ClickHouse<br>• Great for internal fleet operations dashboards                              |
 
+### High Level Architecture
+
 ```mermaid
 
 %%{ init: { 'theme': 'default', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'lineColor': '#333333', 'fontSize': '14px' } } }%%
 
 flowchart LR
-    %% GROUP: Telemetry Producers
-    subgraph PRODUCERS[Telemetry & Event Producers]
-        A1[Vehicle GPS Device\n• Lat, Lon, Speed\n• Bearing, Accuracy]
-        A2[OBD/CANBus Unit\n• RPM, Fuel, Engine Load\n• Diagnostics]
-        A3[Driver Mobile App\n• Driver Status\n• Trip Events]
-    end
 
-    %% Redpanda ingestion
-    subgraph REDPANDA[Redpanda (Kafka API)]
-        RP1[(fleet.telemetry.raw)]
-        RP2[(fleet.trip.events)]
-        RP3[(fleet.events.driver)]
-        RP4[(fleet.alerts.outbound)]
-    end
+  %% --- Telemetry & Event Producers ---
+  subgraph Producers["<b>Telemetry & Event Producers</b>"]
+    A1["<b>Vehicle GPS Device</b><br>Lat, Lon, Speed"]
+    A2["<b>OBD / CANBus Unit</b><br>RPM, Fuel, Diagnostics"]
+    A3["<b>Driver Mobile App</b><br>Driver Status, Trip Events"]
+  end
 
-    %% Flink processing
-    subgraph FLINK[Apache Flink\nStreaming + SQL + CEP]
-        F1[Telemetry Stream Processing\n• Cleaning/Validation\n• Coordinate transformations]
-        F2[Sessionization Engine\n• Trip start/end\n• Idle detection\n• Distance computation]
-        F3[Behavior Scoring Engine\n• Overspeeding\n• Harsh brake\n• Window aggregations]
-        F4[CEP Rule Engine\n• Overspeed alerts\n• Idle > X min\n• Route deviation]
-        F5[Sink Operators → ClickHouse]
-    end
+  %% --- Redpanda ---
+  subgraph RedpandaCluster["<b>Redpanda – Streaming Platform</b>"]
+    RP1["<b>Topic:</b> fleet.telemetry.raw"]
+    RP2["<b>Topic:</b> fleet.trip.events"]
+    RP3["<b>Topic:</b> fleet.events.driver"]
+    RP4["<b>Topic:</b> fleet.alerts.outbound"]
+  end
 
-    %% ClickHouse Analytics
-    subgraph CLICKHOUSE[ClickHouse OLAP]
-        CH1[(fact_telemetry)]
-        CH2[(fact_trip_sessions)]
-        CH3[(fact_driver_behavior)]
-        CH4[(fact_alerts)]
-        CH5[(Materialized Views)]
-    end
+  %% --- Flink Layer ---
+  subgraph FlinkLayer["<b>Apache Flink – Streaming, SQL, CEP</b>"]
+    F1["<b>Telemetry Processing</b><br>Cleaning, Validation, Enrichment"]
+    F2["<b>Sessionization Engine</b><br>Trip Start/End, Idle Detection, Distance"]
+    F3["<b>Driver Behavior Scoring</b><br>Overspeed, Harsh Brake, Windows"]
+    F4["<b>CEP Rule Engine</b><br>Overspeed, Idle, Deviation"]
+    F5["<b>ClickHouse Sink Operators</b><br>JDBC / HTTP Sink"]
+  end
 
-    %% Metabase Layer
-    subgraph METABASE[Metabase Dashboards]
-        M1[Driver Scorecards]
-        M2[Trip Analytics]
-        M3[Fleet Utilization KPIs]
-        M4[Alerting & Ops Dashboard]
-        M5[Heatmaps / Geo Visualizations]
-    end
+  %% --- ClickHouse Layer ---
+  subgraph ClickHouseDB["<b>ClickHouse – OLAP Warehouse</b>"]
+    CH1["<b>fact_telemetry</b>"]
+    CH2["<b>fact_trip_sessions</b>"]
+    CH3["<b>fact_driver_behavior</b>"]
+    CH4["<b>fact_alerts</b>"]
+    CH5["<b>Materialized Views</b><br>Pre-Aggregated KPIs"]
+  end
 
-    %% FLOWS
-    A1 --> RP1
-    A2 --> RP1
-    A3 --> RP2
-    A3 --> RP3
+  %% --- Metabase Layer ---
+  subgraph MetabaseLayer["<b>Metabase – BI & Dashboards</b>"]
+    M1["<b>Driver Scorecards</b>"]
+    M2["<b>Trip Analytics</b>"]
+    M3["<b>Fleet Utilization KPIs</b>"]
+    M4["<b>Alert Monitoring</b>"]
+    M5["<b>Geo / Heatmaps</b>"]
+  end
 
-    RP1 --> F1
-    RP2 --> F2
-    RP3 --> F3
+  %% --- Flows ---
+  A1 --> RP1
+  A2 --> RP1
+  A3 --> RP2
+  A3 --> RP3
 
-    F1 --> F2
-    F2 --> F3
-    F3 --> F4
-    F4 --> RP4
-    F4 --> F5
+  RP1 --> F1
+  RP2 --> F2
+  RP3 --> F3
 
-    F5 --> CH1
-    F5 --> CH2
-    F5 --> CH3
-    RP4 --> CH4
+  F1 --> F2
+  F2 --> F3
+  F3 --> F4
+  F4 --> RP4
+  F4 --> F5
 
-    CH1 --> M2
-    CH2 --> M2
-    CH3 --> M1
-    CH4 --> M4
-    CH1 --> M5
-    CH3 --> M3
+  F5 --> CH1
+  F5 --> CH2
+  F5 --> CH3
+  RP4 --> CH4
+
+  CH1 --> M2
+  CH2 --> M2
+  CH3 --> M1
+  CH4 --> M4
+  CH1 --> M5
+  CH3 --> M3
+
+
+```
+### Flink Pipelines and Clickhouse Architecture
+```mermaid
+%%{ init: { 'theme': 'default', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'lineColor': '#333333', 'fontSize': '14px' } } }%%
+
+flowchart TB
+
+  %% ==============================
+  %% Redpanda Topics
+  %% ==============================
+  subgraph RedpandaTopics["<b>Redpanda Topics</b>"]
+    RP_TEL["<b>fleet.telemetry.raw</b><br>High-frequency GPS/OBD events"]
+    RP_TRIP["<b>fleet.trip.events</b><br>Trip start/stop, status events"]
+    RP_DRV["<b>fleet.events.driver</b><br>Driver status, login/logout"]
+    RP_ALERTS["<b>fleet.alerts.outbound</b><br>Realtime alerts for ops"]
+  end
+
+  %% ==============================
+  %% Flink Job 1 - Raw Telemetry → fact_telemetry
+  %% ==============================
+  subgraph Job1["<b>Flink Job 1</b><br><b>Telemetry Enrichment & Storage</b>"]
+    J1_SRC["<b>Source</b><br>Kafka Source from<br>fleet.telemetry.raw"]
+    J1_CLEAN["<b>Validate & Clean</b><br>Drop bad records,<br>fix nulls, parse JSON"]
+    J1_ENR["<b>Enrich</b><br>Attach vehicle/driver dims<br>Compute H3 cell, bearing, etc."]
+    J1_SINK["<b>Sink</b><br>ClickHouse<br>fact_telemetry"]
+  end
+
+  %% ==============================
+  %% Flink Job 2 - Trip / Sessionization
+  %% ==============================
+  subgraph Job2["<b>Flink Job 2</b><br><b>Trip & Sessionization</b>"]
+    J2_SRC_TEL["<b>Source</b><br>Kafka Source from<br>fleet.telemetry.raw"]
+    J2_SRC_TRIP["<b>Side Input</b><br>fleet.trip.events<br>(explicit starts/stops)"]
+    J2_KEY["<b>KeyBy vehicle_id</b>"]
+    J2_SESSION["<b>Session Windows</b><br>Trip sessions by gaps<br>Idle detection"]
+    J2_AGG["<b>Aggregate</b><br>Distance, duration,<br>idle_time, avg speed"]
+    J2_SINK["<b>Sink</b><br>ClickHouse<br>fact_trip_sessions"]
+  end
+
+  %% ==============================
+  %% Flink Job 3 - Driver Behavior Scoring
+  %% ==============================
+  subgraph Job3["<b>Flink Job 3</b><br><b>Driver Behavior Scoring</b>"]
+    J3_SRC_TEL["<b>Source</b><br>fleet.telemetry.raw"]
+    J3_KEY["<b>KeyBy driver_id</b>"]
+    J3_WINDOWS["<b>Hopping / Tumbling Windows</b><br>1–5 min windows"]
+    J3_METRICS["<b>Metrics</b><br>overspeed_cnt,<br>harsh_brake_cnt,<br>idle_cnt"]
+    J3_SCORE["<b>Score Calculation</b><br>Weighted risk score"]
+    J3_SINK["<b>Sink</b><br>ClickHouse<br>fact_driver_behavior"]
+  end
+
+  %% ==============================
+  %% Flink Job 4 - CEP Alerts
+  %% ==============================
+  subgraph Job4["<b>Flink Job 4</b><br><b>CEP-based Alerting</b>"]
+    J4_SRC_TEL["<b>Source</b><br>fleet.telemetry.raw"]
+    J4_SRC_DRV["<b>Side Input</b><br>fleet.events.driver"]
+    J4_KEY["<b>KeyBy vehicle_id / driver_id</b>"]
+    J4_CEP["<b>CEP Patterns</b><br>Overspeed sequences,<br>long idle, harsh events"]
+    J4_BUILD["<b>Build Alert Payload</b><br>title, severity,<br>trip_id, coords"]
+    J4_SINK_TOPIC["<b>Sink</b><br>Redpanda<br>fleet.alerts.outbound"]
+    J4_SINK_CH["<b>Sink</b><br>ClickHouse<br>fact_alerts"]
+  end
+
+  %% ==============================
+  %% ClickHouse Tables
+  %% ==============================
+  subgraph ClickHouse["<b>ClickHouse Tables</b>"]
+    CH_FTEL["<b>fact_telemetry</b>"]
+    CH_TRIP["<b>fact_trip_sessions</b>"]
+    CH_BEH["<b>fact_driver_behavior</b>"]
+    CH_ALERT["<b>fact_alerts</b>"]
+  end
+
+  %% ---------- WIRES: Redpanda → Flink ----------
+  RP_TEL --> J1_SRC
+  RP_TEL --> J2_SRC_TEL
+  RP_TEL --> J3_SRC_TEL
+  RP_TEL --> J4_SRC_TEL
+
+  RP_TRIP --> J2_SRC_TRIP
+  RP_DRV --> J4_SRC_DRV
+  RP_DRV --> J3_KEY
+
+  %% ---------- Job 1 flow ----------
+  J1_SRC --> J1_CLEAN --> J1_ENR --> J1_SINK
+  J1_SINK --> CH_FTEL
+
+  %% ---------- Job 2 flow ----------
+  J2_SRC_TEL --> J2_KEY
+  J2_SRC_TRIP --> J2_KEY
+  J2_KEY --> J2_SESSION --> J2_AGG --> J2_SINK
+  J2_SINK --> CH_TRIP
+
+  %% ---------- Job 3 flow ----------
+  J3_SRC_TEL --> J3_KEY --> J3_WINDOWS --> J3_METRICS --> J3_SCORE --> J3_SINK
+  J3_SINK --> CH_BEH
+
+  %% ---------- Job 4 flow ----------
+  J4_SRC_TEL --> J4_KEY
+  J4_SRC_DRV --> J4_KEY
+  J4_KEY --> J4_CEP --> J4_BUILD
+  J4_BUILD --> J4_SINK_TOPIC
+  J4_BUILD --> J4_SINK_CH
+  J4_SINK_CH --> CH_ALERT
+  J4_SINK_TOPIC --> RP_ALERTS
 ```
