@@ -5,11 +5,11 @@
     vehicle_id,
     'high_engine_temp' AS alert_type,
     CONCAT('temp=', CAST(MAX(engine_temp_c) AS STRING)) AS details,
-    MAX(`timestamp`) AS raw_timestamp
+    MAX(`raw_timestamp`) AS time_stamp
   FROM TABLE(
     TUMBLE(
       TABLE vehicle_status,
-      DESCRIPTOR(`timestamp`),
+      DESCRIPTOR(`raw_timestamp`),
       INTERVAL '1' MINUTE
     )
   )

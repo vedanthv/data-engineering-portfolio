@@ -107,18 +107,12 @@ services:
       - 8081:8081
     command: jobmanager
     environment:
-      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
-      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
-      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         jobmanager.bind-host: 0.0.0.0
         rest.address: jobmanager
         rest.bind-address: 0.0.0.0
-    volumes:
-      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
-      - ./flink-lib:/opt/flink/usrlib
     networks:
       - realtimeanalytics
 
@@ -131,17 +125,11 @@ services:
       - jobmanager
     command: taskmanager
     environment:
-      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
-      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
-      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         taskmanager.numberOfTaskSlots: 20
         taskmanager.bind-host: 0.0.0.0
-    volumes:
-      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
-      - ./flink-lib:/opt/flink/usrlib
     networks:
       - realtimeanalytics
 
@@ -155,11 +143,7 @@ services:
       - jobmanager
     volumes:
       - ./sql-client/lib:/opt/flink/usrlib
-      - ./flink-conf/core-site.xml:/opt/flink/conf/core-site.xml
     environment:
-      - AWS_ACCESS_KEY_ID=<YOUR_KEY>
-      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET>
-      - AWS_REGION=us-east-1
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
