@@ -1,0 +1,395 @@
+# ---------- Namespace ----------
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: telemetry
+---
+# ---------- Flink Config (ConfigMap) ----------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flink-config
+  namespace: telemetry
+data:
+  flink-conf.yaml: |
+    jobmanager.rpc.address: jobmanager
+    jobmanager.rpc.port: 6123
+    jobmanager.memory.flink.size: 1000M
+
+    taskmanager.numberOfTaskSlots: 20
+    taskmanager.memory.flink.size: 500M
+
+    parallelism.default: 1
+
+    rest.address: jobmanager
+    rest.port: 8081
+
+    execution.target: remote
+---
+# ---------- Redpanda-1 ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpanda-1
+  namespace: telemetry
+spec:
+  selector:
+    app: redpanda-1
+  ports:
+    - name: kafka
+      port: 29092
+      targetPort: 29092
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpanda-1
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redpanda-1
+  template:
+    metadata:
+      labels:
+        app: redpanda-1
+    spec:
+      containers:
+        - name: redpanda
+          image: docker.redpanda.com/redpandadata/redpanda:v23.1.8
+          args:
+            - redpanda
+            - start
+            - --smp
+            - "1"
+            - --reserve-memory
+            - 0M
+            - --overprovisioned
+            - --node-id
+            - "1"
+            - --kafka-addr
+            - PLAINTEXT://0.0.0.0:29092
+            - --advertise-kafka-addr
+            - PLAINTEXT://redpanda-1:29092
+            - --rpc-addr
+            - 0.0.0.0:33145
+            - --advertise-rpc-addr
+            - redpanda-1:33145
+            - --pandaproxy-addr
+            - PLAINTEXT://0.0.0.0:28082
+            - --advertise-pandaproxy-addr
+            - PLAINTEXT://redpanda-1:28082
+          ports:
+            - containerPort: 29092
+            - containerPort: 28082
+            - containerPort: 33145
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/redpanda
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+# ---------- Redpanda-2 ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpanda-2
+  namespace: telemetry
+spec:
+  selector:
+    app: redpanda-2
+  ports:
+    - name: kafka
+      port: 29093
+      targetPort: 29093
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpanda-2
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redpanda-2
+  template:
+    metadata:
+      labels:
+        app: redpanda-2
+    spec:
+      containers:
+        - name: redpanda
+          image: docker.redpanda.com/redpandadata/redpanda:v23.1.8
+          args:
+            - redpanda
+            - start
+            - --smp
+            - "1"
+            - --reserve-memory
+            - 0M
+            - --overprovisioned
+            - --node-id
+            - "2"
+            - --seeds
+            - redpanda-1:33145
+            - --kafka-addr
+            - PLAINTEXT://0.0.0.0:29093
+            - --advertise-kafka-addr
+            - PLAINTEXT://redpanda-2:29093
+            - --rpc-addr
+            - 0.0.0.0:33146
+            - --advertise-rpc-addr
+            - redpanda-2:33146
+            - --pandaproxy-addr
+            - PLAINTEXT://0.0.0.0:28083
+            - --advertise-pandaproxy-addr
+            - PLAINTEXT://redpanda-2:28083
+          ports:
+            - containerPort: 29093
+            - containerPort: 28083
+            - containerPort: 33146
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/redpanda
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+# ---------- Redpanda Console ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpanda-console
+  namespace: telemetry
+spec:
+  selector:
+    app: redpanda-console
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpanda-console
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redpanda-console
+  template:
+    metadata:
+      labels:
+        app: redpanda-console
+    spec:
+      containers:
+        - name: redpanda-console
+          image: docker.redpanda.com/redpandadata/console:v2.2.4
+          command: ["/bin/sh", "-c"]
+          args:
+            - echo "$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console
+          env:
+            - name: CONFIG_FILEPATH
+              value: /tmp/config.yml
+            - name: CONSOLE_CONFIG_FILE
+              value: |
+                kafka:
+                  brokers: ["redpanda-1:29092", "redpanda-2:29093"]
+                  schemaRegistry:
+                    enabled: false
+                redpanda:
+                  adminApi:
+                    enabled: false
+                connect:
+                  enabled: false
+          ports:
+            - containerPort: 8080
+---
+# ---------- Flink: JobManager ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobmanager
+  namespace: telemetry
+spec:
+  selector:
+    app: jobmanager
+  ports:
+    - name: rpc
+      port: 6123
+      targetPort: 6123
+    - name: ui
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobmanager
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobmanager
+  template:
+    metadata:
+      labels:
+        app: jobmanager
+    spec:
+      containers:
+        - name: jobmanager
+          image: flink-sql-k8s:1.19
+          args: ["jobmanager"]
+          ports:
+            - containerPort: 6123
+            - containerPort: 8081
+          volumeMounts:
+            - name: flink-config-volume
+              mountPath: /opt/flink/conf/flink-conf.yaml
+              subPath: flink-conf.yaml
+      volumes:
+        - name: flink-config-volume
+          configMap:
+            name: flink-config
+---
+# ---------- Flink: TaskManager ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskmanager
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskmanager
+  template:
+    metadata:
+      labels:
+        app: taskmanager
+    spec:
+      containers:
+        - name: taskmanager
+          image: flink-sql-k8s:1.19
+          args: ["taskmanager"]
+          ports:
+            - containerPort: 6121
+            - containerPort: 6122
+          volumeMounts:
+            - name: flink-config-volume
+              mountPath: /opt/flink/conf/flink-conf.yaml
+              subPath: flink-conf.yaml
+      volumes:
+        - name: flink-config-volume
+          configMap:
+            name: flink-config
+---
+# ---------- Flink: SQL Client ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-client
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sql-client
+  template:
+    metadata:
+      labels:
+        app: sql-client
+    spec:
+      containers:
+        - name: sql-client
+          image: flink-sql-k8s:1.19
+          command: ["bash", "-c", "sleep infinity"]
+          volumeMounts:
+            - name: flink-config-volume
+              mountPath: /opt/flink/conf/flink-conf.yaml
+              subPath: flink-conf.yaml
+      volumes:
+        - name: flink-config-volume
+          configMap:
+            name: flink-config
+---
+# ---------- ClickHouse ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: clickhouse
+  namespace: telemetry
+spec:
+  selector:
+    app: clickhouse
+  ports:
+    - name: http
+      port: 8123
+      targetPort: 8123
+    - name: native
+      port: 9000
+      targetPort: 9000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clickhouse
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clickhouse
+  template:
+    metadata:
+      labels:
+        app: clickhouse
+    spec:
+      containers:
+        - name: clickhouse
+          image: clickhouse/clickhouse-server:23.8
+          ports:
+            - containerPort: 8123
+            - containerPort: 9000
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/clickhouse
+            - name: logs
+              mountPath: /var/log/clickhouse-server
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: logs
+          emptyDir: {}
+---
+# ---------- Telemetry Producer (Python) ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemetry-producer
+  namespace: telemetry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telemetry-producer
+  template:
+    metadata:
+      labels:
+        app: telemetry-producer
+    spec:
+      containers:
+        - name: telemetry-producer
+          image: telemetry-producer:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "redpanda-1:29092"
+            - name: KAFKA_TOPIC
+              value: "fleet.prod.telemetry.raw"

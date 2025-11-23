@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flink-config
+  namespace: telemetry
+data:
+  flink-conf.yaml: |
+    jobmanager.rpc.address: jobmanager
+    jobmanager.rpc.port: 6123
+    jobmanager.memory.flink.size: 1000M
+
+    taskmanager.numberOfTaskSlots: 20
+    taskmanager.memory.flink.size: 500M
+
+    parallelism.default: 1
+
+    rest.address: jobmanager
+    rest.port: 8081
+
+    execution.target: remote
+    jobmanager.scheduler: adaptive

@@ -1,0 +1,12 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: telemetry
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 30080
+        hostPort: 8080   
+      - containerPort: 30081
+        hostPort: 8081   
+      - containerPort: 30082
+        hostPort: 8123   
