@@ -50,6 +50,8 @@ By processing high-velocity telemetry streams with Apache Flink, this system pro
 
 ### High Level Architecture
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/e523e59c-7640-4bfe-9e37-7a76ef34546a" />
+
 <img width="1704" height="560" alt="image" src="https://github.com/user-attachments/assets/395f4ea9-691f-4e33-a1a0-295d849f797e" />
 
 ### Flink Pipelines and Clickhouse Architecture
