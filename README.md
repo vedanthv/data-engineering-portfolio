@@ -17,6 +17,7 @@ Here is an index of projects with the tech, domain and link.
 | Project | Tech | 
 | :---------: | :---------: |
 |[Realtime Truck Fleet Monitoring Analysis](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
+|[InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)|AWS EC2,Docker,Airflow,ReapidAPI,AWS Lambda,AWS S3,AWS CloudWatch,AWS Redshift,Prometheus,Grafana,PowerBI|
 
 
 ### Small Data Engineering And Analytics Projects
@@ -27,7 +28,6 @@ Here is an index of projects with the tech, domain and link.
 |[Pt 2 : Serving Postgres Data using FastAPI](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-livescores-fastapi)|Backend API Development, Streaming Data|
 |[Pt 3 : Frontend Web App Powered by Streaming Data with Streamlit](https://github.com/vedanthv/data-engineering-portfolio/tree/main/cricket-analytics-frontend-app-streamlit)|Frontend Application Development,MVC Architecture|
 |[Pt 4 : Realtime Ingestion and Transformation with Apache Druid as OLAP Database](https://github.com/vedanthv/data-engineering-portfolio/tree/main/real-time-analytics-druid) | Data Ingestion and Big Data Processing |
-|[InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)|AWS EC2,Docker,Airflow,ReapidAPI,AWS Lambda,AWS S3,AWS CloudWatch,AWS Redshift,Prometheus,Grafana,PowerBI|
 |[User Mingle : Kafka Driven User Profile Streaming](https://github.com/vedanthv/data-engineering-portfolio/tree/main/user-mingle)|Airflow, Zookeeper, Cassandra, Schema Registry, Spark|  
 |[Grand Prix Data Odyssey](https://github.com/vedanthv/data-engineering-projects/tree/main/formula-1-analytics-engg)|Azure Databricks,Spark SQL,Postman,Blob Storage,Unity Catalog,ADF,Azure Devops,Synapse Studio, Delta Lake,PowerBI | 
 |[Medal Metrics: Tokyo Olympics Data Alchemy](https://github.com/vedanthv/data-engineering-projects/tree/main/tokyo-olympics-de)|ADF,Azure Data Lake Gen2,Blob Storage,Databricks,Synapse Analytics,PowerBI|
