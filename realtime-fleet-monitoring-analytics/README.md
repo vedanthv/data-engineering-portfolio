@@ -74,6 +74,126 @@ Below is a dashboard that's benchmarked to ingested **50,000 events per second**
 
 <img width="975" height="745" alt="image" src="https://github.com/user-attachments/assets/0655879a-baae-4f75-adf5-a8bda18a5a85" />
 
-## Visuals
+# Implementation in depth
 
-Click [here](https://github.com/vedanthv/data-engineering-portfolio/blob/main/realtime-fleet-monitoring-analytics/visuals.md) to view some visuals of the project.
+## Data Producer
+
+### Features
+
+* Multiple topic outputs:
+
+  * `fleet.prod.telemetry.raw` – high-frequency telemetry
+  * `fleet.prod.trip.events` – trip start/end events and summaries
+  * `fleet.prod.vehicle.status` – periodic vehicle health
+  * `fleet.prod.events.driver` – driver login/logout and activity events
+  * `fleet.prod.alerts.outbound` – alert events such as overspeed
+  * `fleet.prod.commands` – optional command topic
+* Configurable number of vehicles and telemetry rate
+* Automatic topic creation (optional)
+* Threaded per-vehicle simulation
+* Realistic GPS movement using Haversine distance and interpolation
+
+### Installation
+
+Install Python dependencies:
+
+```bash
+pip install confluent-kafka
+```
+
+Ensure Kafka or Redpanda is running and reachable at the bootstrap server address.
+
+### Quick Start
+
+Run a small test with 5 vehicles for 30 seconds:
+
+```bash
+python data-producer.py \
+  --brokers localhost:9092 \
+  --num-vehicles 5 \
+  --telemetry-rate 1 \
+  --run-seconds 30
+```
+
+Create topics before producing:
+
+```bash
+python data-producer.py --create-topics
+```
+
+Example load test:
+
+```bash
+python data-producer.py \
+  --brokers localhost:9092 \
+  --num-vehicles 500 \
+  --telemetry-rate 2
+```
+
+## Command-Line Arguments
+
+| Argument           | Description                               | Default          |
+| ------------------ | ----------------------------------------- | ---------------- |
+| `--brokers`        | Bootstrap servers                         | `localhost:9092` |
+| `--num-vehicles`   | Number of simulated vehicles              | `10000`          |
+| `--telemetry-rate` | Telemetry messages per second per vehicle | `1.0`            |
+| `--run-seconds`    | How long to run the simulation            | `3600`           |
+| `--create-topics`  | Create required topics                    | Disabled         |
+
+## Example Messages
+
+### Telemetry (`fleet.prod.telemetry.raw`)
+
+```json
+{
+  "event_id": "uuid",
+  "vehicle_id": "veh_1000",
+  "driver_id": "drv_2000",
+  "trip_id": "trip_veh_1000_1700000000",
+  "timestamp": "2025-11-30T12:00:00Z",
+  "lat": 12.9123456,
+  "lon": 77.6123456,
+  "speed_kmph": 45.2,
+  "heading": 130.1,
+  "sat_count": 9,
+  "battery_v": 12.3
+}
+```
+
+### Trip Event (`fleet.prod.trip.events`)
+
+```json
+{
+  "trip_id": "trip_veh_1000_1700000000",
+  "vehicle_id": "veh_1000",
+  "driver_id": "drv_2000",
+  "event_type": "trip_start",
+  "timestamp": "2025-11-30T12:00:00Z",
+  "origin_lat": 12.91,
+  "origin_lon": 77.61
+}
+```
+
+### Alert (`fleet.prod.alerts.outbound`)
+
+```json
+{
+  "alert_id": "uuid",
+  "ts": "2025-11-30T12:05:00Z",
+  "vehicle_id": "veh_1000",
+  "trip_id": "trip_veh_1000_1700000000",
+  "alert_type": "overspeed",
+  "severity": 2,
+  "details": "speed=85.4"
+}
+```
+
+### Notes
+
+* Movement is generated using random multi-waypoint routes.
+* Telemetry is emitted at a fixed per-vehicle rate using interpolation between waypoints.
+* Driver events and status updates occur at random intervals.
+* ThreadPoolExecutor is used to allow many vehicles to run concurrently.
+* The script flushes the producer before stopping to avoid message loss.
+
+---
