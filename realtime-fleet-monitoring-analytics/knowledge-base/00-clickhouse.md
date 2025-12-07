@@ -1,4 +1,4 @@
-# Clickhouse
+# Clickhouse 101
 
 ClickHouse stores data using a **columnar storage engine** combined with **parts**, **granules**, **compression**, and **index marks**. Below is a clear, detailed, internal-level explanation of how it actually stores and organizes data on disk.
 
@@ -1578,3 +1578,690 @@ Because:
 * Granules depend solely on sorted order, not on history
 
 ---
+
+## Performance Tuning in Clickhouse
+
+### Compression Codecs Overview
+
+| Codec                                    | Compression Speed               | Decompression Speed | Compression Ratio                        | Best For                                       | Notes                                                                                           |
+| ---------------------------------------- | ------------------------------- | ------------------- | ---------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **LZ4 (default)**                        | Very fast                       | Very fast           | Medium                                   | General numeric + string columns               | Default codec; best all-round choice                                                            |
+| **LZ4HC**                                | Slow                            | Fast                | Better than LZ4                          | Historical or rarely updated data              | Same format as LZ4 but tighter compression                                                      |
+| **ZSTD (levels 1–22)**                   | Slow → Very slow (higher level) | Fast                | High → Very high                         | Logs, large strings, archival data             | Best ratio overall; level 1–6 practical for most                                                |
+| **Delta**                                | Fast                            | Fast                | Medium–High (on sorted ints)             | Sorted integers, monotonic counters            | Encodes differences between consecutive values                                                  |
+| **DoubleDelta**                          | Fast                            | Fast                | High (monotonic)                         | Timestamps, smoothly increasing numeric series | Computes delta of deltas → highly efficient                                                     |
+| **Gorilla**                              | Medium                          | Medium              | Very high for similar consecutive floats | Time series metrics (Float32/64)               | Best for small fluctuation numeric values                                                       |
+| **T64 (Tunstall coding)**                | Medium                          | Medium              | Medium–High                              | Low-entropy numeric data                       | Rare but useful for repetitive patterns                                                         |
+| **LowCardinality (dictionary encoding)** | Fast                            | Fast                | Very high when cardinality is low        | Status fields, categorical strings             | Not a codec itself, but reduces storage and speeds joins/aggregations; combine with ZSTD or LZ4 |
+
+### Recommendations per Use Case
+
+| Data Type                  | Recommended Codec     | Why                                |
+| -------------------------- | --------------------- | ---------------------------------- |
+| Numeric values (generic)   | LZ4                   | Fast, safe default                 |
+| High-frequency timestamps  | DoubleDelta           | Encodes timestamps efficiently     |
+| Monotonic counters         | Delta / DoubleDelta   | Deltas compress extremely well     |
+| Floating-point time series | Gorilla               | Best for metric-style data         |
+| Text/log messages          | ZSTD(1–6)             | Highest compression ratio          |
+| Large JSON strings         | ZSTD(3+)              | Better for complex structured text |
+| Low-cardinality strings    | LowCardinality + ZSTD | Minimizes memory + disk footprint  |
+| Archived cold data         | ZSTD(6–12)            | Space savings outweigh CPU costs   |
+| Hot frequently-read data   | LZ4 or ZSTD(1)        | Minimize CPU overhead              |
+
+## Why use Delta and Double Delta Codecs?
+
+---
+
+### Think of numbers like moments on a timeline
+
+Example timestamps:
+
+```
+1000, 1005, 1010, 1015, 1020
+```
+
+These numbers look big — ClickHouse wants to compress them.
+
+But the **differences** between them are tiny:
+
+```
++5, +5, +5, +5
+```
+
+Storing big numbers is expensive.
+Storing small numbers is cheap.
+
+That is why Delta exists.
+
+---
+
+### 1. What is DELTA in the simplest terms?
+
+**Delta = store how much the value changed, not the value itself.**
+
+Example:
+
+```
+1000 → store 1000  
+1005 → store +5  
+1010 → store +5  
+1015 → store +5  
+1020 → store +5
+```
+
+Instead of storing:
+
+```
+1000, 1005, 1010, 1015, 1020
+```
+
+Store:
+
+```
+1000, 5, 5, 5, 5
+```
+
+Why it works:
+
+* All those 5’s compress extremely well
+* Much smaller file size
+
+**Delta is simply: “value[i] - value[i-1]”.**
+
+---
+
+### 2. What is DOUBLED DELTA?
+
+Delta looked at the **difference between values**.
+
+DoubleDelta looks at the **difference between the differences**.
+
+Why?
+
+Because sometimes even the delta is always the same.
+
+Example:
+
+```
+Deltas: 5, 5, 5, 5
+```
+
+Difference between these:
+
+```
+0, 0, 0
+```
+
+So DoubleDelta stores:
+
+```
+1000, 5, 0, 0, 0
+```
+
+Which compresses even better than Delta.
+
+---
+
+### 3. Why DoubleDelta works
+
+Think of data like timestamps:
+
+```
+Every row happens 5 seconds after the previous one.
+```
+
+That means:
+
+* First value is big
+* Difference is small
+* **Difference of difference is zero**
+
+Zeros compress like nothing — nearly free space.
+
+---
+
+### 4. Let’s visualize it very simply
+
+Original timestamps:
+
+```
+1000  1005  1010  1015  1020
+```
+
+Delta representation:
+
+```
+1000, 5, 5, 5, 5
+```
+
+DoubleDelta representation:
+
+```
+1000, 5, 0, 0, 0
+```
+
+That is literally it.
+
+* Delta: numbers become small
+* DoubleDelta: numbers become even smaller (mostly zeros)
+
+---
+
+### 5. When to use which?
+
+### Use **Delta** when:
+
+Values go up, but not evenly.
+
+Example:
+
+```
+1000, 1007, 1019, 1021, 1100
+```
+
+Differences are irregular, so DoubleDelta doesn’t help much.
+
+### Use **DoubleDelta** when:
+
+Values increase evenly (or almost evenly).
+
+Example:
+
+```
+1000, 1005, 1010, 1015, 1020
+```
+
+Perfect case: timestamps at fixed intervals.
+
+---
+
+### 6. One-sentence summary
+
+* **Delta** → store “how much did it change?”
+* **DoubleDelta** → store “how much did the change change?”
+
+If the change is stable → zeros → amazing compression.
+
+---
+
+# Materialized Views in Clickhouse
+
+---
+
+### 1. First: What a normal table is
+
+A **table** in ClickHouse:
+
+* Stores your data directly
+* You insert rows into it
+* You query those rows
+* Data lives *physically* inside MergeTree parts
+* Nothing happens automatically when new data arrives (unless you tell ClickHouse via a view)
+
+Example:
+
+```sql
+CREATE TABLE events (
+    id UInt32,
+    ts DateTime,
+    value Float32
+) ENGINE = MergeTree() ORDER BY ts;
+```
+
+This table is just a storage container.
+
+---
+
+### 2. What is a Materialized View?
+
+A **Materialized View (MV)** in ClickHouse is:
+
+* A *query* that runs automatically whenever data is inserted into another table
+* The *result* of that query is physically stored in a target table
+* The MV is **not a table you insert into directly**
+* Instead → it listens to inserts on a source table
+* And writes transformed/aggregated data into a destination table
+
+**A MV = trigger + pipeline + target table**
+
+You do not store anything in an MV itself — it *writes **to** a real table*.
+
+---
+
+### 3. Important: Materialized Views are not virtual
+
+In many databases (Postgres, Oracle), a materialized view is a “cached query”.
+
+In ClickHouse:
+
+* A Materialized View is **NOT** a cached query
+* A Materialized View is **NOT** a table you query directly (although you CAN query the *target table*)
+* A Materialized View is more like a *continuous ingestion rule*
+
+Think of it as:
+
+> Whenever new data is inserted into table A, run query X and store output in table B.
+
+---
+
+### 4. Architecture of a Materialized View
+
+A ClickHouse MV always has:
+
+#### 1) A **source table**
+
+The table you insert into.
+
+#### 2) A **SELECT query** (the transformation logic)
+
+#### 3) A **target table**
+
+Where the MV writes the transformed data.
+
+So the MV is basically the wiring between source and target.
+
+---
+
+### 5. A simple example
+
+Source table:
+
+```sql
+CREATE TABLE events
+(
+    user_id UInt32,
+    amount Float32,
+    ts DateTime
+)
+ENGINE = MergeTree()
+ORDER BY ts;
+```
+
+Target aggregated table:
+
+```sql
+CREATE TABLE daily_totals
+(
+    date Date,
+    user_id UInt32,
+    total_amount Float64
+)
+ENGINE = SummingMergeTree()
+ORDER BY (date, user_id);
+```
+
+Materialized view:
+
+```sql
+CREATE MATERIALIZED VIEW mv_daily
+TO daily_totals
+AS
+SELECT
+    toDate(ts) AS date,
+    user_id,
+    sum(amount) AS total_amount
+FROM events
+GROUP BY date, user_id;
+```
+
+What happens:
+
+* You insert into `events`
+* MV immediately reads the inserted block
+* Computes sums per day per user
+* Writes aggregated rows into `daily_totals`
+
+You never insert directly into `daily_totals`.
+You never query the view; you query `daily_totals`.
+
+---
+
+### 6. How Materialized Views differ from tables
+
+| Feature                             | Table | Materialized View                                       |
+| ----------------------------------- | ----- | ------------------------------------------------------- |
+| Stores data?                        | Yes   | **No (stores into another table)**                      |
+| Insert into?                        | Yes   | **No — inserts happen automatically from source table** |
+| Triggered by inserts?               | No    | **Yes**                                                 |
+| Has a SELECT query inside?          | No    | **Yes**                                                 |
+| Used for transformations?           | No    | **Yes**                                                 |
+| Used for pre-aggregation / rollups? | No    | Yes                                                     |
+| Uses its own storage engine?        | No    | **The target table does**                               |
+| Queryable directly?                 | Yes   | Usually **no** (you query the target table)             |
+
+The MV itself is metadata + logic.
+The actual data lives in the **target table**.
+
+---
+
+### 7. Why Materialized Views are extremely useful
+
+#### 1. Pre-aggregation
+
+Like daily, hourly, or minute-level rollups.
+Huge performance boost for dashboards.
+
+#### 2. ETL pipelines
+
+Materialized views act as *stream processors inside ClickHouse*.
+
+#### 3. Data duplication with transformation
+
+Like storing same data partitioned differently or sorted differently.
+
+#### 4. Automatic projections before projections existed
+
+Materialized views were the ClickHouse way to optimize queries before projections came.
+
+---
+
+### 8. Do Materialized Views read entire tables?
+
+No.
+
+They read **only the newly inserted blocks** in the source table.
+This makes them efficient and ideal for streaming/real-time processing.
+
+---
+
+### 9. What happens if you drop a Materialized View?
+
+* The target table remains
+* Future inserts stop populating it
+* Nothing breaks
+
+Materialized views are loosely coupled.
+
+---
+
+### 10. Are Materialized Views updated when source data is mutated?
+
+No, not automatically.
+
+If you:
+
+```sql
+ALTER TABLE events UPDATE ...
+```
+
+the MV does *not* re-process old rows.
+
+To handle updates correctly, you must:
+
+* avoid updates, OR
+* use engines that merge correctly, like ReplacingMergeTree, OR
+* rebuild the MV manually.
+
+Materialized views are optimized for **append-only** pipelines.
+
+---
+
+### Final Summary
+
+* A **table** is a physical storage unit that you insert/query directly.
+* A **Materialized View** is an **automatic transformation rule** that listens to inserts on a source table and writes the transformed results into a destination table.
+* A Materialized View does not store data itself; the target table does.
+* Materialized Views are best for real-time transformations, aggregations, and rollups.
+
+## Applications of Materialized Views
+
+Below are **very simple, clear, practical examples** showing how **Materialized Views** help in:
+
+1. **Pre-aggregation**
+2. **Data deduplication**
+3. **Projections-like optimizations** (before actual projections existed)
+
+I’ll keep examples tiny so the idea is obvious.
+
+---
+
+# 1. Pre-Aggregation (Small, Clear Example)
+
+### Problem
+
+You insert billions of raw events:
+
+```
+user_id, amount, timestamp
+```
+
+You want dashboards showing:
+
+* total amount per day
+* total amount per user per day
+
+If you run this on raw data every time:
+
+```sql
+SELECT toDate(timestamp), user_id, sum(amount)
+FROM events
+GROUP BY 1, 2;
+```
+
+→ slow
+→ must scan huge table
+→ expensive
+
+### Materialized View Solution
+
+1. **Source table** (raw events):
+
+```sql
+CREATE TABLE events (
+    user_id UInt32,
+    amount Float32,
+    ts DateTime
+) ENGINE = MergeTree() ORDER BY ts;
+```
+
+2. **Target table** (already aggregated):
+
+```sql
+CREATE TABLE daily_totals (
+    date Date,
+    user_id UInt32,
+    total_amount Float64
+) ENGINE = SummingMergeTree() ORDER BY (date, user_id);
+```
+
+3. **Materialized View**:
+
+```sql
+CREATE MATERIALIZED VIEW mv_daily
+TO daily_totals
+AS
+SELECT
+    toDate(ts) AS date,
+    user_id,
+    sum(amount) AS total_amount
+FROM events
+GROUP BY date, user_id;
+```
+
+### What actually happens:
+
+You insert this:
+
+```sql
+INSERT INTO events VALUES (1, 10, '2025-01-01 10:00'), 
+                          (1, 5,  '2025-01-01 11:00');
+```
+
+Materialized view instantly writes:
+
+```
+date=2025-01-01, user_id=1, total_amount=15
+```
+
+into **daily_totals**.
+
+No need to scan raw events ever again.
+
+### Benefit
+
+* Dashboards now read from a **much smaller aggregated table**
+* Huge performance improvement
+* Queries go from seconds → milliseconds
+
+---
+
+# 2. Data Deduplication (Simple Example)
+
+### Problem
+
+You receive duplicate events regularly:
+
+```
+(1, "login")
+(1, "login")
+(1, "login")
+```
+
+You want to keep only **unique** rows in another table.
+
+Materialized views can do deduplication before storing data.
+
+### Source table (raw, may contain duplicates)
+
+```sql
+CREATE TABLE raw_events (
+    user_id UInt32,
+    action String
+) ENGINE = MergeTree()
+ORDER BY user_id;
+```
+
+### Target table (deduplicated)
+
+```sql
+CREATE TABLE unique_events (
+    user_id UInt32,
+    action String
+) ENGINE = ReplacingMergeTree()
+ORDER BY (user_id, action);
+```
+
+### Materialized View
+
+```sql
+CREATE MATERIALIZED VIEW mv_unique
+TO unique_events
+AS
+SELECT DISTINCT user_id, action
+FROM raw_events;
+```
+
+### Insert 3 duplicate rows:
+
+```sql
+INSERT INTO raw_events VALUES (1, 'login'), (1, 'login'), (1, 'login');
+```
+
+Materialized view inserts into `unique_events`:
+
+```
+(1, 'login')
+```
+
+ReplacingMergeTree merges duplicates automatically.
+
+### Benefit
+
+* Raw table stays untouched
+* Clean, deduplicated table always stays up to date
+* You query the deduped table directly
+* No need for periodic “cleanup jobs”
+
+---
+
+# 3. Acting Like “Projections” (Optimized Read Paths)
+
+Before ClickHouse had real **projections**, people used Materialized Views to “pre-store” data in a different shape to speed up queries.
+
+### Problem
+
+You frequently query the same table *sorted differently*.
+
+Example:
+
+Raw table ordered by timestamp:
+
+```sql
+CREATE TABLE events (
+    ts DateTime,
+    user_id UInt32,
+    amount Float32
+) ENGINE = MergeTree()
+ORDER BY ts;
+```
+
+But your BI queries are almost always:
+
+```sql
+SELECT * FROM events WHERE user_id = 10 ORDER BY ts;
+```
+
+This query is slow because:
+
+* Source table is sorted by `ts`
+* But you’re filtering by `user_id`
+* You constantly read many granules unnecessarily
+
+### Create a second table sorted by user_id
+
+```sql
+CREATE TABLE events_by_user (
+    user_id UInt32,
+    ts DateTime,
+    amount Float32
+) ENGINE = MergeTree()
+ORDER BY user_id;
+```
+
+### Materialized View routes inserts automatically
+
+```sql
+CREATE MATERIALIZED VIEW mv_by_user
+TO events_by_user
+AS
+SELECT *
+FROM events;
+```
+
+Now every insert into `events` also goes to `events_by_user`.
+
+### Benefit
+
+Queries like:
+
+```sql
+SELECT *
+FROM events_by_user
+WHERE user_id = 10;
+```
+
+become extremely fast because:
+
+* The table is sorted by user_id
+* Primary index pruning works perfectly
+* You only read the granules containing user_id = 10
+
+### This is exactly what “projections” are built to do
+
+Materialized views were essentially the **manual version** of projections.
+
+Now projections automate this kind of optimization *inside* the table instead of needing a separate table + MV.
+
+---
+
+# Final Summary (Consolidated)
+
+| Use-case                           | How Materialized View Helps                                         | Small Example                                             |
+| ---------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------- |
+| **Pre-aggregation**                | Stores daily/hourly/summed data in a smaller table for fast queries | Summing daily totals                                      |
+| **Data deduplication**             | Writes only unique rows into a clean table                          | DISTINCT + ReplacingMergeTree                             |
+| **Projections-like optimizations** | Stores data sorted/partitioned differently for faster reads         | Raw table sorted by ts, secondary table sorted by user_id |
+
+Materialized Views = automatic ETL step inside ClickHouse.
+
+They transform newly inserted data **in real-time** and store transformed results into another table optimized for queries.
