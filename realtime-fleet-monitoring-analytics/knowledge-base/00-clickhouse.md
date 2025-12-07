@@ -2,10 +2,15 @@
 
 ClickHouse stores data using a **columnar storage engine** combined with **parts**, **granules**, **compression**, and **index marks**. Below is a clear, detailed, internal-level explanation of how it actually stores and organizes data on disk.
 
-Note : Content and Slides Credit : [CMU Database Group - Quarantine Tech Talks (2020) - Introduction to Clickhouse by Robert Hodges](https://www.youtube.com/watch?v=fGG9dApIhDU)
+Note : 
+
+Slides Credit : [CMU Database Group - Quarantine Tech Talks (2020) - Introduction to Clickhouse by Robert Hodges](https://www.youtube.com/watch?v=fGG9dApIhDU)
+
 ---
 
-# 1. Columnar Storage (Foundational Idea)
+# Core Ideas
+
+## 1. Columnar Storage (Foundational Idea)
 
 ClickHouse stores each column **separately on disk**, not row-by-row like relational databases.
 So for a table with columns:
@@ -27,7 +32,7 @@ This makes reading only the needed columns extremely fast.
 
 ---
 
-# 2. Data Parts (Immutable Segments)
+## 2. Data Parts (Immutable Segments)
 
 Data is not written to the table file-by-file. Instead, ClickHouse writes data in **immutable parts**.
 
@@ -50,7 +55,7 @@ Each part corresponds to a chunk of inserted data (usually tens or hundreds of M
 
 ---
 
-# 3. Granules (Blocks of Rows)
+## 3. Granules (Blocks of Rows)
 
 Inside each part, data is logically divided into **granules**, typically containing **8192 rows** (default).
 
@@ -63,7 +68,7 @@ Granule sizes keep index small and predictable.
 
 ---
 
-# 4. How Column Files Are Stored
+## 4. How Column Files Are Stored
 
 For every column, ClickHouse creates two important files:
 
@@ -86,7 +91,7 @@ These marks let ClickHouse skip huge portions of data during queries.
 
 ---
 
-# 5. Primary Index (Sparse Index)
+## 5. Primary Index (Sparse Index)
 
 ClickHouse does NOT store a traditional B-tree index.
 
@@ -110,7 +115,7 @@ Result:
 
 ---
 
-# 6. Compression
+## 6. Compression
 
 ClickHouse compresses data column by column inside `.bin` files.
 
@@ -129,7 +134,7 @@ Compression is highly efficient because:
 
 ---
 
-# 7. Data Merge Process (MergeTree Family)
+## 7. Data Merge Process (MergeTree Family)
 
 When new parts are written, ClickHouse later **merges** them in the background:
 
@@ -148,7 +153,7 @@ Merging preserves:
 
 ---
 
-# 8. Table Engines and Variations
+## 8. Table Engines and Variations
 
 ### MergeTree (base engine)
 
@@ -170,7 +175,7 @@ All still use parts, granules, compression, sparse index.
 
 ---
 
-# 9. On-Disk Directory Layout
+## 9. On-Disk Directory Layout
 
 A typical part directory looks like:
 
@@ -197,7 +202,7 @@ Important files:
 
 ---
 
-# 10. How a Query Reads Data
+## 10. How a Query Reads Data
 
 Process:
 
@@ -211,7 +216,7 @@ This avoids full table scans.
 
 ---
 
-# 11. Why It Is Extremely Fast
+## 11. Why It Is Extremely Fast
 
 ClickHouse’s storage design gives several advantages:
 
@@ -224,7 +229,7 @@ ClickHouse’s storage design gives several advantages:
 
 ---
 
-# Summary (What ClickHouse Stores Internally)
+## Summary (What ClickHouse Stores Internally)
 
 | Layer         | What It Looks Like                          |
 | ------------- | ------------------------------------------- |
@@ -1190,7 +1195,7 @@ This focuses purely on **normal MergeTree**, **mutations**, and **how updates/de
 
 ---
 
-# Key Idea
+## Key Idea
 
 **Normal MergeTree does NOT track latest versions automatically.**
 But it *can* handle updates and deletes using something called a **mutation**.
@@ -1206,7 +1211,7 @@ This gives the illusion of updates, but internally everything is append-only + m
 
 ---
 
-# Small Example (Normal MergeTree Only)
+## Small Example (Normal MergeTree Only)
 
 We create a simple table:
 
@@ -1224,7 +1229,7 @@ At first, the table is empty.
 
 ---
 
-# Step 1. Insert initial data (creates Part A)
+### Step 1. Insert initial data (creates Part A)
 
 ```sql
 INSERT INTO users VALUES (1, 'Alice'), (2, 'Bob');
@@ -1243,7 +1248,7 @@ Parts are immutable, so this stays unchanged.
 
 ---
 
-# Step 2. Issue an UPDATE mutation
+### Step 2. Issue an UPDATE mutation
 
 Suppose we run:
 
@@ -1264,7 +1269,7 @@ Background merge threads will apply it later.
 
 ---
 
-# Step 3. Background merge applies mutation
+### Step 3. Background merge applies mutation
 
 Some time later, a background merge happens:
 
@@ -1297,7 +1302,7 @@ Now the table truly contains the updated row.
 
 ---
 
-# Step 4. Why does this look like an update?
+### Step 4. Why does this look like an update?
 
 Because after the merge is finished:
 
@@ -1307,15 +1312,15 @@ Because after the merge is finished:
 
 But remember:
 
-### Actual update did NOT modify Part A
+Actual update did NOT modify Part A
 
-### It created a brand new Part B with corrected values
+It created a brand new Part B with corrected values
 
 MergeTree = immutable parts + merge-based rewrite.
 
 ---
 
-# Step 5. What happens if you query before merge is done?
+### Step 5. What happens if you query before merge is done?
 
 If you query right after submitting:
 
@@ -1338,7 +1343,7 @@ So logically:
 
 ---
 
-# Step 6. What happens for DELETE?
+### Step 6. What happens for DELETE?
 
 ```
 ALTER TABLE users DELETE WHERE id = 2;
@@ -1353,7 +1358,7 @@ Same process:
 
 ---
 
-# Summary of Normal MergeTree Update Logic
+### Summary of Normal MergeTree Update Logic
 
 | Step               | What Happens                          |
 | ------------------ | ------------------------------------- |
@@ -1373,7 +1378,7 @@ Not by modifying data in-place.
 
 ---
 
-# Final Explanation
+### Final Explanation
 
 In a **normal MergeTree**, “tracking the latest version” is done by:
 
@@ -1395,7 +1400,7 @@ We want to understand:
 
 ---
 
-# Short Answer
+## Short Answer
 
 When a mutation is applied and the new part is created:
 
@@ -1408,13 +1413,13 @@ Therefore:
 
 The rule is simple:
 
-### Granules are determined *fresh* when the new merged part is written.
+Granules are determined *fresh* when the new merged part is written.
 
 Granules are not tied to the old parts. They are reconstructed during merge.
 
 ---
 
-# Now let’s walk through a tiny example
+Now let’s walk through a tiny example
 
 Table:
 
@@ -1449,7 +1454,7 @@ ALTER TABLE users UPDATE name = 'A_new' WHERE id = 1;
 
 ---
 
-# What ClickHouse does during merge
+### What ClickHouse does during merge
 
 During the merge that applies the mutation:
 
@@ -1483,7 +1488,7 @@ But this is not because granules are preserved; it is because sorted order did n
 
 ---
 
-# When would an updated row end up in a *different* granule?
+### When would an updated row end up in a *different* granule?
 
 Whenever the updated row’s position in the sorted key space changes.
 
@@ -1523,11 +1528,11 @@ So the updated row moves to the end.
 
 Meaning:
 
-### Updated rows may move to entirely different granules if their ORDER BY position changes.
+Updated rows may move to entirely different granules if their ORDER BY position changes.
 
 ---
 
-# Very important clarification
+### Very important clarification
 
 **Granules are not preserved between merges.**
 A merge creates a completely new part:
@@ -1550,9 +1555,9 @@ As long as the final part preserves the sorted ORDER BY layout.
 
 ---
 
-# Summary
+### Summary
 
-### Does an updated row end up in the same granule?
+#### Does an updated row end up in the same granule?
 
 **Usually yes**, if:
 
@@ -1563,7 +1568,7 @@ For example updating `name` while ORDER BY `(id)` means the row stays near the s
 
 But:
 
-### It can end up in a completely different granule if the ORDER BY key changes.
+It can end up in a completely different granule if the ORDER BY key changes.
 
 Because:
 
