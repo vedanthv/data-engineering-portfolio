@@ -2003,7 +2003,7 @@ Materialized views are optimized for **append-only** pipelines.
 * A Materialized View does not store data itself; the target table does.
 * Materialized Views are best for real-time transformations, aggregations, and rollups.
 
-## Applications of Materialized Views
+# Applications of Materialized Views
 
 Below are **very simple, clear, practical examples** showing how **Materialized Views** help in:
 
@@ -2015,7 +2015,7 @@ I’ll keep examples tiny so the idea is obvious.
 
 ---
 
-# 1. Pre-Aggregation (Small, Clear Example)
+## 1. Pre-Aggregation (Small, Clear Example)
 
 ### Problem
 
@@ -2105,7 +2105,7 @@ No need to scan raw events ever again.
 
 ---
 
-# 2. Data Deduplication (Simple Example)
+## 2. Data Deduplication (Simple Example)
 
 ### Problem
 
