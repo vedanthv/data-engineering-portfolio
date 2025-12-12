@@ -2,7 +2,7 @@
 
 Hello World! I'm Vedanth. 
 
-This is a complete portfolio of the projects I have designed with a major focus on implementing various data engineering tech and cloud services across Azure, AWS and GCP.
+This is a complete portfolio of the projects I have designed with a major focus on implementing various data engineering tech and cloud services.
 
 Feel Free to Connect with me 🤠
 
@@ -16,7 +16,7 @@ Here is an index of projects with the tech, domain and link.
 
 | Project | Tech | 
 | :---------: | :---------: |
-|[Realtime Truck Fleet Monitoring Analysis](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
+|[Realtime Vehicle Fleet Monitoring Analysis](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics) |Redpanda,Apache Flink,Clickhouse,Metabase,Docker,Kubernetes|
 |[InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)|AWS EC2,Docker,Airflow,ReapidAPI,AWS Lambda,AWS S3,AWS CloudWatch,AWS Redshift,Prometheus,Grafana,PowerBI|
 
 
