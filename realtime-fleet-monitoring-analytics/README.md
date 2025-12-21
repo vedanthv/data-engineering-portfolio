@@ -197,3 +197,267 @@ python data-producer.py \
 * The script flushes the producer before stopping to avoid message loss.
 
 ---
+
+## Flink Transformations
+
+---
+
+### Transformation Flow Overview
+
+```
+Raw Kafka Streams
+   |
+   v
+Enrichment Views (LAG, Derived Columns)
+   |
+   v
+Distance & Session Logic
+   |
+   v
+Windowed Aggregations (HOP / TUMBLE)
+   |
+   v
+Upsert & Append Kafka Sinks
+```
+
+All transformations are **event-time driven** and rely on **watermarks** for correctness under out-of-order data.
+
+---
+
+### 1. Telemetry Enrichment
+
+#### View: `telemetry_session_with_prev`
+
+**Purpose**
+Adds historical context to each telemetry event by attaching the previous GPS point for the same vehicle.
+
+**Key Techniques**
+
+* Window functions
+* Per-vehicle ordering by event time
+* Stateful processing per partition key
+
+**Logic**
+
+* Partition by `vehicle_id`
+* Order by `event_time`
+* Compute previous latitude, longitude, timestamp, and trip ID using `LAG`
+
+**Derived Fields**
+
+* `prev_lat`
+* `prev_lon`
+* `prev_ts`
+* `prev_trip_id`
+
+This view enables downstream distance and session calculations without explicit joins.
+
+---
+
+### 2. Distance Calculation
+
+#### View: `telemetry_session_with_delta`
+
+**Purpose**
+Calculates the incremental distance traveled between consecutive telemetry points.
+
+**Logic**
+
+* Uses the Haversine formula to compute great-circle distance
+* Distance is reset to `0` when:
+
+  * Previous coordinates are missing
+  * Trip ID is missing or empty
+  * Trip ID changes between events
+
+**Output**
+
+* `delta_m`: distance traveled in meters between two consecutive points
+
+This view transforms raw GPS points into a stream of incremental movement events.
+
+---
+
+### 3. Trip-Level Aggregation
+
+#### Sink: `session_trip_summaries` (Upsert Kafka)
+
+**Purpose**
+Produces continuously updated trip summaries.
+
+**Grouping Keys**
+
+* `trip_id`
+* `vehicle_id`
+* `driver_id`
+
+**Aggregations**
+
+* Trip start time (`MIN(event_time)`)
+* Trip end time (`MAX(event_time)`)
+* Trip duration (seconds)
+* Event count
+* Total distance (meters and kilometers)
+* Average, minimum, and maximum speed
+
+**Update Semantics**
+
+* Uses an upsert Kafka sink keyed by `trip_id`
+* Each new event updates the existing trip summary
+
+This table represents the authoritative real-time view of trip execution.
+
+---
+
+### 4. Driver Behavior Scoring
+
+#### Sink: `driver_behavior_scores` (Upsert Kafka)
+
+**Purpose**
+Computes rolling driver behavior scores based on alert activity.
+
+**Input Stream**
+
+* `alerts_outbound`
+
+**Windowing**
+
+* HOP window
+* Window size: 15 seconds
+* Slide interval: 1 second
+
+**Scoring Logic**
+
+* Overspeed events weighted by 2
+* Harsh braking events weighted by 3
+* Idling events weighted by 1
+
+**Output**
+
+* `vehicle_id`
+* Window start and end
+* Computed behavior score
+
+Scores are continuously updated per window and vehicle.
+
+---
+
+### 5. Driver Break Violation Detection
+
+#### Sink: `break_violations`
+
+**Purpose**
+Detects illegal or suspiciously short driver breaks.
+
+**Logic**
+
+* Self-join on `driver_events`
+* Match `break_start` with the next `break_end`
+* Ensure both events belong to the same driver
+* Compute break duration
+
+**Violation Rule**
+
+* Break duration less than 5 seconds
+
+This transformation highlights compliance violations in near real time.
+
+---
+
+### 6. Fleet Utilization Metrics
+
+#### Sink: `fleet_utilization_metrics`
+
+**Purpose**
+Provides a live snapshot of fleet activity levels.
+
+**Input**
+
+* Raw telemetry events
+
+**Windowing**
+
+* HOP window
+* Window size: 5 seconds
+* Slide interval: 1 second
+
+**Metrics**
+
+* `active_count`: speed > 5 km/h
+* `idle_count`: speed ≤ 5 km/h
+* `offline_count`: placeholder for future enrichment
+
+This table supports live dashboards and operational monitoring.
+
+---
+
+### 7. Live Trip Metrics
+
+#### Sink: `trip_metrics_live`
+
+**Purpose**
+Emits rolling trip metrics for near-real-time analytics.
+
+**Metrics**
+
+* Distance traveled within the window
+* Average speed
+
+**Semantics**
+
+* Upsert per `(trip_id, window)`
+* Designed for streaming dashboards and alerting systems
+
+---
+
+### 8. Vehicle Health Alerting
+
+#### Sink: `vehicle_health_alerts`
+
+**Purpose**
+Detects vehicle health anomalies using windowed evaluation.
+
+**Input**
+
+* Vehicle status stream
+
+**Windowing**
+
+* Tumbling window of 1 minute
+* Event time based on raw sensor timestamp
+
+**Rule**
+
+* Engine temperature exceeds 90°C
+
+**Output**
+
+* Vehicle ID
+* Alert type
+* Maximum observed temperature
+* Timestamp of the alert
+
+This transformation enables proactive maintenance and safety monitoring.
+
+---
+
+#### Event-Time and State Management
+
+All transformations rely on:
+
+* Event-time semantics
+* Watermarks to handle late data
+* Stateful operators for:
+
+  * Window functions
+  * Aggregations
+  * Joins
+
+State is scoped by:
+
+* Vehicle ID
+* Driver ID
+* Trip ID
+* Window boundaries
+
+---
