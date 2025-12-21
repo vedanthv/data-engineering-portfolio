@@ -74,6 +74,88 @@ Below is a dashboard that's benchmarked to ingested **50,000 events per second**
 
 <img width="975" height="745" alt="image" src="https://github.com/user-attachments/assets/0655879a-baae-4f75-adf5-a8bda18a5a85" />
 
+# Setup
+
+## Clone the repository
+
+```git clone https://github.com/vedanthv/data-engineering-portfolio.git```
+
+Navigate to ```realtime-fleet-montioring-analytics``` folder.
+
+## Install JAR Files for Apahce Flink
+
+Install the following jar files and keep them in ```sql-client/lib``` folder.
+
+1. flink-connector-kafka_2.12-1.12.0.jar
+2. flink-json-1.19.0.jar
+3. flink-sql-connector-kafka-3.1.0-1.18.jar
+4. kafka-clients-3.4.0.jar
+
+[All the jar files are here](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics/sql-client/lib)
+
+## Docker
+
+Spin up all the services by running:
+
+```
+cd docker
+sudo docker compose up -d
+```
+
+This starts the Redpanda broker and console. Please check the docker compose [file](https://github.com/vedanthv/data-engineering-portfolio/tree/main/realtime-fleet-monitoring-analytics/docker) for info on the ports.
+
+## Start the Producer
+
+```bash
+python data-producer.py \
+  --brokers localhost:9092 \
+  --num-vehicles 5 \
+  --telemetry-rate 1 \
+  --run-seconds 30
+```
+
+### Command-Line Arguments
+
+| Argument           | Description                               | Default          |
+| ------------------ | ----------------------------------------- | ---------------- |
+| `--brokers`        | Bootstrap servers                         | `localhost:9092` |
+| `--num-vehicles`   | Number of simulated vehicles              | `10000`          |
+| `--telemetry-rate` | Telemetry messages per second per vehicle | `1.0`            |
+| `--run-seconds`    | How long to run the simulation            | `3600`           |
+| `--create-topics`  | Create required topics                    | Disabled         |
+
+## Initialize and submit Flink jobs
+
+All the flink sql DDL's and transforms is documented [here](https://github.com/vedanthv/data-engineering-portfolio/blob/main/realtime-fleet-monitoring-analytics/flink-transforms.sql).
+
+Run the following commands to initialize jobs.
+
+```bash
+chmod +x scripts/run-flink-jobs.sh
+
+./run-flink-jobs.sh
+```
+
+This will initialize all flink jobs, the details are in the next part of the documentation.
+
+You should be able to see a screen like this on the Flink UI.
+
+![Flink UI](image.png)
+
+## Create Clickhouse Tables and Materialized Views
+
+To create Clickhouse Tables and Materialized Views run the following shell script.
+
+```bash
+chmod +x scripts/run-clickhouse-scrips.sh
+
+./run-clickhouse-scrips.sh
+```
+
+More details about the architecture is mentioned in the next part of the documentation.
+
+## Metabase Setup [TODO]
+
 # Implementation in depth
 
 ## Data Producer
@@ -95,12 +177,6 @@ Below is a dashboard that's benchmarked to ingested **50,000 events per second**
 
 ### Installation
 
-Install Python dependencies:
-
-```bash
-pip install confluent-kafka
-```
-
 Ensure Kafka or Redpanda is running and reachable at the bootstrap server address.
 
 ### Quick Start
@@ -113,21 +189,6 @@ python data-producer.py \
   --num-vehicles 5 \
   --telemetry-rate 1 \
   --run-seconds 30
-```
-
-Create topics before producing:
-
-```bash
-python data-producer.py --create-topics
-```
-
-Example load test:
-
-```bash
-python data-producer.py \
-  --brokers localhost:9092 \
-  --num-vehicles 500 \
-  --telemetry-rate 2
 ```
 
 ## Command-Line Arguments
