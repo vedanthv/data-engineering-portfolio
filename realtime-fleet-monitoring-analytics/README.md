@@ -461,3 +461,255 @@ State is scoped by:
 * Window boundaries
 
 ---
+
+## Clickhouse Database Structure
+
+### Transformation Model
+
+| Layer              | Responsibility                      |
+| ------------------ | ----------------------------------- |
+| Kafka Engines      | Raw ingestion from Kafka topics     |
+| Materialized Views | JSON parsing, typing, normalization |
+| MergeTree Tables   | Durable, query-optimized storage    |
+
+Unlike Flink, ClickHouse:
+
+* Does **not maintain long-lived state**
+* Does **not support event-time windows**
+* Executes transformations **per row**
+
+---
+
+### 1. Telemetry Ingestion
+
+#### Materialized View: `telemetry_mv`
+
+**Source**
+
+* `telemetry_kafka`
+
+**Target**
+
+* `telemetry_raw`
+
+#### Transformation Summary
+
+| Aspect         | Description                            |
+| -------------- | -------------------------------------- |
+| Parsing        | Manual JSON extraction from raw string |
+| Typing         | Explicit numeric and timestamp casts   |
+| Error Handling | Implicit null/default behavior         |
+| State          | None                                   |
+
+#### Column Mapping
+
+| Target Column | Expression                       | Notes                      |
+| ------------- | -------------------------------- | -------------------------- |
+| `event_id`    | `JSONExtractString(...)`         | Primary identifier         |
+| `vehicle_id`  | `JSONExtractString(...)`         | High-cardinality dimension |
+| `driver_id`   | `JSONExtractString(...)`         | Nullable                   |
+| `trip_id`     | `JSONExtractString(...)`         | Nullable                   |
+| `timestamp`   | `parseDateTime64BestEffort(...)` | Event time                 |
+| `lat / lon`   | `toFloat64(...)`                 | GPS coordinates            |
+| `speed_kmph`  | `toFloat64(...)`                 | Vehicle speed              |
+| `heading`     | `toFloat64(...)`                 | Bearing                    |
+| `sat_count`   | `toUInt8(...)`                   | GPS satellites             |
+| `battery_v`   | `toFloat64(...)`                 | Battery voltage            |
+
+**Operational Notes**
+
+* Uses `replaceAll(raw, '""', '","')` to normalize malformed JSON
+* Transformation executes inline during Kafka ingestion
+* No buffering or windowing
+
+---
+
+### 2. Trip Alert Ingestion
+
+#### Materialized View: `trip_alerts_mv`
+
+**Source**
+
+* `trip_alerts_outbound_kafka`
+
+**Target**
+
+* `trip_alerts_outbound_raw`
+
+#### Transformation Summary
+
+| Aspect    | Description                    |
+| --------- | ------------------------------ |
+| Parsing   | Multi-line JSON reconstruction |
+| Typing    | Severity cast to UInt8         |
+| Timestamp | Parsed from string             |
+| State     | None                           |
+
+#### Special Handling
+
+| Step                    | Purpose                      |
+| ----------------------- | ---------------------------- |
+| `substring(...)`        | Removes outer array brackets |
+| `replaceAll('\n', ',')` | Normalizes multi-line JSON   |
+| `concat('{', ..., '}')` | Reconstructs valid JSON      |
+
+This view exists specifically to handle **non-standard Kafka payload formatting**.
+
+---
+
+### 3. Driver Event Ingestion
+
+#### Materialized View: `driver_events_mv`
+
+**Source**
+
+* `driver_events_kafka`
+
+**Target**
+
+* `driver_events_raw`
+
+#### Transformation Summary
+
+| Aspect    | Description                     |
+| --------- | ------------------------------- |
+| Events    | `break_start`, `break_end`, etc |
+| Timestamp | Event-time preserved            |
+| State     | None                            |
+
+#### Column Mapping
+
+| Column       | Description           |
+| ------------ | --------------------- |
+| `driver_id`  | Driver identifier     |
+| `vehicle_id` | Associated vehicle    |
+| `event_type` | Event classification  |
+| `timestamp`  | Event occurrence time |
+
+Used later for **join-based or query-time compliance analysis**.
+
+---
+
+### 4. Fleet Utilization Metrics
+
+#### Materialized View: `prod_metrics_mv`
+
+**Source**
+
+* `prod_metrics_kafka`
+
+**Target**
+
+* `prod_metrics_raw`
+
+#### Transformation Summary
+
+| Aspect    | Description           |
+| --------- | --------------------- |
+| Windowing | Pre-computed upstream |
+| Role      | Sink for Flink output |
+| State     | None                  |
+
+#### Metrics
+
+| Column          | Meaning                |
+| --------------- | ---------------------- |
+| `window_start`  | Window start timestamp |
+| `window_end`    | Window end timestamp   |
+| `active_count`  | Active vehicles        |
+| `idle_count`    | Idle vehicles          |
+| `offline_count` | Offline vehicles       |
+
+ClickHouse treats these as **immutable facts**.
+
+---
+
+### 5. Trip Event Stream
+
+#### Materialized View: `trip_events_mv`
+
+**Source**
+
+* `trip_events_kafka`
+
+**Target**
+
+* `trip_events_raw`
+
+#### Transformation Summary
+
+| Aspect          | Description                      |
+| --------------- | -------------------------------- |
+| Nullable fields | Origin / destination coordinates |
+| Metrics         | Distance and duration            |
+| Timestamp       | Event-time preserved             |
+| Ingestion Time  | Explicitly added                 |
+
+#### Special Handling
+
+| Field               | Strategy                       |
+| ------------------- | ------------------------------ |
+| Optional floats     | `toFloat64OrNull(nullIf(...))` |
+| Optional integers   | `toUInt32OrNull(...)`          |
+| Ingestion timestamp | `now64(6)`                     |
+
+This table supports **trip lifecycle auditing** and replay.
+
+---
+
+### 6. Trip Summary Ingestion
+
+#### Materialized View: `trip_summary_mv`
+
+**Source**
+
+* `trip_summary_kafka`
+
+**Target**
+
+* `trip_summary_raw`
+
+#### Transformation Summary
+
+| Aspect        | Description               |
+| ------------- | ------------------------- |
+| Origin        | Flink upsert output       |
+| Semantics     | Append-only in ClickHouse |
+| Deduplication | Handled at query time     |
+
+#### Column Mapping
+
+| Column                  | Description            |
+| ----------------------- | ---------------------- |
+| `trip_id`               | Business key           |
+| `vehicle_id`            | Vehicle                |
+| `driver_id`             | Driver                 |
+| `trip_start / end`      | Trip boundaries        |
+| `trip_duration_sec`     | Duration               |
+| `event_count`           | Events                 |
+| `distance_m / km`       | Distance               |
+| `avg / min / max speed` | Speed metrics          |
+| `ingestion_ts`          | ClickHouse ingest time |
+
+**Important Note**
+
+* ClickHouse does not interpret Kafka upserts
+* Each update becomes a new row
+* Latest state must be derived using:
+
+  * `ReplacingMergeTree`, or
+  * `argMax()` at query time
+
+---
+
+### State and Consistency Model
+
+| Aspect             | ClickHouse Behavior   |
+| ------------------ | --------------------- |
+| Stateful operators | Not supported         |
+| Windows            | Must be pre-computed  |
+| Exactly-once       | Kafka offsets only    |
+| Reprocessing       | Requires replay       |
+| Late events        | Handled at query time |
+
+ClickHouse assumes **immutability and idempotent ingestion**.
