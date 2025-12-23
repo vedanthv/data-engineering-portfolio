@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: insurance
+    schema: bronze
+    tables:
+      - name: policy_bronze
+      - name: claims_bronze
+      - name: billing_bronze
