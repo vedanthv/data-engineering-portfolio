@@ -1,4 +1,4 @@
-# Insurance Operations Data Lakehouse with Databricks and dbt
+# Enterprise-Grade Insurance Operations and Decision Intelligence Lakehouse
 
 This project implements an Insurance Operations Analytics Lakehouse built on Databricks using modern analytics engineering and AI-ready design principles. The platform unifies policy, billing, and claims data into a governed lakehouse architecture that supports batch processing, incremental transformations, historical analysis, and advanced operational insights. By combining Delta Lake, dbt, Unity Catalog, and MLflow, the project demonstrates how an enterprise insurance data platform can deliver trustworthy analytics, enable cross-domain metrics, and serve as a foundation for AI and machine learning use cases.
 
