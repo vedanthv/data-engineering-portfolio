@@ -1,0 +1,13 @@
+CATALOG = "insurance"
+SCHEMA = "bronze"
+VOLUME = "insurance_vol"
+
+spark.sql(f"CREATE CATALOG IF NOT EXISTS {CATALOG}")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.silver")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.gold")
+
+
+spark.sql(f"""
+CREATE VOLUME IF NOT EXISTS {CATALOG}.{SCHEMA}.{VOLUME}
+""")

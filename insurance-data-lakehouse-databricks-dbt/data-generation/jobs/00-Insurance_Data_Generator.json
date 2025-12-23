@@ -1,0 +1,88 @@
+{
+  "name": "00_Insurance Data Generator",
+  "email_notifications": {
+    "no_alert_for_skipped_runs": false
+  },
+  "webhook_notifications": {},
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "generate_policies",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/vedanthbaliga21@gmail.com/Insurance-Operations-Intelligence-Lakehouse/data-ingestion/01_Data_Generation/00_generate_policies",
+        "source": "WORKSPACE"
+      },
+      "max_retries": 0,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "disable_auto_optimization": true,
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "generate_claims",
+      "depends_on": [
+        {
+          "task_key": "generate_policies"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/vedanthbaliga21@gmail.com/Insurance-Operations-Intelligence-Lakehouse/data-ingestion/01_Data_Generation/01_generate_claims",
+        "source": "WORKSPACE"
+      },
+      "max_retries": 0,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "disable_auto_optimization": true,
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    },
+    {
+      "task_key": "generate_billing",
+      "depends_on": [
+        {
+          "task_key": "generate_claims"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/vedanthbaliga21@gmail.com/Insurance-Operations-Intelligence-Lakehouse/data-ingestion/01_Data_Generation/02_generate_billing",
+        "source": "WORKSPACE"
+      },
+      "max_retries": 0,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "disable_auto_optimization": true,
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    }
+  ],
+  "queue": {
+    "enabled": true
+  },
+  "environments": [
+    {
+      "environment_key": "Default",
+      "spec": {
+        "environment_version": "4"
+      }
+    },
+    {
+      "environment_key": "Insurance_Data_Generator_environment",
+      "spec": {
+        "dependencies": [
+          "faker",
+          "pandas"
+        ],
+        "environment_version": "4"
+      }
+    }
+  ],
+  "performance_target": "PERFORMANCE_OPTIMIZED"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "01_Insurance Data Bronze Ingestion",
+  "email_notifications": {
+    "no_alert_for_skipped_runs": false
+  },
+  "webhook_notifications": {},
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "Insurance_Bronze_Ingestion",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/vedanthbaliga21@gmail.com/Insurance-Operations-Intelligence-Lakehouse/data-ingestion/02_Data_Ingestion/02_data_ingestion",
+        "source": "WORKSPACE"
+      },
+      "max_retries": 0,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "disable_auto_optimization": true,
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {}
+    }
+  ],
+  "queue": {
+    "enabled": true
+  },
+  "performance_target": "PERFORMANCE_OPTIMIZED"
+}
