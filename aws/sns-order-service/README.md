@@ -333,17 +333,3 @@ DynamoDB
 ```
 
 ---
-
-## Learning Outcome
-
-This project demonstrates:
-
-Event-driven architecture using AWS
-
-Integration of Next.js with AWS services
-
-Secure credential management using IAM roles
-
-Deploying Node.js applications on EC2
-
----

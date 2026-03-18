@@ -1,0 +1,17 @@
+{
+  "StartAt": "SendToSQS",
+  "States": {
+    "SendToSQS": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage",
+      "Parameters": {
+        "QueueUrl": "https://sqs.us-east-1.amazonaws.com/425515537709/OrdersQueueDemo",
+        "MessageBody.$": "$.detail"
+      },
+      "Next": "Success"
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}
