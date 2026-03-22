@@ -270,7 +270,7 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0.1,
-    api_key="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"
+    api_key="xxxxxxxxxxxxxxxxxxxxxxx"
 )
 
 # Query
