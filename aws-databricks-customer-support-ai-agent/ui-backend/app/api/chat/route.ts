@@ -7,114 +7,144 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
-// Detect aggregation queries
-function isAggregationQuery(q: string) {
-  const keywords = [
-    "total",
-    "sum",
-    "average",
-    "avg",
-    "count",
-    "group by",
-    "revenue",
-    "top",
-    "trend",
-  ];
-  return keywords.some((k) => q.toLowerCase().includes(k));
+// ================= ROUTER =================
+
+async function shouldUseSQL(question: string) {
+  const prompt = `
+Classify the query.
+
+Return ONLY one word:
+SQL or RAG
+
+Rules:
+- SQL → aggregations, totals, trends, peak, highest, lowest
+- RAG → explanations, descriptions, specific records
+
+Query:
+${question}
+`;
+
+  const res = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  const decision = res.choices[0].message.content?.trim();
+  return decision === "SQL";
 }
 
-// Clean SQL output
+// ================= SQL HELPERS =================
+
 function cleanSQL(sql: string) {
-  return sql
+  let cleaned = sql
     .replace(/```sql/g, "")
     .replace(/```/g, "")
     .replace(/^sql\s*/i, "")
     .trim();
-}
 
-function formatAnswer(text: string) {
-  let cleaned = text.trim();
-
-  try {
-    const parsed = JSON.parse(cleaned);
-
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return JSON.stringify({
-        type: "table",
-        data: parsed,
-      });
-    }
-  } catch (e) {
-    // not JSON → continue
-  }
-
-  if (cleaned.includes("|") && cleaned.includes("\n")) {
-    return cleaned;
-  }
-
-  cleaned = cleaned
-    .replace(/\. /g, ".\n\n")
-    .replace(/- /g, "\n• ")
-    .trim();
+  cleaned = cleaned.replace(
+    /customer_support_agent\.raw\.orders/gi,
+    "customer_suppport_agent.raw.orders"
+  );
 
   return cleaned;
 }
 
-// Generate SQL
+const today = new Date().toISOString().split("T")[0];
+
 async function generateSQL(question: string) {
   const prompt = `
 You are a SQL generator.
 
 STRICT RULES:
-- Use ONLY these columns:
-  - order_id
-  - customer_id
-  - product_id
-  - order_status
-  - order_amount
-  - currency
-  - payment_method
-  - payment_status
-  - shipping_address
-  - billing_address
-  - order_date
-  - delivery_date
-  - discount
-  - tax
-  - shipping_cost
-  - quantity
-  - seller_id
-  - warehouse_id
-  - region
-  - city
-  - pincode
-  - device_type
-  - browser
-  - ip_address
-  - is_gift
-  - gift_message
-  - coupon_code
-  - loyalty_points_used
-  - order_channel
-  - fulfillment_type
-  - delivery_partner
-  - status_timestamp
-  - created_at
-  - updated_at
-  - year
-  - month
-  - day
+- If the question has "Show me the numbers for this month/quarter/year/week or any date metrics" or "Show me product order history over past week" then use sql only not rag based. You are aware of today's date is ${today}. Always convert this ${today} to actual date filters suitable for Spark Sql and pass it to where condition.
 
-- IMPORTANT:
-  - Always return multiple rows where applicable
-  - For aggregations, include grouping if meaningful
-  - Example:
-    - "revenue by month" → GROUP BY month
-    - "top customers" → ORDER BY + LIMIT
+- Dont answer any questions not in customer support, orders or payments domain.
 
-- Return ONLY SQL
+- Use ONLY these exact tables:
+  customer_suppport_agent.raw.orders and customer_suppport_agent.raw.user_activity_raw_intermediate
+- Use ONLY columns from these tables. Do NOT make up any columns. Use joins also if needed.
+- Use only where filters that correspond to distinct values from the columns not what you infer, for example event_type can only be CLICK,VIEW,PURCHASE. make them case insensitive though, so click, Click, CLICK are all valid.
 
-Table: customer_suppport_agent.raw.orders
+- when you use where filters first look up distinct values from that filter column, use only those values.
+- DO NOT change spelling
+- DO NOT correct typos
+- Always use full dataset for aggregations
+
+Here is the schema for customer_suppport_agent.raw.orders:
+  order_id
+  customer_id
+  product_id
+  order_status
+  order_amount
+  currency
+  payment_method
+  payment_status
+  shipping_address
+  billing_address
+  order_date
+  delivery_date
+  discount
+  tax
+  shipping_cost
+  quantity
+  seller_id
+  warehouse_id
+  region
+  city
+  pincode
+  device_type
+  browser
+  ip_address
+  is_gift
+  gift_message
+  coupon_code
+  loyalty_points_used
+  order_channel
+  fulfillment_type
+  delivery_partner
+  status_timestamp
+  created_at
+  updated_at
+  year
+  month
+  day
+
+Here is the schema for customer_suppport_agent.raw.user_activity table:
+
+  ad_id
+  app_version
+  browser
+  campaign_id
+  click_x
+  click_y
+  conversion
+  created_at
+  customer_id
+  device_id
+  device_type
+  error_code
+  error_message
+  event_id
+  event_type
+  experiment_id
+  feature_flag
+  ip_address
+  lat
+  load_time
+  location
+  lon
+  network
+  os
+  page_url
+  referrer
+  screen_resolution
+  scroll_depth
+  session_id
+  time_on_page
+  user_id
+
+Return ONLY SQL.
 
 Question: ${question}
 `;
@@ -127,7 +157,6 @@ Question: ${question}
   return cleanSQL(res.choices[0].message.content!);
 }
 
-// Run SQL on Databricks
 async function runSQL(query: string) {
   const res = await fetch(process.env.DATABRICKS_SQL_URL!, {
     method: "POST",
@@ -156,59 +185,111 @@ async function runSQL(query: string) {
   });
 }
 
-export async function POST(req: NextRequest) {
-  const { question } = await req.json();
+// ================= FOLLOW UPS =================
 
-  // ================= SQL ROUTE =================
-  if (isAggregationQuery(question)) {
-    try {
-      console.log("SQL route:", question);
-
-      const sql = await generateSQL(question);
-      console.log("SQL:", sql);
-
-      const result = await runSQL(sql);
-      console.log("Result:", result);
-
-      const summaryPrompt = `
-You are a data analyst.
-
-Summarize the SQL query result clearly and concisely.
+async function generateFollowUps(question: string, answer: string) {
+  const prompt = `
+Generate 3 short follow-up responses.
 
 Rules:
-- Max 200-300 words
-- Highlight key insights (totals, trends, top values)
-- Use bullet points if helpful
-- Do NOT mention SQL
-- Do NOT mention JSON
-- If no data, say "No meaningful data found"
+- Max 10 words
+- No numbering
+- No symbols
 
-User Question: ${question}
+For example if person asks what's the total revenue this month, next suggestion can be "Show me the revenue by products"
 
-SQL Result:
-${JSON.stringify(result)}
+Dont answer or give followups for general questions, only for specific questions related to orders, customers, payments, products.
+
+Question: ${question}
+Answer: ${answer}
 `;
+
+  const res = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  return (
+    res.choices[0].message.content
+      ?.split("\n")
+      .map((q) => q.trim())
+      .filter(Boolean)
+      .slice(0, 3) || []
+  );
+}
+
+// ================= MAIN =================
+
+export async function POST(req: NextRequest) {
+  const { question, history } = await req.json();
+
+  const useSQL = await shouldUseSQL(question);
+  console.log("ROUTE:", useSQL ? "SQL" : "RAG");
+
+  // ================= SQL ROUTE =================
+  if (useSQL) {
+    try {
+      const sql = await generateSQL(question);
+      const result = await runSQL(sql);
+      console.log(sql)
+      console.log("Result", result)
+      if (!result || result.length === 0) {
+        const { context } = await vectorSearch(question);
+
+        const ragAnswer = await callLLM([
+          {
+            role: "system",
+            content: "Tell user that a full query of the database failed. Then answer using the context and give insights. Be concise.",
+          },
+          {
+            role: "user",
+            content: `Q: ${question}\n\nContext:\n${context}`,
+          },
+        ]);
+
+        return new Response(
+          JSON.stringify({
+            answer: ragAnswer,
+            table: [],
+            followUps: [],
+          }),
+          { headers: { "Content-Type": "application/json" } }
+        );
+      }
 
       const summaryRes = await openai.chat.completions.create({
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: summaryPrompt }],
+        messages: [
+          {
+            role: "user",
+            content: `
+Answer and give insights.
+
+Question: ${question}
+Data: ${JSON.stringify(result)}
+`,
+          },
+        ],
       });
 
       const summary =
-        summaryRes.choices[0].message.content || "No summary available";
+        summaryRes.choices[0].message.content ||
+        "No meaningful data found";
 
-      return new Response(summary, {
-        headers: { "Content-Type": "text/plain" },
-      });
-    } catch (e: any) {
+      const followUps = await generateFollowUps(question, summary);
+
       return new Response(
         JSON.stringify({
-          type: "error",
-          message: e.message,
+          answer: summary,
+          table: result,
+          followUps,
         }),
-        {
-          headers: { "Content-Type": "text/plain" },
-        }
+        { headers: { "Content-Type": "application/json" } }
+      );
+    } catch (e: any) {
+      return new Response(
+        JSON.stringify({ message: e.message }),
+        { headers: { "Content-Type": "application/json" } }
       );
     }
   }
@@ -220,27 +301,40 @@ ${JSON.stringify(result)}
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        let context: any;
-        context = await vectorSearch(question);
+        const { context } = await vectorSearch(question);
 
         const rawAnswer = await callLLM([
           {
             role: "system",
-            content:
-              "Answer using context clearly. Answer only related to the context and tell user that you aren't supposed to give answers for generic questions",
+            content: `
+You are a helpful assistant.
+Use past conversation and context.
+Be concise.
+Dont answer and give followups for general questions, only for specific questions related to orders, customers, payments, products.
+`,
           },
+          ...(history || []).map((msg: any) => ({
+            role: msg.role,
+            content: msg.content,
+          })),
           {
             role: "user",
-            content: `Q: ${question}\nContext: ${JSON.stringify(context)}`,
+            content: `Q: ${question}\n\nContext:\n${context}`,
           },
         ]);
 
-        const answer = formatAnswer(rawAnswer);
+        const followUps = await generateFollowUps(question, rawAnswer);
 
-        for (const char of answer) {
+        for (const char of rawAnswer) {
           controller.enqueue(encoder.encode(char));
           await new Promise((r) => setTimeout(r, 5));
         }
+
+        controller.enqueue(
+          encoder.encode(
+            "\n__FOLLOWUPS__" + JSON.stringify(followUps)
+          )
+        );
 
         controller.close();
       } catch (e: any) {
