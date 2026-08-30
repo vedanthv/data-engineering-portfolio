@@ -24,7 +24,7 @@ Here is an index of projects with the tech, domain and link.
 
 | Project | Description | Tech |
 | :---------: | :---------: | :---------: |
-|[Deal2Delivery](https://github.com/vedanthv/deal2delivery)|Unified SAP + Salesforce demand intelligence platform on a Databricks Lakehouse — combines churn prediction and demand forecasting ML models with a Genie AI/BI space for internal analytics and a Next.js app for business stakeholders. 🏆 2nd Place Winner, Databricks DAIS 2026 Community Virtual Hackathon|Databricks (Serverless), Delta Lake, Unity Catalog, Lakeflow DLT, Databricks Asset Bundles, XGBoost, Genie AI/BI, Next.js, Vercel|
+|[Deal2Delivery](https://github.com/vedanthv/deal2delivery) ([Live Demo](https://deal2delivery-hjosuqxlm-vedanthvs-projects.vercel.app/))|Unified SAP + Salesforce demand intelligence platform on a Databricks Lakehouse — combines churn prediction and demand forecasting ML models with a Genie AI/BI space for internal analytics and a Next.js app for business stakeholders. 🏆 2nd Place Winner, Databricks DAIS 2026 Community Virtual Hackathon|Databricks (Serverless), Delta Lake, Unity Catalog, Lakeflow DLT, Databricks Asset Bundles, XGBoost, Genie AI/BI, Next.js, Vercel|
 
 ### Small Data Engineering And Analytics Projects
 
