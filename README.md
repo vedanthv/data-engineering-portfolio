@@ -20,6 +20,12 @@ Here is an index of projects with the tech, domain and link.
 |[InvestIQ Metrics](https://github.com/vedanthv/data-engineering-portfolio/tree/main/investiq-metrics)|AWS EC2,Docker,Airflow,ReapidAPI,AWS Lambda,AWS S3,AWS CloudWatch,AWS Redshift,Prometheus,Grafana,PowerBI|
 
 
+### Databricks End to End Products
+
+| Project | Description | Tech |
+| :---------: | :---------: | :---------: |
+|[Deal2Delivery](https://github.com/vedanthv/deal2delivery)|Unified SAP + Salesforce demand intelligence platform on a Databricks Lakehouse — combines churn prediction and demand forecasting ML models with a Genie AI/BI space for internal analytics and a Next.js app for business stakeholders. 🏆 2nd Place Winner, Databricks DAIS 2026 Community Virtual Hackathon|Databricks (Serverless), Delta Lake, Unity Catalog, Lakeflow DLT, Databricks Asset Bundles, XGBoost, Genie AI/BI, Next.js, Vercel|
+
 ### Small Data Engineering And Analytics Projects
 
 | Project | Tech | 
