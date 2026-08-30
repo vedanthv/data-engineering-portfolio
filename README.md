@@ -1,4 +1,4 @@
- ![image](https://github.com/vedanthv/data-engineering-portfolio/assets/44313631/664c2886-b8d7-41cd-b231-f9f1ca4bbd3e)
+![Vedanth Baliga — Data Engineering Portfolio](assets/banner.svg)
 
 Hello World! I'm Vedanth. 
 
